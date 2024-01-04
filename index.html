@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hamza's Website</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mediaqueries.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="mediaqueries.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body>
@@ -17,11 +18,11 @@
         </a>
     </div>
     <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="index.html#about">About</a></li>
         <li><a href="experience.html">Experience</a></li>
         <li><a href="university.html">University</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
     </ul>
 </nav>
 <nav id="hamburger-nav">
@@ -35,11 +36,11 @@
         <span></span>
       </div>
       <div class="menu-links">
-        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+        <li><a href="index.html#about" onclick="toggleMenu()">About</a></li>
         <li><a href="experience.html">Experience</a></li>
         <li><a href="university.html">University</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        <li><a href="index.html#contact" onclick="toggleMenu()">Contact</a></li>
       </div>
     </div>
   </nav>
@@ -54,9 +55,9 @@
           <div class="btn-container">
             <button
               class="btn btn-color-2"
-              onclick="window.open('./assets/resume-example.pdf')"
+              onclick="window.open('./assets/resume.pdf')"
             >
-              Download Resume
+              Download CV
             </button>
             <button class="btn btn-color-1" onclick="location.href='./#contact'">
               Contact Info
@@ -78,6 +79,8 @@
           </div>
         </div>
       </section>
+    </div>
+    <div class="section" id="section1">
       <section id="about">
         <p class="section__text__p1">Get To Know More</p>
         <h1 class="title">About Me</h1>
@@ -97,8 +100,8 @@
                   alt="Experience icon"
                   class="icon"
                 />
-                <h3>Experience</h3>
-                <p>2+ years <br />Frontend Development</p>
+                <h3>Exploration</h3>
+                <p>6+ Years of Constant Learning <br/>All Things Computer-Related <br/> From Hardware to Software to IoT</p>
               </div>
               <div class="details-container">
                 <img
@@ -107,115 +110,27 @@
                   class="icon"
                 />
                 <h3>Education</h3>
-                <p>B.Sc. Bachelors Degree<br />M.Sc. Masters Degree</p>
+                <p>Student Of <br/>Bachelor of Engineering Science<br />Software Engineering</p>
               </div>
             </div>
             <div class="text-container">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-                reprehenderit et laborum, rem, dolore eum quod voluptate
-                exercitationem nobis, nihil esse debitis maxime facere minus sint
-                delectus velit in eos quo officiis explicabo deleniti dignissimos.
-                Eligendi illum libero dolorum cum laboriosam corrupti quidem,
-                reiciendis ea magnam? Nulla, impedit fuga!
+                Ever since I was a kid, I've been captivated by the world of computers. My journey into the realm of technology began when I built my very own PC from scratch 🛠️. That experience ignited a spark within me, setting me on a path of exploration, innovation, and endless fascination with all things tech.
+              </p><br>
+                My journey continued through video games, where I not only enjoyed playing but also delved into the intricacies of game files and configurations. This experience solidified my interest in coding and software development. 🎮
+              <p><br>
+                Now, as I pursue my degree, I'm committed to honing my programming skills in languages like Java, Python, and JavaScript.
+              </p><br>
+                Beyond my academic pursuits, I'm fortunate to be part of a newly established family business called Smartegrators, specializing in IoT, smart systems, and security solutions. This venture aligns perfectly with my passion, and I dream of contributing to its growth and success. 🌐
+              <p><br>
+                Most of all, I'm eager to contribute to the tech community and connect with like-minded individuals who share my enthusiasm for all things tech.
               </p>
             </div>
           </div>
         </div>
-        <img
-          src="./assets/arrow.png"
-          alt="Arrow icon"
-          class="icon arrow"
-          onclick="location.href='./#experience'"
-        />
       </section>
-      
-      <section id="projects">
-        <p class="section__text__p1">Browse My Recent</p>
-        <h1 class="title">Projects</h1>
-        <div class="experience-details-container">
-          <div class="about-containers">
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="./assets/project-1.png"
-                  alt="Project 1"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Project One</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                  Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                  Live Demo
-                </button>
-              </div>
-            </div>
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="./assets/project-2.png"
-                  alt="Project 2"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Project Two</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                  Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                  Live Demo
-                </button>
-              </div>
-            </div>
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="./assets/project-3.png"
-                  alt="Project 3"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Project Three</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                  Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                  Live Demo
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <img
-          src="./assets/arrow.png"
-          alt="Arrow icon"
-          class="icon arrow"
-          onclick="location.href='./#contact'"
-        />
-      </section>
+    </div>
+    <div class="section" id="section2">
       <section id="contact">
         <p class="section__text__p1">Get in Touch</p>
         <h1 class="title">Contact Me</h1>
@@ -226,7 +141,7 @@
               alt="Email icon"
               class="icon contact-icon email-icon"
             />
-            <p><a href="mailto:examplemail@gmail.com">Example@gmail.com</a></p>
+            <p><a href="mailto:examplemail@gmail.com">hamza.kababji@gmail.com</a></p>
           </div>
           <div class="contact-info-container">
             <img
@@ -234,22 +149,23 @@
               alt="LinkedIn icon"
               class="icon contact-icon"
             />
-            <p><a href="https://www.linkedin.com">LinkedIn</a></p>
+            <p><a href="https://www.linkedin.com/in/hamzakababji/">Hamza Elkababji</a></p>
           </div>
         </div>
       </section>
+      </div>
       <footer>
         <nav>
           <div class="nav-links-container">
             <ul class="nav-links">
-              <li><a href="#about">About</a></li>
-              <li><a href="#experience">Experience</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="experience.html#experience">Experience</a></li>
+              <li><a href="university.html">University</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
             </ul>
           </div>
         </nav>
-        <p>Copyright &#169; 2023 John Doe. All Rights Reserved.</p>
       </footer>
 </body>
 </html>

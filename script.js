@@ -1,22 +1,42 @@
 function toggleMenu() {
-    const menu = document.querySelector(".menu-links");
-    const icon = document.querySelector(".hamburger-icon");
-    menu.classList.toggle("open");
-    icon.classList.toggle("open");
-  }
+  const menu = document.querySelector(".menu-links");
+  const icon = document.querySelector(".hamburger-icon");
+  menu.classList.toggle("open");
+  icon.classList.toggle("open");
+}
 
-  // const observer = new IntersectionObserver((entries) => {
-  //   entries.forEach((entry) => {
-  //       console.log(entry);
-  //     if (entry.isIntersecting) {
-  //       entry.target.classList.add('show');
-  //     } else {
-  //       entry.target.classList.remove('show');
-  //     }
-  //   });
-  // });
+document.addEventListener('DOMContentLoaded', function() {
+  const sections = document.querySelectorAll('.section');
 
-  // const hiddenElements = document.querySelectorAll('.hidden');
-  // hiddenElements.forEach((el) => {
-  //   observer.observe(el);
-  // });
+  window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY + window.innerHeight * 0.6;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+
+      if (scrollPosition > sectionTop) {
+        section.classList.add('visible');
+      } else {
+        section.classList.remove('visible');
+      }
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+
+    if (this.hash !== "") {
+      event.preventDefault();
+
+      var hash = this.hash;
+
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        window.location.hash = hash;
+      });
+    }
+  });
+});
