@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-    --primary-color: #FBE0C3;
-    --secondary-color: #FFBB98;
+    /* --primary-color: #FBE0C3;
+    --secondary-color: #FFBB98; */
     --tertiary-color: #7D8E95;
     --quaternary-color: #344648;
     --white: #e6e6e6;
@@ -54,7 +54,7 @@ nav:hover {
 }
 
 a {
-    color: var(--black);
+    color: var(--white);
     text-decoration: none;
 }
 
@@ -71,7 +71,7 @@ a:not(.logo):hover {
     align-items: center;
     background-color: var(--tertiary-color);
     transition-duration: 1000ms;
-    padding: 0 20px; /* Adjust the padding as needed */
+    padding: 0 20px;
 }
 
 #desktop-nav:hover {
@@ -80,7 +80,7 @@ a:not(.logo):hover {
     align-items: center;
     background-color: var(--quaternary-color);
     transition-duration: 1000ms;
-    padding: 0 20px; /* Adjust the padding as needed */
+    padding: 0 20px;
 }
 
 .left-content {
@@ -485,4 +485,12 @@ footer p {
 .visible {
     opacity: 1;
     filter: blur(0);
+}
+
+#contactText {
+    color: var(--black);
+}
+
+.contactText {
+    color: var(--black);
 }
