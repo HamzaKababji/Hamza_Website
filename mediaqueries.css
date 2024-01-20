@@ -122,4 +122,24 @@
     width: 100%;
     height: 30rem;
   }
+  .experience-details-container {
+    margin-bottom: 1rem; /* Adjust margin for smaller screens */
+  }
+
+  footer {
+    margin-top: 1rem; /* Adjust margin-top for smaller screens */
+  }
+
+  body {
+    padding-bottom: 1rem; /* Adjust padding for smaller screens */
+  }
+  .about-containers {
+    flex-direction: column; /* Stack containers vertically */
+    align-items: center; /* Center items within the column */
+  }
+
+  .details-container {
+    width: 100%; /* Make each container take the full width */
+    margin-right: 0; /* Remove margin between containers */
+  }
 }
