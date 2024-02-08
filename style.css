@@ -105,7 +105,7 @@ a:not(.logo):hover {
     transition-duration: 350ms;
 }
 
-img:not(.icon, .section__pic-container, .main-pic, .about-pic, .curlybrace, .project-img) {
+img:not(.icon, .section__pic-container, .main-pic, .about-pic, .curlybrace, .project-img, .project-img-overhaul) {
     vertical-align: middle;
     width: 50px;
     height: 50px;
@@ -414,6 +414,10 @@ article .icon {
     background: rgb(250, 250, 250);
 }
 
+.project-img-overhaul {
+    border-radius: 2;
+    object-fit:fill;
+}
 .project-img {
     height: 150px;
     width: 150px;
