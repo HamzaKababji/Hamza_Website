@@ -40,3 +40,18 @@ $(document).ready(function(){
     }
   });
 });
+
+function downloadFile() {
+  var filename = 'MediaOrganizer.exe';
+  
+  var a = document.createElement('a');
+  
+  a.href = filename;
+  
+  a.download = filename;
+  
+  document.body.appendChild(a);
+  a.click();
+  
+  document.body.removeChild(a);
+}
