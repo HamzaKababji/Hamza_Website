@@ -257,19 +257,11 @@ section {
     height: 2rem;
 }
 
-.btn-container {
-    white-space: nowrap;
-    display:flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
 .btn {
     white-space: nowrap;
     font-weight: 600;
     transition: all 300ms ease;
     padding: 1rem;
-    width: 8rem;
     border-radius: 2rem;
 }
 
@@ -309,11 +301,6 @@ section {
     border: rgb(255, 255, 255) 0.1rem solid;
 }
 
-.btn-container {
-    white-space: nowrap;
-    gap: 1rem;
-}
-
 #about {
     position: relative;
 }
@@ -345,7 +332,14 @@ section {
     bottom: 2.5rem;
 }
 
-.details-container {
+.details-container-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center
+}
+
+.details-container-2 {
     padding: 2rem;
     flex: 1;
     background: white;
@@ -384,7 +378,7 @@ section {
     flex-direction: column;
 }
 
-.article-container {
+.article-container-2 {
     display: flex;
     text-align: initial;
     flex-wrap: wrap;
@@ -409,21 +403,52 @@ article .icon {
     margin-bottom: 20rem;
 }
 
-.color-container {
+.details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure spacing between content and buttons */
+    align-items: center;
+    padding: 2rem;
+    flex: 1;
+    background: white;
+    border-radius: 2rem;
+    border: rgb(53, 53, 53) 0.1rem solid;
     border-color: rgb(163, 163, 163);
-    background: rgb(250, 250, 250);
+    text-align: center;
+    min-height: 400px; /* Add a minimum height to make all cards equal */
+    box-sizing: border-box; /* Ensure padding is included in height/width */
 }
 
-.project-img-overhaul {
-    border-radius: 2;
-    object-fit:fill;
+.article-container {
+    flex-grow: 1; /* This makes the content grow to fill available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the content vertically */
+    align-items: center;
 }
+
+.btn-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px;
+}
+
 .project-img {
     height: 150px;
-    width: 150px;
     width: auto;
-    border-radius: 2;
-    object-fit:fill;
+    object-fit: fill;
+    border-radius: 2px;
+}
+
+.project-btn {
+    white-space: nowrap;
+    color: black;
+    border-color: rgb(163, 163, 163);
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
 }
 
 .project-title {
@@ -431,10 +456,11 @@ article .icon {
     color: black;
 }
 
-.project-btn {
-    white-space: nowrap;
-    color: black;
+.color-container {
     border-color: rgb(163, 163, 163);
+    background: rgb(250, 250, 250);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 #contact {
@@ -519,18 +545,4 @@ footer p {
 
 h2 {
     text-wrap:pretty;
-}
-
-.details-container {
-    padding: 2rem;
-    width: calc(33.33% - 4rem); /* Set a fixed width for each container */
-    box-sizing: border-box;
-    margin-right: 2rem; /* Add some margin between the containers */
-    margin-bottom: 2rem;
-    background: white;
-    border-radius: 2rem;
-    border: rgb(53, 53, 53) 0.1rem solid;
-    border-color: rgb(163, 163, 163);
-    text-align: center;
-    text-wrap: nowrap;
 }
