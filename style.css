@@ -11,7 +11,7 @@
 
 html {
     scroll-behavior: smooth;
-  }
+}
 
 * {
     margin: 0;
@@ -96,7 +96,7 @@ a:not(.logo):hover {
 }
 
 .name {
-    margin-left: 10px; /* Adjust the margin as needed */
+    margin-left: 10px;
 }
 
 .logo:hover {
@@ -182,18 +182,6 @@ img:not(.icon, .section__pic-container, .main-pic, .about-pic, .curlybrace, .pro
 
 .hamburger-icon.open span:last-child {
     transform: rotate(-45deg) translate(10px, -5px);
-}
-
-.hamburger-icon span:first-child {
-    transform: none;
-}
-
-.hamburger-icon span:first-child {
-    opacity: 1;
-}
-
-.hamburger-icon span:first-child {
-    transform: none;
 }
 
 section {
@@ -361,23 +349,6 @@ section {
     margin: auto 0;
 }
 
-#experience {
-    position: relative;
-}
-
-.experience-sub-title {
-    color: rgb(85, 85, 85);
-    font-weight: 600;
-    font-size: 1.75rem;
-    margin-bottom: 2rem;
-}
-
-.experience-details-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
 .article-container-2 {
     display: flex;
     text-align: initial;
@@ -406,7 +377,7 @@ article .icon {
 .details-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensure spacing between content and buttons */
+    justify-content: space-between;
     align-items: center;
     padding: 2rem;
     flex: 1;
@@ -415,22 +386,22 @@ article .icon {
     border: rgb(53, 53, 53) 0.1rem solid;
     border-color: rgb(163, 163, 163);
     text-align: center;
-    min-height: 400px; /* Add a minimum height to make all cards equal */
-    box-sizing: border-box; /* Ensure padding is included in height/width */
+    min-height: 400px;
+    box-sizing: border-box;
 }
 
 .article-container {
-    flex-grow: 1; /* This makes the content grow to fill available space */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center the content vertically */
+    justify-content: center;
     align-items: center;
 }
 
 .btn-container {
     display: flex;
-    justify-content: center; /* Center buttons horizontally */
-    gap: 10px; /* Space between buttons */
+    justify-content: center;
+    gap: 10px;
     margin-top: 10px;
 }
 
@@ -451,9 +422,9 @@ article .icon {
     cursor: pointer;
 }
 
-.project-title {
-    margin: 1rem;
-    color: black;
+#projects-title-container {
+    text-align: center;
+    margin: 4rem 0 2rem 0;
 }
 
 .color-container {
@@ -515,8 +486,8 @@ footer p {
     transition: all 2s;
     opacity: 0;
     filter: blur(5px);
-  }
-  
+}
+
 .visible {
     opacity: 1;
     filter: blur(0);
@@ -536,13 +507,119 @@ footer p {
     align-items: center;
     margin-top: -20rem;
     margin-bottom: 10rem;
-  }
+}
 
-  #resume {
-    padding-top: 5rem;
-    position: relative;
-  }
+/* Title section */
+#experience-title-container {
+    text-align: center;
+    margin: 4rem 0 2rem 0;
+}
 
-h2 {
-    text-wrap:pretty;
+.experience-title {
+    font-size: 3rem;
+    color: var(--quaternary-color);
+    text-align: center;
+}
+
+.experience-intro-text {
+    text-align: center;
+    font-weight: 600;
+    color: var(--quaternary-color);
+}
+
+/* Flexbox container for icons and resume */
+#experience-and-resume-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15rem;
+    margin: 0 auto;
+    max-width: 90%;
+    flex-wrap: nowrap;
+}
+
+/* Adjust the widths of the icons and resume columns to balance them */
+#icons-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-basis: 20%; /* Set fixed width for icons */
+    max-width: 20%;
+}
+
+/* Wrapper for each icon */
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Icon styling using FontAwesome */
+.icon-wrapper a i {
+    font-size: 6rem;  /* Adjust size of the icons */
+    color: var(--quaternary-color);
+    transition: transform 0.3s ease;
+}
+
+.icon-wrapper a i:hover {
+    transform: scale(1.2);  /* Grow icon on hover */
+    color: var(--tertiary-color); /* Change color on hover */
+}
+
+/* Icon styling using FontAwesome */
+.icon-link {
+    font-size: 6rem;  /* Adjust size of the icon */
+    color: var(--quaternary-color);
+    transition: transform 0.3s ease;
+}
+
+.icon-link:hover {
+    transform: scale(1.2);  /* Grow icon on hover */
+    color: var(--tertiary-color); /* Change color on hover */
+}
+
+/* Right column for resume */
+#resume-column {
+    flex-basis: 60%;
+    max-width: 60%;
+    display: block;
+}
+
+/* Ensure the resume PDF is displayed correctly */
+.resume-pdf-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#resume-column embed {
+    width: 100%;
+    height: 80vh;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1200px) {
+    #experience-and-resume-container {
+        flex-wrap: wrap;
+    }
+
+    #icons-column,
+    #resume-column {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    #resume-column embed {
+        height: 60vh;
+    }
+}
+
+.resume-pdf-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
 }
