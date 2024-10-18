@@ -1,179 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hamza's Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
     <script defer src="script.js"></script>
-</head>
-<body>
-  <nav id="desktop-nav">
-    <div class="left-content">
+  </head>
+  <body>
+    <nav id="desktop-nav">
+      <div class="left-content">
         <a href="index.html" class="logo">
-            <img src="assets/profile_picture.png" alt="Profile Picture">
-            <span class="name">Hamza Elkababji</span>
+          <img src="assets/profile_picture.png" alt="Profile Picture" />
+          <span class="name">Hamza Elkababji</span>
         </a>
-    </div>
-    <ul class="nav-links">
+      </div>
+      <ul class="nav-links">
         <li><a href="index.html#about">About</a></li>
         <li><a href="experience.html">Experience</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-</nav>
-<nav id="hamburger-nav">
-    <a href="index.html" class="logo">
-        <img src="assets/profile_picture.png">
-    </a>
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+      </ul>
+    </nav>
+    <nav id="hamburger-nav">
+      <a href="index.html" class="logo">
+        <img src="assets/profile_picture.png" />
+      </a>
+      <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="index.html#about" onclick="toggleMenu()">About</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li>
+            <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+          </li>
+        </div>
       </div>
-      <div class="menu-links">
-        <li><a href="index.html#about" onclick="toggleMenu()">About</a></li>
-        <li><a href="experience.html">Experience</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="index.html#contact" onclick="toggleMenu()">Contact</a></li>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
     <div id="projects-title-container">
-        <p class="experience-intro-text">Some Recent</p>
-        <h1 class="experience-title">Projects</h1>
+      <p class="experience-intro-text">Some Recent</p>
+      <h1 class="experience-title">Projects</h1>
     </div>
 
     <section id="projects">
-        <div class="experience-details-container">
-          <div class="about-containers">
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="assets/Logo.png"
-                  alt="Project 1"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Engineering Competition - Natural Disasters</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/HamzaKababji/WEC-Programming'"
-                >Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://hamzakababji.github.io/WEC-Programming/'"
-                >Live Demo
-                </button>
-              </div>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="assets/Logo.png" alt="Project 1" class="project-img" />
             </div>
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="assets/Files.png"
-                  alt="Project 2"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Media Converter And Organizer</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/HamzaKababji/Media-Converter-And-Organizer'"
-                >Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://apps.microsoft.com/detail/9phd5lx85dfh?ocid=pdpshare&hl=en-us&gl=US'"
-                >Microsoft Store
-                </button>
-              </div>
+            <h2 class="experience-sub-title project-title">
+              Engineering Competition - Natural Disasters
+            </h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/HamzaKababji/WEC-Programming'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://hamzakababji.github.io/WEC-Programming/'"
+              >
+                Live Demo
+              </button>
             </div>
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="assets/logo-cast-away.png"
-                  alt="Project 4"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Cast Away Video Game - Unity</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/HamzaKababji/Cast-Away-Game'"
-                >Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/HamzaKababji/Cast-Away-Game/releases/download/V1.0.0/Cast_Away_WindowsOS.zip'"
-                >Download (.zip)
-                </button>
-              </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="assets/Files.png" alt="Project 2" class="project-img" />
             </div>
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="assets/Minecraft.png"
-                  alt="Project 4"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Minecraft Java Mod</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/Omar1Ramadan/Minecraft-Mod'"
-                >Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href=''"
-                >Coming Soon
-                </button>
-              </div>
+            <h2 class="experience-sub-title project-title">
+              Media Converter And Organizer
+            </h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/HamzaKababji/Media-Converter-And-Organizer'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://apps.microsoft.com/detail/9phd5lx85dfh?ocid=pdpshare&hl=en-us&gl=US'"
+              >
+                Microsoft Store
+              </button>
             </div>
-            <div class="details-container color-container">
-              <div class="article-container">
-                <img
-                  src="assets/logo-justforyou.png"
-                  alt="Project 4"
-                  class="project-img"
-                />
-              </div>
-              <h2 class="experience-sub-title project-title">Feasibility Study Website + 3D Model Viewer</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/HamzaKababji/JustForYou-Luxury-Gift-Shop'"
-                >Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://hamzakababji.github.io/JustForYou-Luxury-Gift-Shop/'"
-                >Live Demo
-                </button>
-              </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/logo-cast-away.png"
+                alt="Project 4"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Cast Away Video Game - Unity
+            </h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/HamzaKababji/Cast-Away-Game'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/HamzaKababji/Cast-Away-Game/releases/download/V1.0.0/Cast_Away_WindowsOS.zip'"
+              >
+                Download (.zip)
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Minecraft.png"
+                alt="Project 4"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Minecraft Java Mod
+            </h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/Omar1Ramadan/Minecraft-Mod'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href=''"
+              >
+                Coming Soon
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/logo-justforyou.png"
+                alt="Project 4"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              Feasibility Study Website + 3D Model Viewer
+            </h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/HamzaKababji/JustForYou-Luxury-Gift-Shop'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://hamzakababji.github.io/JustForYou-Luxury-Gift-Shop/'"
+              >
+                Live Demo
+              </button>
             </div>
           </div>
         </div>
-      </section>
-      <footer>
-        <nav>
-          <div class="nav-links-container">
-            <ul class="nav-links">
-              <li><a href="index.html#about">About</a></li>
-              <li><a href="experience.html">Experience</a></li>
-              <li><a href="projects.html">Projects</a></li>
-              <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-      </footer>
-</body>
+      </div>
+    </section>
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </footer>
+  </body>
 </html>

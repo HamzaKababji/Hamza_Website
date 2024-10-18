@@ -1,7 +1,7 @@
 :root {
   /* --primary-color: #FBE0C3;
   --secondary-color: #FFBB98; */
-  --tertiary-color: #7D8E95;
+  --tertiary-color: #7d8e95;
   --quaternary-color: #344648;
   --white: #e6e6e6;
   --black: #1f1f1f;
@@ -10,7 +10,7 @@
 @media screen and (max-width: 1400px) {
   #profile {
     height: 83vh;
-    padding-bottom:45rem;
+    padding-bottom: 45rem;
   }
   .about-containers {
     flex-wrap: wrap;
@@ -29,7 +29,7 @@
     color: var(--white);
     display: flex;
   }
-  
+
   #experience,
   .experience-details-container {
     margin-top: 2rem;
@@ -111,7 +111,7 @@
   .text-container {
     text-align: justify;
   }
-  
+
   .pdf-container {
     display: block;
     margin-top: 10px;
