@@ -25,9 +25,9 @@ import { buildHero } from './hero.mjs';
 const OUT = path.join(ROOT, 'src', 'assets', 'photos');
 const JSON_PATH = path.join(CONTENT, 'photos.json');
 const NOTES_PATH = path.join(CONTENT, 'photo-notes.toml');
-const SIZES = { grid: 800, full: 2000 };
+const SIZES = { grid: 1200, full: 2000 };
 // Grid images are small, so they can afford more quality; lightbox images carry the bytes.
-const QUALITY = { grid: { avif: 50, webp: 72 }, full: { avif: 42, webp: 60 } };
+const QUALITY = { grid: { avif: 58, webp: 74 }, full: { avif: 56, webp: 68 } };
 const SETTINGS = JSON.stringify([SIZES, QUALITY, 2]);
 const GPS_RADIUS_KM = 50;
 const WARN_MB = 200;

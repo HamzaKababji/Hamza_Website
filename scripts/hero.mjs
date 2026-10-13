@@ -12,6 +12,7 @@ const VARIANTS = {
   desktop: [1000, 1600],
   mobile: [640, 1080],
 };
+const QUALITY = { avif: 62, webp: 82 };
 
 export async function buildHero({ source = photoSource(), picks = findPicks(source), force = false } = {}) {
   const { hero } = readToml('site.toml');
@@ -21,7 +22,7 @@ export async function buildHero({ source = photoSource(), picks = findPicks(sour
   const stat = fs.statSync(match);
   const key = crypto
     .createHash('sha1')
-    .update(JSON.stringify([path.relative(source, match), stat.mtimeMs, hero.desktop_crop, hero.mobile_crop, VARIANTS]))
+    .update(JSON.stringify([path.relative(source, match), stat.mtimeMs, hero.desktop_crop, hero.mobile_crop, VARIANTS, QUALITY]))
     .digest('hex')
     .slice(0, 12);
   const manifestPath = path.join(OUT, 'hero.json');
@@ -54,8 +55,8 @@ export async function buildHero({ source = photoSource(), picks = findPicks(sour
       const resized = sharp(cropped).resize({ width, withoutEnlargement: true });
       const avif = `${name}-${width}.avif`;
       const webp = `${name}-${width}.webp`;
-      await resized.clone().avif({ quality: 52, effort: 6 }).toFile(path.join(OUT, avif));
-      await resized.clone().webp({ quality: 74 }).toFile(path.join(OUT, webp));
+      await resized.clone().avif({ quality: QUALITY.avif, effort: 6 }).toFile(path.join(OUT, avif));
+      await resized.clone().webp({ quality: QUALITY.webp }).toFile(path.join(OUT, webp));
       files.push({ width, avif, webp });
     }
     manifest.crops[name] = { width: box.width, height: box.height, files };

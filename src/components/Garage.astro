@@ -364,7 +364,8 @@ const EMBED =
         </div>
 
         <button type="button" class="door" id="gxDoor" aria-expanded="false" aria-controls="gxInside">
-          <span class="plate door-plate" aria-hidden="true">HAMZA E</span>
+          <span class="plate door-plate" aria-hidden="true">THE GARAGE</span>
+          <span class="door-sign" aria-hidden="true">No parking. Except for the Quattro.</span>
           <span class="door-label">Open the garage</span>
           <span class="handle" aria-hidden="true"></span>
         </button>
@@ -866,6 +867,22 @@ const EMBED =
     padding: 10px 16px;
     border: 2px solid var(--deep);
     box-shadow: 0 0 0 3px var(--yellow);
+  }
+  .door-sign {
+    position: absolute;
+    top: calc(22% + 70px);
+    left: 50%;
+    transform: translateX(-50%);
+    font: 700 12px/1.2 var(--font-body);
+    font-stretch: 78%;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--green);
+    background: var(--decal);
+    padding: 7px 11px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 2px var(--green), 0 0 0 3px var(--decal), 0 6px 14px -8px #000;
   }
   .door-label {
     position: absolute;
