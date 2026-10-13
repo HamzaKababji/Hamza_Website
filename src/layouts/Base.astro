@@ -13,9 +13,10 @@ interface Props {
   description?: string;
   theme?: 'night' | 'decal';
   ogImage?: string;
+  overlayHeader?: boolean;
 }
 
-const { title, description = SITE_DESCRIPTION, theme = 'night', ogImage = '/og.jpg' } = Astro.props;
+const { title, description = SITE_DESCRIPTION, theme = 'night', ogImage = '/og.jpg', overlayHeader = false } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogUrl = new URL(ogImage, Astro.site);
@@ -46,7 +47,7 @@ const ogUrl = new URL(ogImage, Astro.site);
   </head>
   <body class={theme === 'decal' ? 'theme-decal' : undefined}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
+    <Header overlay={overlayHeader} />
     <main id="main" tabindex="-1">
       <slot />
     </main>

@@ -1,0 +1,222 @@
+# The route, in the order the car drives it on /places.
+# id is the country id used for /photos?country=<id>; iso is the world-atlas country code
+# (Bahrain is too small for the 110m atlas, so it has no iso: its dots show, the fill is skipped).
+
+[[stop]]
+id = "jo"
+city = "Amman"
+country = "Jordan"
+iso = "400"
+lon = 35.93
+lat = 31.95
+note = "Born here"
+
+[[stop]]
+id = "sa"
+city = "Dammam"
+country = "Saudi Arabia"
+iso = "682"
+lon = 50.10
+lat = 26.43
+
+[[stop]]
+id = "jo"
+city = "Amman"
+country = "Jordan"
+iso = "400"
+lon = 35.93
+lat = 31.95
+note = "Back home"
+
+[[stop]]
+id = "bh"
+city = "Saar"
+country = "Bahrain"
+lon = 50.49
+lat = 26.19
+
+[[stop]]
+id = "bh"
+city = "Manama"
+country = "Bahrain"
+lon = 50.59
+lat = 26.23
+
+[[stop]]
+id = "ca"
+city = "London, Ontario"
+country = "Canada"
+iso = "124"
+lon = -81.25
+lat = 42.98
+note = "New home"
+
+[[stop]]
+id = "us"
+city = "Philadelphia"
+country = "United States"
+iso = "840"
+lon = -75.17
+lat = 39.95
+
+[[stop]]
+id = "us"
+city = "New York"
+country = "United States"
+iso = "840"
+lon = -74.00
+lat = 40.71
+
+[[stop]]
+id = "tr"
+city = "Istanbul"
+country = "Türkiye"
+iso = "792"
+lon = 28.98
+lat = 41.01
+note = "Favourite country so far"
+
+[[stop]]
+id = "ca"
+city = "Calgary"
+country = "Canada"
+iso = "124"
+lon = -114.07
+lat = 51.05
+note = "Alberta"
+
+[[stop]]
+id = "ca"
+city = "Canmore"
+country = "Canada"
+iso = "124"
+lon = -115.36
+lat = 51.09
+note = "Alberta"
+
+[[stop]]
+id = "ca"
+city = "Banff"
+country = "Canada"
+iso = "124"
+lon = -115.57
+lat = 51.18
+note = "Alberta"
+
+[[stop]]
+id = "ca"
+city = "Vancouver"
+country = "Canada"
+iso = "124"
+lon = -123.12
+lat = 49.28
+note = "British Columbia"
+
+[[stop]]
+id = "ca"
+city = "Victoria"
+country = "Canada"
+iso = "124"
+lon = -123.37
+lat = 48.43
+note = "British Columbia"
+
+[[stop]]
+id = "ca"
+city = "London, Ontario"
+country = "Canada"
+iso = "124"
+lon = -81.25
+lat = 42.98
+note = "Western"
+
+[[stop]]
+id = "ca"
+city = "Bolton, Ontario"
+country = "Canada"
+iso = "124"
+lon = -79.73
+lat = 43.88
+note = "16 months at Husky"
+
+[[stop]]
+id = "ca"
+city = "Toronto"
+country = "Canada"
+iso = "124"
+lon = -79.38
+lat = 43.65
+note = "Harbour at blue hour"   # added from photo dates; confirm with Hamza
+
+[[stop]]
+id = "nl"
+city = "Amsterdam"
+country = "Netherlands"
+iso = "528"
+lon = 4.90
+lat = 52.37
+note = "Favourite recent trip"
+
+[[stop]]
+id = "be"
+city = "Bruges"
+country = "Belgium"
+iso = "056"
+lon = 3.22
+lat = 51.21
+
+[[stop]]
+id = "lu"
+city = "Luxembourg"
+country = "Luxembourg"
+iso = "442"
+lon = 6.13
+lat = 49.61
+
+[[stop]]
+id = "uk"
+city = "London, UK"
+country = "United Kingdom"
+iso = "826"
+lon = -0.13
+lat = 51.50
+
+[[stop]]
+id = "uk"
+city = "Oxford"
+country = "United Kingdom"
+iso = "826"
+lon = -1.26
+lat = 51.75
+
+[[stop]]
+id = "ca"
+city = "Rattlesnake Point"
+country = "Canada"
+iso = "124"
+lon = -79.91
+lat = 43.47
+note = "Back in Ontario for the fall colours"
+
+# Gallery locations that are not route stops: small dots on the globe and
+# city chips under their country on /photos. The car doesn't drive to them.
+
+[[place]]
+id = "ca"
+city = "Fanshawe Park"
+country = "Canada"
+lon = -81.18
+lat = 43.04
+note = "Conservation area, London, Ontario"
+
+[[place]]
+id = "ca"
+city = "Port Stanley"
+country = "Canada"
+lon = -81.21
+lat = 42.66
+note = "Lake Erie beach town"
+
+# Trip labels for the lightbox, keyed by the trip folder name in the photo library.
+[trips]
+"BeNeLux_UK" = "BeNeLux & UK, Sep 2026"

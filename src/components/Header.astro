@@ -1,8 +1,9 @@
 ---
 import { NAV } from '../lib/site';
+const { overlay = false } = Astro.props as { overlay?: boolean };
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
-<header class="site-header wrap">
+<header class:list={['site-header', 'wrap', { overlay }]}>
   <a class="plate" href="/" aria-label="Hamza Elkababji, home" aria-current={here === '/' ? 'page' : undefined}>HAMZA E</a>
   <nav aria-label="Main">
     <ul>
@@ -25,6 +26,12 @@ const here = Astro.url.pathname.replace(/\/$/, '') || '/';
     justify-content: space-between;
     gap: 8px 16px;
     padding-block: 20px;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   ul {
     display: flex;

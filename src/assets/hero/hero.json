@@ -1,0 +1,38 @@
+{
+  "key": "30ff3dd1ac90",
+  "file": "DSCF2776",
+  "crops": {
+    "desktop": {
+      "width": 4440,
+      "height": 4000,
+      "files": [
+        {
+          "width": 1000,
+          "avif": "desktop-1000.avif",
+          "webp": "desktop-1000.webp"
+        },
+        {
+          "width": 1600,
+          "avif": "desktop-1600.avif",
+          "webp": "desktop-1600.webp"
+        }
+      ]
+    },
+    "mobile": {
+      "width": 3240,
+      "height": 4000,
+      "files": [
+        {
+          "width": 640,
+          "avif": "mobile-640.avif",
+          "webp": "mobile-640.webp"
+        },
+        {
+          "width": 1080,
+          "avif": "mobile-1080.avif",
+          "webp": "mobile-1080.webp"
+        }
+      ]
+    }
+  }
+}

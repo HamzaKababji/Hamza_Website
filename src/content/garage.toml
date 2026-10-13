@@ -1,0 +1,32 @@
+[daily]
+laptop   = "Dell G15 5511"
+cpu      = "i7-11800H"
+gpu      = "RTX 3060"
+ram      = "16 GB DDR4"
+keyboard = "Lofree Flow 2, 84-key"
+
+[camera]
+body    = "Fujifilm X-T2"
+lenses  = ["XF23mm f/2 R WR", "Tamron 18-300mm"]
+filters = "K&F variable ND (both lenses)"
+tripod  = "K&F"
+bag     = "Tarion TB-S, grey"
+cards   = "2x Lexar 1667x V60 64 GB"   # the expensive part
+recipes = "custom"
+
+[retired]   # first build, age 14
+cpu     = "Ryzen 7 2700X"
+gpu     = "RTX 2060"
+ram     = "32 GB DDR4"   # was 16, upgraded for Ubuntu dual boot
+storage = "500 GB M.2 + HDDs"
+status  = "sold"
+
+[wishlist]
+mouse  = "Logitech MX Master 3S"
+laptop = "Framework Laptop 13, DIY edition"   # grad gift, assemble myself
+
+[dream]
+car    = "Audi Sport Quattro S1"
+colour = "British racing green"
+status = "saving up"
+model  = "https://sketchfab.com/3d-models/audi-quattro-s1-402697365eaa41a68a543b71d0e0bfa8"

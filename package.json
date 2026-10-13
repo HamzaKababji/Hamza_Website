@@ -10,7 +10,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "photos": "node --env-file-if-exists=.env scripts/import-photos.mjs"
+    "photos": "node --env-file-if-exists=.env scripts/import-photos.mjs",
+    "hero": "node --env-file-if-exists=.env scripts/hero.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",
