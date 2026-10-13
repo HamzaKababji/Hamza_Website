@@ -69,7 +69,7 @@ const teasers = [
     <div class="hero-text wrap">
       <div class="title">
         <h1 id="name" class="name">Hamza Elkababji</h1>
-        <div class="reflect" aria-hidden="true"><span>Hamza Elkababji</span></div>
+        <div class="reflect" aria-hidden="true" data-text="Hamza Elkababji"></div>
       </div>
       <div class="stripes" aria-hidden="true"><i></i><i></i></div>
       <dl class="specs">
@@ -170,6 +170,11 @@ const teasers = [
     user-select: none;
     -webkit-mask-image: linear-gradient(0deg, #000, transparent 75%);
     mask-image: linear-gradient(0deg, #000, transparent 75%);
+  }
+  /* Drawn as generated content: it's decoration, not text to read or contrast-check. */
+  .reflect::before {
+    content: attr(data-text);
+    display: block;
   }
   .hero .stripes {
     width: min(100%, 520px);

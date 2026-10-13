@@ -4,7 +4,7 @@ const { overlay = false } = Astro.props as { overlay?: boolean };
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <header class:list={['site-header', 'wrap', { overlay }]}>
-  <a class="plate" href="/" aria-label="Hamza Elkababji, home" aria-current={here === '/' ? 'page' : undefined}>HAMZA E</a>
+  <a class="plate" href="/" aria-current={here === '/' ? 'page' : undefined}>HAMZA E<span class="visually-hidden">, Hamza Elkababji, home</span></a>
   <nav aria-label="Main">
     <ul>
       {NAV.map((item) => (

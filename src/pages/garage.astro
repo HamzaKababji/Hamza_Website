@@ -71,6 +71,8 @@ const EMBED =
 
     <div class="garage" id="garage" data-open="false" data-view="page">
       <div class="scene">
+        <!-- First in tab order once open, so Tab moves from here into the garage. -->
+        <button type="button" class="close" id="gxClose" hidden>Close the door</button>
         <div class="inside" id="gxInside" inert>
           <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
 
@@ -363,11 +365,10 @@ const EMBED =
         </div>
 
         <button type="button" class="door" id="gxDoor" aria-expanded="false" aria-controls="gxInside">
-          <span class="plate door-plate">HAMZA E</span>
+          <span class="plate door-plate" aria-hidden="true">HAMZA E</span>
           <span class="door-label">Open the garage</span>
           <span class="handle" aria-hidden="true"></span>
         </button>
-        <button type="button" class="close" id="gxClose" hidden>Close the door</button>
       </div>
     </div>
 

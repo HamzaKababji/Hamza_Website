@@ -9,3 +9,6 @@ dist/
 Thumbs.db
 desktop.ini
 src/assets/.photo-gps-cache.json
+
+# Design brief and references (the résumé PDF contains a phone number)
+_rebuild/

@@ -77,7 +77,8 @@ const lightboxData = allPhotos.map((p) => ({
                   alt={p.alt}
                   width={p.files.grid.w}
                   height={p.files.grid.h}
-                  loading={i < 6 ? 'eager' : 'lazy'}
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
                   decoding="async"
                 />
               </picture>
