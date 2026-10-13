@@ -1,0 +1,29 @@
+---
+// PAGE / FILE.TOML pill switch. Shows [data-view="page"] or [data-view="file"] inside the
+// closest [data-switch-root]. Without JS the page view simply stays visible.
+interface Props {
+  page: string;
+  file: string;
+  label: string;
+}
+const { page, file, label } = Astro.props;
+---
+<div class="seg" role="group" aria-label={label} data-switch>
+  <button type="button" aria-pressed="true" data-show="page">{page}</button>
+  <button type="button" aria-pressed="false" data-show="file">{file}</button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-switch]').forEach((sw) => {
+    const root = sw.closest<HTMLElement>('[data-switch-root]');
+    if (!root) return;
+    sw.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-show]');
+      if (!b) return;
+      const show = b.dataset.show!;
+      sw.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      root.querySelectorAll<HTMLElement>('[data-view]').forEach((v) => (v.hidden = v.dataset.view !== show));
+      root.dataset.mode = show;
+    });
+  });
+</script>

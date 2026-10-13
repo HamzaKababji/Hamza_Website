@@ -1,0 +1,964 @@
+---
+import Base from '../layouts/Base.astro';
+import ViewSwitch from '../components/ViewSwitch.astro';
+import { garage, garageRawText, now, tomlComment } from '../lib/content';
+import { highlightToml } from '../lib/toml-highlight';
+
+const { daily, camera, retired, wishlist, dream } = garage;
+const note = (table: string, key?: string) => tomlComment(garageRawText, table, key);
+const cap = (s: string) => (s ? s[0].toUpperCase() + s.slice(1) : s);
+// "2x Lexar" -> "2× Lexar" (leaves the card's 1667x speed rating alone); "18-300" -> "18–300"
+const times = (s: string) => s.replace(/^(\d)x /, '$1× ').replace(/(\d)-(\d)/g, '$1–$2');
+
+const [kbName, ...kbRest] = String(daily.keyboard).split(', ');
+const lensNames: string[] = camera.lenses.map(times);
+
+const cameraTag = [
+  lensNames.join(', '),
+  `${camera.filters.replace(/ \(.*\)/, '')}s + ${camera.tripod} tripod`,
+  times(camera.cards),
+  `${cap(camera.recipes)} film recipes`,
+  `${camera.bag.replace(/, .*/, '')} bag`,
+];
+const cardsShort = times(camera.cards).replace(/ 1667x/, '').replace(/ \d+ GB/, '');
+
+// 84-key layout (75%), in key units per row.
+const KB_ROWS = [
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1],
+  [1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.5, 1],
+  [1.75, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.25, 1],
+  [2.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.75, 1, 1],
+  [1.25, 1.25, 1.25, 6.25, 1, 1, 1, 1, 1, 1],
+];
+const U = 10.4;
+const keys: { x: number; y: number; w: number; h: number; dark: boolean }[] = [];
+{
+  let y = 5;
+  KB_ROWS.forEach((row, ri) => {
+    let x = 5;
+    const h = ri === 0 ? 6 : 8;
+    row.forEach((w, ki) => {
+      const dark = (ri === 0 && ki === 0) || (ri === 5 && w === 1 && ki >= 7) || (ri === 4 && ki === 13 - 1);
+      keys.push({ x: x + 0.6, y, w: w * U - 1.2, h, dark });
+      x += w * U;
+    });
+    y += h + 1.6;
+  });
+}
+
+// A few lines of now.toml on the laptop screen.
+const screen = [
+  { k: '[reading]', h: true },
+  { k: 'next', v: now.reading?.next },
+  { k: '[building]', h: true },
+  { k: 'club', v: now.building?.club },
+  { k: 'team', v: now.building?.team },
+];
+
+const EMBED =
+  'https://sketchfab.com/models/402697365eaa41a68a543b71d0e0bfa8/embed?autostart=1&autospin=0.25&preload=1&transparent=1&ui_theme=dark&ui_hint=0&ui_help=0&ui_settings=0&ui_vr=0&ui_ar=0&ui_inspector=0&ui_annotations=0';
+---
+<Base title="Garage" description="The camera, the laptop, the first PC I built at 14, and a parking bay saved for an Audi Sport Quattro S1.">
+  <section class="wrap g-page" data-switch-root aria-labelledby="garage-h">
+    <header class="g-head">
+      <div>
+        <h1 id="garage-h" class="page-title">The Garage</h1>
+        <p class="intro">Everything I use, one thing I retired, and a bay I’m keeping free.</p>
+      </div>
+      <ViewSwitch page="GARAGE" file="GARAGE.TOML" label="View the garage as" />
+    </header>
+
+    <div class="garage" id="garage" data-open="false" data-view="page">
+      <div class="scene">
+        <div class="inside" id="gxInside" inert>
+          <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+
+          <!-- ============ top row: the wall ============ -->
+          <div class="wall">
+            <h2 class="visually-hidden">What I use now</h2>
+
+            <!-- pegboard group -->
+            <div class="zone peg">
+              <div class="items">
+                <figure class="item cam">
+                  <svg viewBox="0 0 160 118" aria-hidden="true">
+                    <path d="M80 0v10" stroke="#a5a99b" stroke-width="1.2"></path>
+                    <path d="M30 34 Q80 6 130 34" fill="none" stroke="#2b2e2a" stroke-width="3"></path>
+                    <rect x="16" y="38" width="128" height="62" rx="6" fill="#d6d5c9" stroke="#8f9488"></rect>
+                    <rect x="16" y="50" width="128" height="42" fill="#1e201e"></rect>
+                    <g stroke="#2b2e2a" stroke-width=".7" opacity=".6">
+                      {Array.from({ length: 32 }, (_, i) => <path d={`M${18 + i * 4} 52v38`}></path>)}
+                    </g>
+                    <path d="M58 38l7-18h30l7 18z" fill="#d6d5c9" stroke="#8f9488"></path>
+                    <rect x="68" y="24" width="24" height="10" rx="1" fill="#1e201e"></rect>
+                    <rect x="24" y="28" width="20" height="10" rx="2" fill="#2b2e2a"></rect>
+                    <path d="M24 31h20M24 34h20" stroke="#6b706a" stroke-width=".8"></path>
+                    <rect x="110" y="28" width="22" height="10" rx="2" fill="#2b2e2a"></rect>
+                    <path d="M110 31h22M110 34h22" stroke="#6b706a" stroke-width=".8"></path>
+                    <rect x="122" y="22" width="8" height="6" rx="1" fill="#2b2e2a"></rect>
+                    <circle cx="80" cy="72" r="28" fill="#141615" stroke="#4a4f48" stroke-width="2"></circle>
+                    <circle cx="80" cy="72" r="22" fill="#1e201e" stroke="#3a3f3a" stroke-width="3" stroke-dasharray="2 2"></circle>
+                    <circle cx="80" cy="72" r="15" fill="#0b1520" stroke="#2b2e2a" stroke-width="2"></circle>
+                    <circle cx="74" cy="66" r="5" fill="#8fb3e8" opacity=".45"></circle>
+                    <circle cx="85" cy="77" r="2" fill="#8fb3e8" opacity=".3"></circle>
+                    <text x="80" y="47" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="5" font-weight="700" fill="#4a4f48" letter-spacing=".8">X-T2</text>
+                    <rect x="126" y="44" width="10" height="4" rx="1" fill="#8f9488"></rect>
+                  </svg>
+                  <figcaption class="cap">{camera.body.replace('Fujifilm ', '')} + 23mm f/2</figcaption>
+                </figure>
+                <figure class="item lens">
+                  <svg viewBox="0 0 70 150" aria-hidden="true">
+                    <path d="M35 0v10" stroke="#a5a99b" stroke-width="1.2"></path>
+                    <rect x="17" y="10" width="36" height="8" rx="2" fill="#a5a99b"></rect>
+                    <path d="M15 18h40v108l-4 12H19l-4-12z" fill="#1e201e" stroke="#4a4f48"></path>
+                    <rect x="15" y="34" width="40" height="30" fill="#2b2e2a"></rect>
+                    <g stroke="#1a1c1a" stroke-width="1.6">
+                      {Array.from({ length: 9 }, (_, i) => <path d={`M15 ${36 + i * 3}h40`}></path>)}
+                    </g>
+                    <rect x="15" y="78" width="40" height="16" fill="#2b2e2a"></rect>
+                    <g stroke="#1a1c1a" stroke-width="1.6">
+                      {Array.from({ length: 5 }, (_, i) => <path d={`M15 ${80 + i * 3}h40`}></path>)}
+                    </g>
+                    <text x="35" y="106" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="5.5" fill="#a5a99b">18–300</text>
+                    <rect x="15" y="112" width="40" height="3" fill="#a5a99b"></rect>
+                    <rect x="19" y="134" width="32" height="6" rx="1" fill="#141615"></rect>
+                  </svg>
+                  <figcaption class="cap">{lensNames[1]}</figcaption>
+                </figure>
+                <figure class="item cards">
+                  <svg viewBox="0 0 70 60" aria-hidden="true">
+                    <path d="M35 0v8" stroke="#a5a99b" stroke-width="1.2"></path>
+                    <path d="M6 14h22l6 6v34H6z" fill="#1e201e" stroke="#e3b520" stroke-width="1.2"></path>
+                    <rect x="10" y="40" width="20" height="10" fill="#e3b520"></rect>
+                    <path d="M30 10h22l6 6v34H30z" fill="#1e201e" stroke="#e3b520" stroke-width="1.2"></path>
+                    <rect x="34" y="36" width="20" height="10" fill="#e3b520"></rect>
+                    <g fill="#a5a99b"><rect x="33" y="12" width="3" height="5"></rect><rect x="38" y="12" width="3" height="5"></rect><rect x="43" y="12" width="3" height="5"></rect></g>
+                  </svg>
+                  <figcaption class="cap">{cardsShort}</figcaption>
+                </figure>
+              </div>
+              <div class="tag">
+                <b>{camera.body}</b>
+                {cameraTag.map((l) => <span>{l}</span>)}
+                {note('camera', 'cards') && <em>Cards: {note('camera', 'cards')}</em>}
+              </div>
+            </div>
+
+            <!-- workbench -->
+            <div class="zone bench">
+              <div class="desk">
+                <figure class="item laptop">
+                  <svg viewBox="0 0 170 104" aria-hidden="true">
+                    <rect x="22" y="2" width="126" height="84" rx="4" fill="#1a1c1a" stroke="#4a4f48"></rect>
+                    <rect x="28" y="8" width="114" height="72" fill="#0a150f"></rect>
+                    <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="6.2" fill="#a5a99b">
+                      <text x="34" y="18" fill="#7f9a86"># now.toml</text>
+                      {screen.map((l, i) =>
+                        l.h ? (
+                          <text x="34" y={29 + i * 10} fill="#8fb3e8">{l.k}</text>
+                        ) : (
+                          <text x="34" y={29 + i * 10}>
+                            {l.k} = <tspan fill="#e3b520">"{l.v}"</tspan>
+                          </text>
+                        ),
+                      )}
+                      <text class="cursor" x="34" y={29 + screen.length * 10} fill="#e3b520">▍</text>
+                    </g>
+                    <path d="M8 86h154l-8 12H16z" fill="#2b2e2a" stroke="#4a4f48"></path>
+                    <rect x="74" y="88" width="22" height="3" rx="1.5" fill="#1a1c1a"></rect>
+                  </svg>
+                  <figcaption class="cap">{daily.laptop.replace(/ \d+$/, '')}</figcaption>
+                </figure>
+                <figure class="item kb">
+                  <svg viewBox="0 0 176 62" aria-hidden="true">
+                    <rect x="1" y="1" width="174" height="60" rx="6" fill="#d9d8cb" stroke="#a5a99b"></rect>
+                    {keys.map((k) => (
+                      <rect x={k.x} y={k.y} width={k.w} height={k.h} rx="1.6" fill={k.dark ? '#a5a99b' : '#f4f3ea'} stroke="#bdbcae" stroke-width=".5"></rect>
+                    ))}
+                  </svg>
+                  <figcaption class="cap">{kbName}</figcaption>
+                </figure>
+              </div>
+              <div class="benchtop" aria-hidden="true"></div>
+              <div class="tags">
+                <div class="tag">
+                  <b>{daily.laptop}</b>
+                  <span>Daily driver</span>
+                  <span>{daily.cpu}, {daily.gpu}</span>
+                  <span>{daily.ram}</span>
+                </div>
+                <div class="tag">
+                  <b>{kbName}</b>
+                  <span>{kbRest.join(', ')}, low profile</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- wishlist -->
+            <div class="zone wish">
+              <p class="wish-title">Wishlist</p>
+              <div class="wish-items">
+                <figure class="item mouse">
+                  <svg viewBox="0 0 80 100" aria-hidden="true">
+                    <path d="M34 6c18-2 32 12 36 34 4 24-2 50-26 54-22 4-34-8-36-26-1-10 2-16 0-24C6 26 14 8 34 6z" fill="none" stroke="#e3b520" stroke-width="1.8" stroke-dasharray="5 4"></path>
+                    <path d="M8 52c-6 2-8 10-4 16 3 4 8 5 12 3" fill="none" stroke="#e3b520" stroke-width="1.6" stroke-dasharray="4 3"></path>
+                    <path d="M36 6c2 10 2 22 0 32" fill="none" stroke="#e3b520" stroke-width="1.3" stroke-dasharray="3 3"></path>
+                    <rect x="31" y="14" width="8" height="14" rx="4" fill="none" stroke="#e3b520" stroke-width="1.4"></rect>
+                    <path d="M14 40h10M14 46h10" stroke="#e3b520" stroke-width="1.3" stroke-dasharray="2 2"></path>
+                  </svg>
+                  <figcaption class="cap">{wishlist.mouse.replace('Logitech ', '')}</figcaption>
+                </figure>
+                <figure class="item fw">
+                  <svg viewBox="0 0 150 100" aria-hidden="true">
+                    <rect x="20" y="4" width="96" height="62" rx="4" fill="none" stroke="#e3b520" stroke-width="1.8" stroke-dasharray="5 4"></rect>
+                    <path d="M8 66h120l-6 10H14z" fill="none" stroke="#e3b520" stroke-width="1.8" stroke-dasharray="5 4" stroke-linejoin="round"></path>
+                    <g font-family="Archivo, Arial, sans-serif" fill="#e3b520" text-anchor="middle">
+                      <text x="68" y="34" font-size="9" font-weight="700" letter-spacing="1">FRAMEWORK</text>
+                      <text x="68" y="47" font-size="7.5" font-weight="500" letter-spacing=".5">13 · DIY EDITION</text>
+                    </g>
+                    <!-- swappable expansion cards -->
+                    <g fill="none" stroke="#e3b520" stroke-width="1.4">
+                      <rect x="124" y="14" width="12" height="16" rx="2"></rect>
+                      <rect x="124" y="34" width="12" height="16" rx="2"></rect>
+                      <rect x="138" y="26" width="10" height="16" rx="2" transform="rotate(10 143 34)"></rect>
+                      <path d="M127 21h6M127 41h6M140 33h5"></path>
+                    </g>
+                    <!-- screwdriver -->
+                    <g transform="translate(26 84) rotate(-12)">
+                      <rect x="0" y="0" width="26" height="7" rx="3" fill="#e3b520"></rect>
+                      <path d="M26 3.5h18" stroke="#a5a99b" stroke-width="2"></path>
+                      <path d="M44 2v3" stroke="#a5a99b" stroke-width="1.2"></path>
+                    </g>
+                  </svg>
+                  <figcaption class="cap">Framework 13</figcaption>
+                </figure>
+              </div>
+              <div class="wish-txt">
+                <span>{wishlist.mouse}</span>
+                <span>{wishlist.laptop}.{note('wishlist', 'laptop') && ` ${cap(note('wishlist', 'laptop'))}.`}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ bottom row: the floor ============ -->
+          <div class="ground">
+            <h2 class="visually-hidden">Retired, and reserved</h2>
+
+            <div class="zone retired">
+              <figure class="item tower">
+                <svg viewBox="0 0 150 230" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#fff" stop-opacity=".08"></stop>
+                      <stop offset=".4" stop-color="#fff" stop-opacity="0"></stop>
+                      <stop offset=".55" stop-color="#fff" stop-opacity=".05"></stop>
+                      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+                    </linearGradient>
+                  </defs>
+                  <rect x="18" y="222" width="18" height="6" rx="2" fill="#0a0b0a"></rect>
+                  <rect x="114" y="222" width="18" height="6" rx="2" fill="#0a0b0a"></rect>
+                  <rect x="8" y="4" width="134" height="220" rx="6" fill="#1a1c1a" stroke="#4a4f48"></rect>
+                  <rect x="8" y="4" width="22" height="220" rx="6" fill="#141615"></rect>
+                  <g fill="#2b2e2a">
+                    {Array.from({ length: 26 }, (_, i) => <circle cx="14" cy={30 + i * 7} r="1.6"></circle>)}
+                    {Array.from({ length: 26 }, (_, i) => <circle cx="22" cy={33.5 + i * 7} r="1.6"></circle>)}
+                  </g>
+                  <circle cx="19" cy="14" r="3" fill="none" stroke="#a5a99b" stroke-width="1"></circle>
+                  <rect x="34" y="10" width="102" height="208" rx="3" fill="#0e1712" stroke="#3a5c46"></rect>
+                  <!-- motherboard -->
+                  <rect x="44" y="20" width="84" height="112" rx="2" fill="#13241a" stroke="#24402f"></rect>
+                  <rect x="44" y="20" width="10" height="34" fill="#2b2e2a"></rect>
+                  <rect x="58" y="20" width="40" height="8" fill="#2b2e2a"></rect>
+                  <!-- RAM -->
+                  <rect x="100" y="26" width="5" height="44" rx="1" fill="#a5a99b"></rect>
+                  <rect x="108" y="26" width="5" height="44" rx="1" fill="#a5a99b"></rect>
+                  <rect x="116" y="26" width="5" height="44" rx="1" fill="#a5a99b"></rect>
+                  <rect x="124" y="26" width="3" height="44" rx="1" fill="#a5a99b"></rect>
+                  <rect x="100" y="26" width="5" height="3" fill="#e3b520"></rect>
+                  <rect x="108" y="26" width="5" height="3" fill="#e3b520"></rect>
+                  <rect x="116" y="26" width="5" height="3" fill="#e3b520"></rect>
+                  <!-- CPU cooler -->
+                  <rect x="58" y="34" width="36" height="36" rx="3" fill="#1a1c1a"></rect>
+                  <circle cx="76" cy="52" r="15" fill="#2b2e2a" stroke="#4a4f48" stroke-width=".8"></circle>
+                  {Array.from({ length: 7 }, (_, i) => {
+                    const a = (i / 7) * Math.PI * 2;
+                    const x1 = 76 + Math.cos(a) * 4.5, y1 = 52 + Math.sin(a) * 4.5;
+                    const cx = 76 + Math.cos(a + 0.5) * 14, cy = 52 + Math.sin(a + 0.5) * 14;
+                    const x2 = 76 + Math.cos(a + 1) * 13, y2 = 52 + Math.sin(a + 1) * 13;
+                    return <path d={`M${x1.toFixed(1)} ${y1.toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`} stroke="#3a3f3a" stroke-width="3.3" stroke-linecap="round" fill="none"></path>;
+                  })}
+                  <circle cx="76" cy="52" r="4.5" fill="#141615"></circle>
+                  <circle class="rgb" cx="76" cy="52" r="16" fill="none" stroke="#e3b520" stroke-width="2"></circle>
+                  <!-- dual-fan GPU -->
+                  <rect x="46" y="84" width="82" height="26" rx="3" fill="#2b2e2a" stroke="#4a4f48"></rect>
+                  <rect x="46" y="84" width="82" height="4" fill="#3a3f3a"></rect>
+                  {[66, 106].map((fx) => (
+                    <g>
+                      <circle cx={fx} cy="97" r="10" fill="#2b2e2a" stroke="#4a4f48" stroke-width=".8"></circle>
+                      {Array.from({ length: 7 }, (_, i) => {
+                        const a = (i / 7) * Math.PI * 2;
+                        const x1 = fx + Math.cos(a) * 3, y1 = 97 + Math.sin(a) * 3;
+                        const cx = fx + Math.cos(a + 0.5) * 9.5, cy = 97 + Math.sin(a + 0.5) * 9.5;
+                        const x2 = fx + Math.cos(a + 1) * 8.6, y2 = 97 + Math.sin(a + 1) * 8.6;
+                        return <path d={`M${x1.toFixed(1)} ${y1.toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`} stroke="#3a3f3a" stroke-width="2.2" stroke-linecap="round" fill="none"></path>;
+                      })}
+                      <circle cx={fx} cy="97" r="3" fill="#141615"></circle>
+                    </g>
+                  ))}
+                  <rect x="40" y="88" width="6" height="18" fill="#6b706a"></rect>
+                  <!-- M.2 -->
+                  <rect x="48" y="116" width="30" height="3" rx="1" fill="#6b706a"></rect>
+                  <rect x="48" y="122" width="30" height="3" rx="1" fill="#6b706a"></rect>
+                  <!-- drive bays -->
+                  <rect x="38" y="146" width="94" height="66" rx="2" fill="#141615" stroke="#24402f"></rect>
+                  <rect x="38" y="146" width="94" height="3" fill="#3a5c46"></rect>
+                  {[156, 172, 188].map((y) => <rect x="46" y={y} width="48" height="12" rx="1.5" fill="#2b2e2a" stroke="#3a3f3a"></rect>)}
+                  <g fill="#6b706a"><circle cx="88" cy="162" r="1.5"></circle><circle cx="88" cy="178" r="1.5"></circle><circle cx="88" cy="194" r="1.5"></circle></g>
+                  <rect x="102" y="158" width="24" height="44" rx="2" fill="#1a1c1a" stroke="#3a3f3a"></rect>
+                  <rect x="34" y="10" width="102" height="208" rx="3" fill="url(#glass)"></rect>
+                </svg>
+              </figure>
+              <div class="tag big">
+                <b>Retired: {note('retired') || 'first build'}</b>
+                <span>{retired.cpu}</span>
+                <span>{retired.gpu}</span>
+                <span>{retired.ram}{note('retired', 'ram') && ` (${note('retired', 'ram').replace(/^was (\d+), upgraded/, 'upgraded from $1')})`}</span>
+                <span>{retired.storage.replace('500 GB M.2 + HDDs', '500 GB M.2 SSD plus hard drives')}</span>
+                <span>{retired.status === 'sold' ? 'Since sold' : cap(retired.status)}</span>
+              </div>
+            </div>
+
+            <div class="zone bay" id="bay" data-bare="false">
+              <p class="bay-no" aria-hidden="true">04</p>
+              <div class="car" id="carBox">
+                <svg class="cover" viewBox="0 0 300 150" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="coverShade" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#fff" stop-opacity=".14"></stop>
+                      <stop offset="1" stop-color="#000" stop-opacity=".35"></stop>
+                    </linearGradient>
+                  </defs>
+                  <path d="M4 146C2 120 8 104 26 98c18-6 40-8 58-14 16-26 34-52 70-56 40-4 70 6 88 36 8 14 20 26 40 32 14 4 16 20 14 50z" fill="#a5a99b"></path>
+                  <path d="M60 140c10-30 16-46 24-56M150 140c2-40 2-70 4-110M230 140c-6-28-8-44-12-68" stroke="#7c8174" stroke-width="2" fill="none" opacity=".7"></path>
+                  <path d="M4 146C2 120 8 104 26 98c18-6 40-8 58-14 16-26 34-52 70-56 40-4 70 6 88 36 8 14 20 26 40 32 14 4 16 20 14 50z" fill="url(#coverShade)"></path>
+                </svg>
+              </div>
+              <div class="placard">
+                <span class="spec">Bay 04, reserved</span>
+                <b>{dream.car}</b>
+                <span>{cap(dream.colour)}. Status: {dream.status}.</span>
+                <div class="placard-actions">
+                  <button type="button" class="uncover" id="uncover" aria-pressed="false" aria-controls="carBox">Lift the cover</button>
+                  <a class="link" href={dream.model}>Open on Sketchfab</a>
+                </div>
+                <p class="credit" id="credit" hidden>
+                  3D model: <a class="link" href={dream.model}>“Audi Quattro S1”</a> by
+                  <a class="link" href="https://sketchfab.com/TonyWony">TonyWony</a>, licensed
+                  <a class="link" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, on Sketchfab.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="door" id="gxDoor" aria-expanded="false" aria-controls="gxInside">
+          <span class="plate door-plate">HAMZA E</span>
+          <span class="door-label">Open the garage</span>
+          <span class="handle" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="close" id="gxClose" hidden>Close the door</button>
+      </div>
+    </div>
+
+    <div class="file" data-view="file" hidden>
+      <p class="file-name">src/content/garage.toml</p>
+      <pre class="toml"><code set:html={highlightToml(garageRawText)} /></pre>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ EMBED }}>
+  (() => {
+    const g = document.getElementById('garage');
+    const door = document.getElementById('gxDoor');
+    const close = document.getElementById('gxClose');
+    const inside = document.getElementById('gxInside');
+
+    function setOpen(open) {
+      g.dataset.open = String(open);
+      door.setAttribute('aria-expanded', String(open));
+      close.hidden = !open;
+      if (open) {
+        inside.removeAttribute('inert');
+        door.setAttribute('tabindex', '-1');
+        setTimeout(() => close.focus({ preventScroll: true }), 60);
+      } else {
+        inside.setAttribute('inert', '');
+        door.removeAttribute('tabindex');
+        door.focus({ preventScroll: true });
+      }
+    }
+    door.addEventListener('click', () => setOpen(true));
+    close.addEventListener('click', () => setOpen(false));
+
+    // Bay 04: lift the cover, then load the Sketchfab embed (only now, never before).
+    const bay = document.getElementById('bay');
+    const box = document.getElementById('carBox');
+    const btn = document.getElementById('uncover');
+    const credit = document.getElementById('credit');
+    btn.addEventListener('click', () => {
+      const bare = bay.dataset.bare !== 'true';
+      bay.dataset.bare = String(bare);
+      btn.setAttribute('aria-pressed', String(bare));
+      btn.textContent = bare ? 'Put the cover back' : 'Lift the cover';
+      credit.hidden = !bare;
+      const existing = box.querySelector('iframe');
+      if (bare && !existing) {
+        const f = document.createElement('iframe');
+        f.src = EMBED;
+        f.title = 'Audi Quattro S1, interactive 3D model by TonyWony on Sketchfab';
+        f.allow = 'autoplay; fullscreen; xr-spatial-tracking';
+        f.setAttribute('allowfullscreen', '');
+        f.loading = 'lazy';
+        box.appendChild(f);
+      } else if (!bare && existing) {
+        existing.remove();
+      }
+    });
+  })();
+</script>
+
+<style>
+  .g-page {
+    padding-top: clamp(24px, 5vw, 56px);
+  }
+  .g-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px 24px;
+    margin-bottom: 24px;
+  }
+  .intro {
+    margin-top: 10px;
+    color: var(--mist);
+  }
+
+  .garage {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--deep);
+  }
+  .scene {
+    position: relative;
+    overflow: hidden;
+    min-height: 620px;
+  }
+
+  /* ---------- inside ---------- */
+  .inside {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 620px;
+  }
+  .inside::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #000;
+    opacity: 0.72;
+    transition: opacity 0.5s 0.9s;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .garage[data-open='true'] .inside::after {
+    opacity: 0;
+  }
+
+  .lights {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+    z-index: 4;
+  }
+  .lights i {
+    width: 22%;
+    height: 7px;
+    border-radius: 4px;
+    background: #3a3f3a;
+  }
+  .garage[data-open='true'] .lights i {
+    animation: tube 1.3s steps(1, end) 0.8s forwards;
+  }
+  .garage[data-open='true'] .lights i:nth-child(2) {
+    animation-delay: 1s;
+  }
+  .garage[data-open='true'] .lights i:nth-child(3) {
+    animation-delay: 1.15s;
+  }
+  @keyframes tube {
+    0% { background: #ecebe0; box-shadow: 0 0 30px 6px rgba(236, 235, 224, 0.35); }
+    12% { background: #3a3f3a; box-shadow: none; }
+    22% { background: #ecebe0; box-shadow: 0 0 30px 6px rgba(236, 235, 224, 0.35); }
+    30% { background: #3a3f3a; box-shadow: none; }
+    45%, 100% { background: #f4f3ea; box-shadow: 0 0 40px 10px rgba(236, 235, 224, 0.3), 0 30px 120px 40px rgba(236, 235, 224, 0.06); }
+  }
+
+  /* back wall: pegboard */
+  .wall {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 58px clamp(14px, 2.5vw, 28px) 24px;
+    background:
+      radial-gradient(circle at 6px 6px, #0a150f 1.6px, transparent 2.2px) 0 0 / 16px 16px,
+      linear-gradient(#26332a, #1d2a21);
+  }
+  /* floor: grey concrete */
+  .ground {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 28px clamp(14px, 2.5vw, 28px) 28px;
+    background:
+      radial-gradient(120% 60% at 50% 0%, rgba(255, 255, 255, 0.06), transparent 70%),
+      repeating-linear-gradient(90deg, transparent 0 239px, rgba(0, 0, 0, 0.25) 239px 241px),
+      linear-gradient(#4f5650, #3a403b 40%, #2c322d);
+    border-top: 8px solid #1a211b;
+  }
+  @media (min-width: 900px) {
+    .wall {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 0.95fr);
+      align-items: end;
+      gap: clamp(16px, 2.2vw, 30px);
+    }
+    .ground {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+      align-items: end;
+      gap: clamp(20px, 3vw, 40px);
+    }
+  }
+
+  .zone {
+    position: relative;
+    min-width: 0;
+  }
+  .item {
+    margin: 0;
+    min-width: 0;
+  }
+  .item svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .cap {
+    display: block;
+    margin-top: 5px;
+    font: 600 10.5px/1.2 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-align: center;
+  }
+
+  .tag {
+    position: relative;
+    display: grid;
+    gap: 1px;
+    max-width: 100%;
+    padding: 9px 12px 10px;
+    border-radius: 2px 8px 2px 2px;
+    background: var(--decal);
+    color: var(--ink);
+    font: 500 12.5px/1.35 var(--font-body);
+    font-stretch: 80%;
+    box-shadow: 0 6px 14px -8px #000;
+  }
+  .tag::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #26332a;
+  }
+  .tag b {
+    font: 400 18px/1.15 var(--font-display);
+    margin-bottom: 3px;
+    padding-right: 14px;
+  }
+  .tag em {
+    font-style: normal;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+
+  /* pegboard group */
+  .peg {
+    display: grid;
+    gap: 14px;
+  }
+  .peg .items {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .cam {
+    width: clamp(112px, 34%, 150px);
+  }
+  .lens {
+    width: clamp(44px, 13%, 58px);
+  }
+  .cards {
+    width: clamp(40px, 12%, 52px);
+  }
+  .peg .cap {
+    max-width: 9em;
+    margin-inline: auto;
+  }
+  .peg .tag {
+    justify-self: start;
+  }
+
+  /* workbench */
+  .bench {
+    display: grid;
+    gap: 0;
+  }
+  .desk {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    align-items: end;
+    gap: 12px;
+    padding: 0 6px;
+  }
+  .kb {
+    padding-bottom: 2px;
+  }
+  .benchtop {
+    height: 14px;
+    margin-top: 6px;
+    background: linear-gradient(#7a5a3a, #5a4029);
+    border-radius: 2px;
+    box-shadow: 0 10px 0 -3px #2e2318;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 18px;
+  }
+  .tags .tag {
+    flex: 1 1 140px;
+  }
+  .cursor {
+    animation: blink 1.1s steps(1, end) infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  /* wishlist: dashed yellow outline */
+  .wish {
+    display: grid;
+    gap: 10px;
+    padding: 12px 14px 14px;
+    border: 1.5px dashed var(--yellow);
+    border-radius: 4px;
+    color: var(--yellow);
+  }
+  .wish-title {
+    font: 400 22px/1 var(--font-display);
+  }
+  .wish-items {
+    display: grid;
+    grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 14px;
+  }
+  .wish .cap {
+    color: var(--yellow);
+  }
+  .mouse {
+    max-width: 64px;
+    justify-self: center;
+  }
+  .wish-txt {
+    display: grid;
+    gap: 3px;
+    font: 500 13px/1.4 var(--font-body);
+    font-stretch: 80%;
+  }
+
+  /* retired PC */
+  .retired {
+    display: grid;
+    grid-template-columns: minmax(100px, 150px) minmax(0, 1fr);
+    align-items: end;
+    gap: 16px;
+  }
+  .tower {
+    filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.5));
+  }
+  .garage[data-open='true'] .tower :global(.rgb) {
+    animation: rgb 4s linear 2s infinite;
+  }
+  @keyframes rgb {
+    0% { stroke: #e3b520; }
+    33% { stroke: #8fb3e8; }
+    66% { stroke: #ecebe0; }
+    100% { stroke: #e3b520; }
+  }
+
+  /* Bay 04: yellow lines, diagonal hatching */
+  .bay {
+    display: grid;
+    gap: 14px;
+    padding: 14px 16px 12px;
+    border-left: 4px solid var(--yellow);
+    border-right: 4px solid var(--yellow);
+    background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(227, 181, 32, 0.08) 14px 28px);
+  }
+  .bay-no {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    font: 800 44px/1 var(--font-body);
+    font-stretch: 125%;
+    color: var(--yellow);
+    opacity: 0.35;
+  }
+  .car {
+    position: relative;
+    height: clamp(200px, 26vw, 300px);
+    border-radius: 3px;
+    overflow: hidden;
+    background: radial-gradient(70% 55% at 50% 100%, #2a4a35, var(--green) 60%, #13241a);
+  }
+  .car :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .cover {
+    position: absolute;
+    left: 4%;
+    bottom: 0;
+    width: 92%;
+    height: 78%;
+    z-index: 1;
+    transition: transform 1.1s cubic-bezier(0.6, 0, 0.2, 1), opacity 0.6s 0.6s;
+  }
+  .bay[data-bare='true'] .cover {
+    transform: translate(8%, -115%) rotate(-6deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .bay:not([data-bare='true']) .car:hover .cover {
+    transform: translateY(-5%);
+  }
+  .placard {
+    display: grid;
+    gap: 4px;
+    font: 500 13px/1.4 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.03em;
+    color: var(--stone);
+  }
+  .placard b {
+    font: 400 clamp(24px, 2.6vw, 32px) / 1.1 var(--font-display);
+    color: var(--yellow);
+    letter-spacing: 0;
+  }
+  .placard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin-top: 8px;
+  }
+  .uncover {
+    font: 600 13px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.06em;
+    background: var(--yellow);
+    color: var(--deep);
+    border: 0;
+    border-radius: 999px;
+    padding: 11px 16px;
+    cursor: pointer;
+  }
+  .credit {
+    margin-top: 6px;
+    font-size: 12.5px;
+    letter-spacing: 0;
+    color: var(--mist);
+  }
+
+  /* ---------- door ---------- */
+  .door {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--decal);
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent 6%, transparent 94%, rgba(0, 0, 0, 0.35)),
+      repeating-linear-gradient(180deg, #1d3a29 0 30px, #17301f 30px 32px, #2a4a35 32px 34px, #1d3a29 34px 36px);
+    box-shadow: inset 0 -10px 0 #14231a;
+    transition: transform 1.25s cubic-bezier(0.65, 0, 0.25, 1);
+  }
+  .door::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 22px;
+    background: linear-gradient(transparent, rgba(244, 243, 234, 0.2));
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .door:hover,
+  .door:focus-visible {
+    transform: translateY(-9%);
+  }
+  .door:hover::after,
+  .door:focus-visible::after {
+    opacity: 1;
+  }
+  .door:focus-visible {
+    outline: 3px solid var(--dusk);
+    outline-offset: -6px;
+  }
+  .garage[data-open='true'] .door {
+    transform: translateY(-101%);
+    pointer-events: none;
+  }
+  .door-plate {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(16px, 2vw, 22px);
+    padding: 10px 16px;
+    border: 2px solid var(--deep);
+    box-shadow: 0 0 0 3px var(--yellow);
+  }
+  .door-label {
+    position: absolute;
+    bottom: 56px;
+    left: 50%;
+    transform: translateX(-50%);
+    font: 600 14px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mist);
+    background: rgba(10, 21, 15, 0.6);
+    padding: 11px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .handle {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 10px;
+    border-radius: 5px;
+    background: var(--stone);
+    box-shadow: inset 0 -3px 0 #6b706a;
+  }
+  .close {
+    position: absolute;
+    top: 30px;
+    right: 12px;
+    z-index: 6;
+    font: 600 12.5px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--moss);
+    background: rgba(10, 21, 15, 0.88);
+    color: var(--mist);
+    padding: 9px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .file {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .file-name {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--code-bg);
+    font: 500 12.5px/1 var(--font-mono);
+    color: var(--stone);
+  }
+
+  @media (max-width: 899px) {
+    .wish-items {
+      grid-template-columns: minmax(0, 0.35fr) minmax(0, 1fr);
+      max-width: 420px;
+    }
+  }
+  @media (max-width: 480px) {
+    .retired {
+      grid-template-columns: 96px minmax(0, 1fr);
+    }
+    .desk {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .laptop {
+      width: 80%;
+    }
+    .kb {
+      width: 70%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .door,
+    .cover,
+    .inside::after {
+      transition: none;
+    }
+    .door:hover,
+    .door:focus-visible {
+      transform: none;
+    }
+    .garage[data-open='true'] .lights i {
+      animation: none;
+      background: #f4f3ea;
+      box-shadow: 0 0 40px 10px rgba(236, 235, 224, 0.3);
+    }
+    .garage[data-open='true'] .tower :global(.rgb),
+    .cursor {
+      animation: none;
+    }
+  }
+</style>

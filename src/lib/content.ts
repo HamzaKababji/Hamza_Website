@@ -47,3 +47,24 @@ export const nowRawText = nowRaw;
 export const now = parse(nowRaw) as any;
 export const garageRawText = garageRaw;
 export const garage = parse(garageRaw) as any;
+
+import workRaw from '../content/work.toml?raw';
+export const work = parse(workRaw) as any;
+
+/** The trailing `# comment` on a key (or on a [table] header when key is omitted) in a raw TOML file. */
+export function tomlComment(raw: string, table: string, key?: string): string {
+  let current = '';
+  for (const line of raw.split(/\r?\n/)) {
+    const h = /^\s*\[([^\]]+)\]\s*(?:#\s*(.*))?$/.exec(line);
+    if (h) {
+      current = h[1].trim();
+      if (!key && current === table) return h[2]?.trim() ?? '';
+      continue;
+    }
+    if (key && current === table) {
+      const kv = new RegExp(`^\\s*${key}\\s*=.*?#\\s*(.*)$`).exec(line);
+      if (kv && !/^\s*#/.test(line)) return kv[1].trim();
+    }
+  }
+  return '';
+}
