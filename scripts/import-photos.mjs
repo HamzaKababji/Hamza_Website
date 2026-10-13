@@ -238,7 +238,7 @@ const byHow = result.reduce((m, p) => ((m[p.placed] = (m[p.placed] ?? 0) + 1), m
 console.log(`Placed by:   ${Object.entries(byHow).map(([k, v]) => `${k} ${v}`).join(', ')}`);
 console.log(`Photos:      ${mb(photosBytes)} in src/assets/photos (${(photosBytes / 1024 / Math.max(1, result.length)).toFixed(0)} KB per photo)`);
 console.log(`Hero:        ${mb(heroBytes)}`);
-console.log(`Projected deployed site: ${mb(projected)} (Azure SWA Free allows 250 MB)`);
+console.log(`Projected deployed site: ${mb(projected)} (keep it under ~200 MB)`);
 if (projected > WARN_MB * 1024 * 1024) {
   console.log(`\n!! WARNING: the site would be over ${WARN_MB} MB. Un-pick some photos or move them to a CDN (PHOTO_CDN_URL).`);
 }

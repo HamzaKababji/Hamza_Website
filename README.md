@@ -1,7 +1,7 @@
 # hamzakababji.com
 
-Static Astro site, deployed to Azure Static Web Apps by the GitHub workflow on every push to `main`
-(the workflow builds with `npm run build` and serves `dist/`).
+Static Astro site, hosted on Vercel. Vercel is connected to this GitHub repo and deploys every push to
+`main` (it runs `npm run build` and serves `dist/`). Caching and headers are in `vercel.json`.
 
 ## Layout
 
@@ -17,7 +17,7 @@ the left on every page, and **Work** (the résumé) is its own page at /work. Th
 ```sh
 npm install
 npm run dev       # http://localhost:4321
-npm run build     # what Azure runs; check it passes before pushing
+npm run build     # what Vercel runs; check it passes before pushing
 ```
 
 ## Edit content
@@ -47,5 +47,5 @@ Everything you'd normally change is a file in `src/content/`:
 
 Changed a hero crop in `site.toml`? Run `npm run hero`.
 
-If the photos ever outgrow the Azure free tier (the report warns past 200 MB), upload `src/assets/photos/`
+If the photos ever get too big for the repo (the report warns past 200 MB), upload `src/assets/photos/`
 to object storage and set `PHOTO_CDN_URL` for the build; the pages pick it up without code changes.

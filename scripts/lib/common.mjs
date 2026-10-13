@@ -1,5 +1,5 @@
 // Shared helpers for the local photo scripts. These run on Hamza's machine only;
-// the Azure build never reads the photo library or generates images.
+// the Vercel build never reads the photo library or generates images.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
