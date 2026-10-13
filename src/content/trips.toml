@@ -158,12 +158,29 @@ lat = 52.37
 note = "Favourite recent trip"
 
 [[stop]]
+id = "nl"
+city = "Zaanse Schans"
+country = "Netherlands"
+iso = "528"
+lon = 4.82
+lat = 52.47
+note = "Windmills and green wooden houses"
+
+[[stop]]
 id = "be"
 city = "Bruges"
 country = "Belgium"
 iso = "056"
 lon = 3.22
 lat = 51.21
+
+[[stop]]
+id = "be"
+city = "Ghent"
+country = "Belgium"
+iso = "056"
+lon = 3.72
+lat = 51.05
 
 [[stop]]
 id = "lu"
@@ -183,7 +200,7 @@ lat = 51.50
 
 [[stop]]
 id = "uk"
-city = "Oxford"
+city = "Oxford, UK"
 country = "United Kingdom"
 iso = "826"
 lon = -1.26

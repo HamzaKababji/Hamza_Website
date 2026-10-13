@@ -67,21 +67,25 @@ alt = "Canal houses glowing gold, reflected in the panes of an open window"
 city = "Amsterdam"
 draft = true
 
-# ---------- Netherlands, 1 Sep (city unconfirmed: looks like Zaandam / Zaanse Schans) ----------
+# ---------- Zaanse Schans, 1 Sep ----------
 [dscf1832]
+city = "Zaanse Schans"   # confirmed by Hamza
 alt = "A cyclist rides between stacked green Zaan-style houses under a bright sky"
 person = true
 draft = true
 
 [dscf2215]
+city = "Zaanse Schans"   # confirmed by Hamza
 alt = "A rosehip and leaves in focus, a windmill's sails a soft silhouette against the sun behind"
 draft = true
 
 [dscf2249]
+city = "Zaanse Schans"   # confirmed by Hamza
 alt = "Green wooden houses and an arched footbridge reflected in still water"
 draft = true
 
 [dscf2311]
+city = "Zaanse Schans"   # confirmed by Hamza
 alt = "A yellow Audi R8 parked on a cobbled street in front of a white townhouse"
 draft = true
 
@@ -104,32 +108,39 @@ person = true
 draft = true
 
 [dscf4066]
+city = "Bruges"   # confirmed by Hamza
 alt = "A no-entry sign and a Dépôt d'O street sign on an ivy-covered brick corner"
 draft = true
 
 [dscf4077]
+city = "Bruges"   # confirmed by Hamza
 alt = "A dark stone passage opening onto a sunlit courtyard"
 draft = true
 
 [dscf4491]
+city = "Ghent"   # confirmed by Hamza
 alt = "A scooter mirror reflecting an ornate building, beside a red pole"
 draft = true
 
 [dscf4593]
+city = "Bruges"   # confirmed by Hamza
 alt = "Three tall white-framed windows in a weathered stone wall"
 draft = true
 
 [dscf4599]
+city = "Ghent"   # confirmed by Hamza
 alt = "A scooter rider rounds a cobbled corner beside a grand grey townhouse"
 person = true
 draft = true
 
 [dscf4631]
+city = "Bruges"   # confirmed by Hamza
 alt = "Looking past the back of a man's head down a street of brick and white facades"
 person = true
 draft = true
 
 [dscf4909]
+city = "Ghent"   # confirmed by Hamza
 alt = "A Gothic cathedral and a gabled hall lit by evening sun, a cyclist blurring past"
 person = true
 draft = true
@@ -204,18 +215,18 @@ draft = true
 
 [dscf8558]
 alt = "Punts moored along a narrow river, trees leaning over the water"
-city = "Oxford"   # guess: punts and college stone on 10 Sep
+city = "Oxford, UK"   # guess: punts and college stone on 10 Sep
 draft = true
 
 [dscf9002]
 alt = "A man in a dark suit walks past an ornate Gothic doorway in golden stone"
-city = "Oxford"   # guess
+city = "Oxford, UK"   # guess
 person = true
 draft = true
 
 [dscf9084]
 alt = "A carved baroque gateway in honey-coloured stone behind black iron railings"
-city = "Oxford"   # guess
+city = "Oxford, UK"   # guess
 draft = true
 
 [dscf0165]
