@@ -3,9 +3,7 @@ import Base from '../layouts/Base.astro';
 import { work } from '../lib/content';
 import { CONTACT } from '../lib/site';
 
-const { feature, job: jobs, project: projects, education, skills } = work;
-const ratio = Math.round(feature.before_mb / feature.after_mb / 100) * 100;
-const afterPct = Math.max(0.4, (feature.after_mb / feature.before_mb) * 100);
+const { job: jobs, project: projects, education, skills } = work;
 ---
 <Base title="Work" description="Résumé: Software Controls Engineer at Husky Technologies, co-founder of WE AutoPilot, Software Engineering at Western.">
   <article class="wrap work">
@@ -19,25 +17,6 @@ const afterPct = Math.max(0.4, (feature.after_mb / feature.before_mb) * 100);
         <li><a class="link" href={CONTACT.github}>github.com/HamzaKababji</a></li>
       </ul>
     </header>
-
-    <section class="feature" aria-labelledby="feature-h">
-      <h2 id="feature-h" class="spec">Spec sheet · {feature.label}</h2>
-      <div class="ba">
-        <div class="before">
-          <span class="spec">Before</span>
-          <b>{feature.before}</b>
-          <span class="n">{feature.before_note}</span>
-          <span class="bar" aria-hidden="true"><i style="width:100%"></i></span>
-        </div>
-        <div class="after">
-          <span class="spec">After</span>
-          <b>{feature.after}</b>
-          <span class="n">{feature.after_note}</span>
-          <span class="bar" aria-hidden="true"><i style={`width:${afterPct}%`}></i></span>
-        </div>
-      </div>
-      <p class="ratio spec">About {ratio.toLocaleString('en-CA')}× smaller</p>
-    </section>
 
     <section class="block" aria-labelledby="exp-h">
       <h2 id="exp-h" class="section-h">Experience</h2>
@@ -155,64 +134,6 @@ const afterPct = Math.max(0.4, (feature.after_mb / feature.before_mb) * 100);
     margin: 4px 0 0;
     padding: 0;
     font-size: 15px;
-  }
-
-  /* ---------- featured spec ---------- */
-  .feature {
-    border: 1px solid var(--line);
-    border-top: 4px solid var(--yellow);
-    border-radius: 4px;
-    padding: clamp(18px, 3vw, 32px);
-    background: linear-gradient(var(--code-bg), var(--night));
-    display: grid;
-    gap: 22px;
-  }
-  .ba {
-    display: grid;
-    gap: 24px;
-  }
-  .ba > div {
-    display: grid;
-    gap: 6px;
-    min-width: 0;
-  }
-  .ba b {
-    font: 400 clamp(56px, 9vw, 112px) / 0.9 var(--font-display);
-    color: var(--decal);
-    letter-spacing: -0.01em;
-  }
-  .after b {
-    color: var(--yellow);
-  }
-  .n {
-    color: var(--stone);
-    font-size: 14.5px;
-  }
-  .bar {
-    display: block;
-    height: 8px;
-    margin-top: 8px;
-    background: var(--line);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .bar i {
-    display: block;
-    height: 100%;
-    min-width: 3px;
-    background: var(--stone);
-  }
-  .after .bar i {
-    background: var(--yellow);
-  }
-  .ratio {
-    color: var(--yellow);
-  }
-  @media (min-width: 760px) {
-    .ba {
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-    }
   }
 
   /* ---------- sections ---------- */

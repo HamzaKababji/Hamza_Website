@@ -3,16 +3,6 @@
 
 headline = "Software Engineering student at Western, graduating May 2027. Embedded Linux, real-time controls and robotics."
 
-# The featured spec at the top of the page (figures from the Husky bullets below).
-[feature]
-label = "Yocto Linux image, Husky Technologies"
-before = "220 GB"
-before_note = "Windows-based environment"
-after = "70 MB"
-after_note = "minimal Yocto-based Linux OS, PLC and Wi-Fi support"
-before_mb = 220000
-after_mb = 70
-
 [[job]]
 title = "Software Controls Engineer"
 org = "Husky Technologies"
