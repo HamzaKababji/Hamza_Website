@@ -53,8 +53,8 @@ const teasers = [
     <picture class="hero-img">
       <source media="(max-width: 719px)" type="image/avif" srcset={hero.mobile.avif} sizes="100vw" width={hero.mobile.width} height={hero.mobile.height} />
       <source media="(max-width: 719px)" type="image/webp" srcset={hero.mobile.webp} sizes="100vw" width={hero.mobile.width} height={hero.mobile.height} />
-      <source type="image/avif" srcset={hero.desktop.avif} sizes="64vw" />
-      <source type="image/webp" srcset={hero.desktop.webp} sizes="64vw" />
+      <source type="image/avif" srcset={hero.desktop.avif} sizes="70vw" />
+      <source type="image/webp" srcset={hero.desktop.webp} sizes="70vw" />
       <img
         src={hero.desktop.fallback}
         alt={site.hero.alt}
@@ -195,7 +195,7 @@ const teasers = [
     }
     .hero-img {
       inset: 0 0 0 auto;
-      width: 64%;
+      width: 70%;
       height: auto;
     }
     .hero-img img {

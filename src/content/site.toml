@@ -2,11 +2,11 @@
 
 [hero]
 file  = "DSCF2776"          # Rattlesnake Point/_site/DSCF2776.JPG (Hamza himself)
-focus = "70% 40%"           # desktop object-position inside the desktop crop
+focus = "60% 40%"           # desktop object-position inside the desktop crop
 mobile_focus = "50% 30%"    # mobile object-position inside the mobile crop
 # Crop boxes on the original, as fractions of its width/height: [left, top, width, height].
 # Desktop: wide, with Hamza on the right third. Mobile: taller, with Hamza centred.
-desktop_crop = [0.0, 0.0, 0.74, 1.0]
+desktop_crop = [0.04, 0.0, 0.81, 1.0]
 mobile_crop  = [0.23, 0.0, 0.54, 1.0]
 alt = "Hamza standing in tall autumn grass at Rattlesnake Point, a quarry lake and the evening sky behind him"
 

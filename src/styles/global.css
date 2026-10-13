@@ -26,7 +26,7 @@
   --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
 
   --gutter: clamp(16px, 4vw, 40px);
-  --max: 1240px;
+  --max: 1360px;
 
   --bg: var(--night);
   --fg: var(--decal);
