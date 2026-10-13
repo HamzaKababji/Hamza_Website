@@ -98,6 +98,8 @@ iso = "124"
 lon = -115.36
 lat = 51.09
 note = "Alberta"
+callout = "Mountains"
+callout_text = "What made me fall in love with mountains."
 
 [[stop]]
 id = "ca"
@@ -107,6 +109,8 @@ iso = "124"
 lon = -115.57
 lat = 51.18
 note = "Alberta"
+callout = "Mountains"
+callout_text = "What made me fall in love with mountains."
 
 [[stop]]
 id = "ca"

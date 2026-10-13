@@ -237,7 +237,7 @@ const EMBED =
               </div>
               <div class="wish-txt">
                 <span>{wishlist.mouse}</span>
-                <span>{wishlist.laptop}.{note('wishlist', 'laptop') && ` ${cap(note('wishlist', 'laptop'))}.`}</span>
+                <span class="one-line">{wishlist.laptop}{note('wishlist', 'laptop') ? `… ${cap(note('wishlist', 'laptop'))}` : '.'}</span>
               </div>
             </div>
           </div>
@@ -538,7 +538,7 @@ const EMBED =
   }
   @media (min-width: 900px) {
     .wall {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 0.95fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1.25fr);
       align-items: end;
       gap: clamp(16px, 2.2vw, 30px);
     }
@@ -696,6 +696,9 @@ const EMBED =
   .mouse {
     max-width: 64px;
     justify-self: center;
+  }
+  .one-line {
+    text-wrap: balance;
   }
   .wish-txt {
     display: grid;
