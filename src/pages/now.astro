@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import ViewSwitch from '../components/ViewSwitch.astro';
+import { now, nowRawText } from '../lib/content';
+import { highlightToml } from '../lib/toml-highlight';
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const [y, m] = String(now.updated).split('-').map(Number);
+const updated = m ? `${MONTHS[m - 1]} ${y}` : String(now.updated);
+
+const list = (items: string[]) =>
+  items.length <= 1 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+
+// "Minecraft (modded: better-vanilla and engineering packs)" -> value "Modded Minecraft", note "Better-vanilla and engineering packs."
+const games: string[] = now.playing?.games ?? [];
+const [firstGame = '', ...otherGames] = games;
+const g = /^(.*?)\s*\((.*)\)$/.exec(firstGame);
+const modded = g ? /^modded/i.test(g[2]) : false;
+const gameDetail = g ? g[2].replace(/^modded:?\s*/i, '') : '';
+
+const entries = [
+  {
+    label: 'Reading',
+    value: now.reading?.next ? `${now.reading.next}, probably` : '',
+    note: now.reading?.finished?.length ? `Book ${now.reading.finished.length + 1}, after ${list(now.reading.finished)}` : '',
+  },
+  {
+    label: 'Playing',
+    value: g ? `${modded ? 'Modded ' : ''}${g[1]}` : firstGame,
+    note: [
+      gameDetail ? `${gameDetail[0].toUpperCase()}${gameDetail.slice(1)}.` : '',
+      otherGames.length ? `Plus ${list(otherGames)}${now.playing.with ? ` with ${now.playing.with}` : ''}.` : '',
+    ]
+      .filter(Boolean)
+      .join(' '),
+  },
+  {
+    label: 'Building',
+    value: now.building?.club ?? '',
+    note: now.building?.team ? `Leading the ${now.building.team.toLowerCase().replace(' / ', ' and ')} team` : '',
+  },
+  {
+    label: 'Shooting',
+    value: now.shooting?.body ?? '',
+    note: now.shooting?.lens ? `Mostly the ${(/\d+mm/.exec(now.shooting.lens) ?? [now.shooting.lens])[0]} lens, mostly at f/2` : '',
+  },
+];
+---
+<Base title="Now" description="What I'm reading, playing, building and shooting right now.">
+  <section class="wrap now" data-switch-root aria-labelledby="now-h">
+    <header class="n-head">
+      <div>
+        <h1 id="now-h" class="page-title">Now</h1>
+        <p class="spec updated">Last updated <time datetime={String(now.updated)}>{updated}</time></p>
+      </div>
+      <ViewSwitch page="PAGE" file="NOW.TOML" label="View this page as" />
+    </header>
+
+    <dl class="entries" data-view="page">
+      {entries.map((e) => (
+        <div>
+          <dt class="spec">{e.label}</dt>
+          <dd>
+            <span class="value">{e.value}</span>
+            {e.note && <small>{e.note}</small>}
+          </dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="file" data-view="file" hidden>
+      <p class="file-name">src/content/now.toml</p>
+      <pre class="toml"><code set:html={highlightToml(nowRawText)} /></pre>
+    </div>
+
+    <p class="about">
+      A <a class="link" href="https://nownownow.com/about">now page</a> is what I’m focused on at this point in my life.
+      This one is a config file underneath, so updating it takes a minute.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .now {
+    padding-top: clamp(24px, 5vw, 56px);
+  }
+  .n-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .updated {
+    margin-top: 12px;
+  }
+  .entries {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0;
+  }
+  .entries > div {
+    display: grid;
+    gap: 8px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+    min-width: 0;
+  }
+  .entries dd {
+    margin: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .value {
+    font: 400 clamp(30px, 4vw, 44px) / 1.1 var(--font-display);
+    color: var(--decal);
+  }
+  .entries small {
+    font-size: 15px;
+    color: var(--stone);
+    max-width: 48ch;
+  }
+  @media (min-width: 760px) {
+    .entries {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 48px;
+    }
+  }
+  .file {
+    margin-top: 28px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .file-name {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--code-bg);
+    font: 500 12.5px/1 var(--font-mono);
+    color: var(--stone);
+  }
+  .about {
+    margin-top: 32px;
+    max-width: 60ch;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+</style>
