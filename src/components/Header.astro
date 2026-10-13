@@ -1,0 +1,62 @@
+---
+import { NAV } from '../lib/site';
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="site-header wrap">
+  <a class="plate" href="/" aria-label="Hamza Elkababji, home" aria-current={here === '/' ? 'page' : undefined}>HAMZA E</a>
+  <nav aria-label="Main">
+    <ul>
+      {NAV.map((item) => (
+        <li>
+          <a href={item.href} aria-current={here === item.href ? 'page' : undefined}>{item.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding-block: 20px;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px clamp(4px, 2vw, 22px);
+    list-style: none;
+    margin: 0 -8px 0 0;
+    padding: 0;
+  }
+  nav a {
+    display: block;
+    padding: 10px 6px;
+    font: 600 12.5px/1 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--mist);
+  }
+  :global(.theme-decal) nav a {
+    color: var(--ink-soft);
+  }
+  nav a:hover {
+    color: var(--fg);
+  }
+  nav a[aria-current='page'] {
+    color: var(--fg);
+    box-shadow: inset 0 -2px 0 var(--yellow);
+  }
+  @media (min-width: 720px) {
+    nav a {
+      font-size: 13.5px;
+    }
+  }
+</style>

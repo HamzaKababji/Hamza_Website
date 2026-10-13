@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Not found">
+  <section class="wrap nf">
+    <p class="spec">Error 404</p>
+    <h1 class="page-title">Wrong turn.</h1>
+    <p>This page isn't here. Try the <a class="link" href="/">home page</a> or the <a class="link" href="/photos">photos</a>.</p>
+  </section>
+</Base>
+<style>
+  .nf {
+    display: grid;
+    gap: 16px;
+    padding-block: clamp(48px, 10vw, 120px);
+  }
+</style>
