@@ -1,0 +1,357 @@
+---
+import Base from '../layouts/Base.astro';
+import { work } from '../lib/content';
+import { CONTACT } from '../lib/site';
+
+const { feature, job: jobs, project: projects, education, skills } = work;
+const ratio = Math.round(feature.before_mb / feature.after_mb / 100) * 100;
+const afterPct = Math.max(0.4, (feature.after_mb / feature.before_mb) * 100);
+---
+<Base title="Work" description="Résumé: Software Controls Engineer at Husky Technologies, co-founder of WE AutoPilot, Software Engineering at Western.">
+  <article class="wrap work">
+    <header class="w-head">
+      <p class="spec">Résumé</p>
+      <h1 class="page-title">Work</h1>
+      <p class="headline">{work.headline}</p>
+      <ul class="contact">
+        <li><a class="link" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
+        <li><a class="link" href={CONTACT.linkedin}>linkedin.com/in/hamzakababji</a></li>
+        <li><a class="link" href={CONTACT.github}>github.com/HamzaKababji</a></li>
+      </ul>
+    </header>
+
+    <section class="feature" aria-labelledby="feature-h">
+      <h2 id="feature-h" class="spec">Spec sheet · {feature.label}</h2>
+      <div class="ba">
+        <div class="before">
+          <span class="spec">Before</span>
+          <b>{feature.before}</b>
+          <span class="n">{feature.before_note}</span>
+          <span class="bar" aria-hidden="true"><i style="width:100%"></i></span>
+        </div>
+        <div class="after">
+          <span class="spec">After</span>
+          <b>{feature.after}</b>
+          <span class="n">{feature.after_note}</span>
+          <span class="bar" aria-hidden="true"><i style={`width:${afterPct}%`}></i></span>
+        </div>
+      </div>
+      <p class="ratio spec">About {ratio.toLocaleString('en-CA')}× smaller</p>
+    </section>
+
+    <section class="block" aria-labelledby="exp-h">
+      <h2 id="exp-h" class="section-h">Experience</h2>
+      {jobs.map((j: any) => (
+        <article class="entry">
+          <div class="when">
+            <p class="spec">{j.dates}</p>
+            <p class="spec place">{j.place}</p>
+          </div>
+          <div class="what">
+            <h3>{j.title}</h3>
+            <p class="org">{j.org}</p>
+            {j.figures?.length > 0 && (
+              <dl class="figures">
+                {j.figures.map(([v, l]: string[]) => (
+                  <div><dt class="spec">{l}</dt><dd>{v}</dd></div>
+                ))}
+              </dl>
+            )}
+            <ul class="bullets">
+              {j.bullets.map((b: string) => <li>{b}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="block" aria-labelledby="proj-h">
+      <h2 id="proj-h" class="section-h">Projects</h2>
+      {projects.map((p: any) => (
+        <article class="entry">
+          <div class="when">
+            <p class="spec stack">{p.stack}</p>
+          </div>
+          <div class="what">
+            <h3>{p.name}</h3>
+            <p class="org links">
+              <a class="link" href={p.link}>{p.link_label}</a>
+              {p.repo && <a class="link" href={p.repo}>Source on GitHub</a>}
+            </p>
+            {p.figures?.length > 0 && (
+              <dl class="figures">
+                {p.figures.map(([v, l]: string[]) => (
+                  <div><dt class="spec">{l}</dt><dd>{v}</dd></div>
+                ))}
+              </dl>
+            )}
+            <ul class="bullets">
+              {p.bullets.map((b: string) => <li>{b}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="block" aria-labelledby="edu-h">
+      <h2 id="edu-h" class="section-h">Education</h2>
+      <article class="entry">
+        <div class="when">
+          <p class="spec">{education.dates}</p>
+          <p class="spec place">{education.place}</p>
+        </div>
+        <div class="what">
+          <h3>{education.school}</h3>
+          <p class="org">{education.degree}</p>
+          <dl class="facts">
+            <div>
+              <dt class="spec">Relevant courses</dt>
+              <dd>{education.courses.join(', ')}</dd>
+            </div>
+            <div>
+              <dt class="spec">Extracurricular</dt>
+              <dd>{education.extracurricular.join(', ')}</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="block" aria-labelledby="skills-h">
+      <h2 id="skills-h" class="section-h">Skills</h2>
+      <dl class="skills">
+        {Object.entries(skills).map(([group, items]) => (
+          <div>
+            <dt class="spec">{group}</dt>
+            <dd>
+              <ul>{(items as string[]).map((s) => <li>{s}</li>)}</ul>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .work {
+    padding-top: clamp(24px, 5vw, 56px);
+  }
+  .w-head {
+    display: grid;
+    gap: 14px;
+    padding-bottom: 36px;
+  }
+  .headline {
+    max-width: 40ch;
+    font: 400 clamp(22px, 2.6vw, 30px) / 1.25 var(--font-display);
+    color: var(--mist);
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    font-size: 15px;
+  }
+
+  /* ---------- featured spec ---------- */
+  .feature {
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--yellow);
+    border-radius: 4px;
+    padding: clamp(18px, 3vw, 32px);
+    background: linear-gradient(var(--code-bg), var(--night));
+    display: grid;
+    gap: 22px;
+  }
+  .ba {
+    display: grid;
+    gap: 24px;
+  }
+  .ba > div {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+  .ba b {
+    font: 400 clamp(56px, 9vw, 112px) / 0.9 var(--font-display);
+    color: var(--decal);
+    letter-spacing: -0.01em;
+  }
+  .after b {
+    color: var(--yellow);
+  }
+  .n {
+    color: var(--stone);
+    font-size: 14.5px;
+  }
+  .bar {
+    display: block;
+    height: 8px;
+    margin-top: 8px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bar i {
+    display: block;
+    height: 100%;
+    min-width: 3px;
+    background: var(--stone);
+  }
+  .after .bar i {
+    background: var(--yellow);
+  }
+  .ratio {
+    color: var(--yellow);
+  }
+  @media (min-width: 760px) {
+    .ba {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  /* ---------- sections ---------- */
+  .block {
+    padding-top: clamp(48px, 7vw, 88px);
+  }
+  .section-h {
+    font: 400 clamp(36px, 5vw, 56px) / 1 var(--font-display);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .entry {
+    display: grid;
+    gap: 12px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .when {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .when .spec:first-child {
+    color: var(--decal);
+  }
+  .stack {
+    color: var(--stone) !important;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+  .what {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+  .what h3 {
+    font: 400 clamp(26px, 3vw, 34px) / 1.1 var(--font-display);
+    color: var(--decal);
+  }
+  .org {
+    font: 600 15px/1.3 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.04em;
+    color: var(--yellow);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+  .figures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 6px;
+  }
+  .figures > div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 4px;
+    padding: 10px 14px 9px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--yellow);
+    border-radius: 2px;
+    min-width: 0;
+  }
+  .figures dd {
+    margin: 0;
+    font: 400 26px/1 var(--font-display);
+    color: var(--decal);
+  }
+  .bullets {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 8px;
+    max-width: 78ch;
+    color: var(--mist);
+    font-size: 15.5px;
+  }
+  .bullets li::marker {
+    color: var(--yellow);
+  }
+  .facts {
+    margin: 10px 0 0;
+    display: grid;
+    gap: 12px;
+    max-width: 78ch;
+  }
+  .facts dd {
+    margin: 4px 0 0;
+    color: var(--mist);
+  }
+  @media (min-width: 900px) {
+    .entry {
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+    }
+    .when {
+      flex-direction: column;
+      padding-top: 10px;
+    }
+  }
+
+  .skills {
+    margin: 0;
+    display: grid;
+    gap: 0;
+  }
+  .skills > div {
+    display: grid;
+    gap: 10px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .skills dd {
+    margin: 0;
+  }
+  .skills ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .skills li {
+    font: 500 14px/1 var(--font-body);
+    font-stretch: 85%;
+    padding: 8px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--decal);
+  }
+  @media (min-width: 900px) {
+    .skills > div {
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+  }
+</style>

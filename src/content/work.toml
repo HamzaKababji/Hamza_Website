@@ -1,0 +1,91 @@
+# The résumé, transcribed from Hamza_Resume.pdf. The /work page renders from this file.
+# Never add the phone number or a street address here.
+
+headline = "Software Engineering student at Western, graduating May 2027. Embedded Linux, real-time controls and robotics."
+
+# The featured spec at the top of the page (figures from the Husky bullets below).
+[feature]
+label = "Yocto Linux image, Husky Technologies"
+before = "220 GB"
+before_note = "Windows-based environment"
+after = "70 MB"
+after_note = "minimal Yocto-based Linux OS, PLC and Wi-Fi support"
+before_mb = 220000
+after_mb = 70
+
+[[job]]
+title = "Software Controls Engineer"
+org = "Husky Technologies"
+place = "Bolton, ON"
+dates = "May 2025 – Aug 2026"
+bullets = [
+  "Proposed & architected a minimal Yocto-based Linux OS to replace a 220GB Windows-based environment on a Raspberry Pi edge device; developed and validated a proof of concept resulting in a 70MB image supporting PLC and Wi-Fi functionality.",
+  "Engineered & debugged real-time machine controls using C and IEC 61131-3 Structured Text in TwinCAT 2/3, integrating YTS61 and LDH100 oil sensors via RS-485 and EtherCAT IO-Link masters for custom client requests.",
+  "Upgraded 12 Industrial PCs by migrating legacy VB software to .NET, delivering ~$72K in billable engineering value, and deploying a new CoolPik sensor application to dictate part-dropping logic via real-time temperature data.",
+  "Configured & deployed PLC software builds across 100K+ DLL/TSM combinations, resolving dependency mappings for customer-specific machine configurations.",
+]
+figures = [["220 GB → 70 MB", "OS image"], ["12", "industrial PCs"], ["~$72K", "billable value"], ["100K+", "build combos"]]
+
+[[job]]
+title = "Co-Founder & Mapping/Localization Team Lead"
+org = "WE AutoPilot"
+place = "London, ON"
+dates = "Sep 2024 – Present"
+bullets = [
+  "Engineered a custom UART driver in C/C++ to decipher serial data from a 2D LiDAR (LD19), enabling real-time spatial mapping by bridging the hardware directly to ROS and RViz on a Linux edge device.",
+  "Architected the distributed data flow between the Autonomous Driving module and the Vehicle Control Unit (VCU) by designing low-latency ROS topics and strictly defined I/O software interfaces.",
+  "Developed autonomous navigation using supervised/reinforcement learning in a customized F1TENTH simulator fork; successfully completed an indoor circular track without collisions across 15 runs.",
+  "Grew WE AutoPilot to 70 members and led a 10-engineer Mapping/Localization team implementing SLAM.",
+]
+figures = [["70", "members"], ["10", "engineers led"], ["15", "collision-free runs"]]
+
+[[job]]
+title = "IoT Systems Integrator"
+org = "Smartegrators Ltd."
+place = "London, ON"
+dates = "May 2024 – Sep 2024"
+bullets = [
+  "Engineered the localized integration of 75+ smart edge devices by configuring MQTT and HTTP message brokers, centralizing distributed telemetry data into a custom Raspberry Pi server rack.",
+  "Optimized embedded device communication and system state reporting across 20+ commercial operations by writing automation scripts and configuring Node-RED data pipelines.",
+]
+figures = [["75+", "edge devices"], ["20+", "commercial operations"]]
+
+[[project]]
+name = "Media Converter And Organizer"
+stack = "Python, Tkinter, PyInstaller, Git"
+link = "https://bit.ly/MS-Store-Page"
+link_label = "Microsoft Store page"
+repo = "https://github.com/HamzaKababji/Media-Converter-And-Organizer"
+bullets = [
+  "Improved application processing speed by 80% through multithreading to handle concurrent file I/O operations.",
+  "Validated system reliability and memory management during the Agile testing phase by successfully processing and sorting 23,000+ media files (.HEIC, .MOV).",
+  "Architected and deployed a packaged executable to the Microsoft Store, maintaining an open-source repository while delivering a stable conversion tool for Windows environments.",
+]
+figures = [["80%", "faster"], ["23,000+", "files sorted"]]
+
+[[project]]
+name = "“Cast Away” Video Game"
+stack = "C#, Unity, Git"
+link = "https://bit.ly/Cast-Away-Game"
+link_label = "Project page"
+repo = "https://github.com/HamzaKababji/Cast-Away-Game"
+bullets = [
+  "Engineered object-oriented game logic and environment mapping in C# within the Unity engine, managing 2D sprite rendering, user input, and collision detection.",
+  "Designed a robust system state manager to track and load 40+ concurrent player challenges, inventory items, and dynamic NPC aggression metrics.",
+]
+figures = [["40+", "tracked states"]]
+
+[education]
+school = "The University Of Western Ontario"
+degree = "Bachelor of Engineering Science in Software Engineering with Co-op"
+place = "London, ON"
+dates = "Sep. 2022 – May 2027"
+courses = ["Real-Time & Embedded Systems", "Operating Systems", "Microprocessors & Microcomputers", "Hardware/Software Co-Design", "Digital Logic Systems", "DSA", "Networking", "Cloud Computing", "Machine Learning"]
+extracurricular = ["WE AutoPilot (Co-Founder & Lead)", "Engineering Student Ambassador 2023 - 2024", "Western Engineering Competition", "Dean’s Honour List x2", "The Western Scholarship of Distinction"]
+
+[skills]
+"Languages" = ["C", "C++", "Bash", "Python", "C#", "Java", "SQL", "YAML"]
+"Hardware & Microcontrollers" = ["Raspberry Pi", "ESP32", "Arduino", "FPGA (Verilog)", "IMU"]
+"Operating Systems & Frameworks" = ["Linux", "Yocto", "ROS/ROS2", "RViz", "QNX", "POSIX Threads (pthreads)"]
+"Protocols & Networking" = ["EtherCAT", "RS-485", "UART", "IO-Link", "MQTT", "TCP/IP", "UDP", "HTTP", "REST APIs"]
+"Development & DevOps" = ["Docker", "CMake", "Make", "Git", "Wireshark", "WSL", "Jira", "AWS", "Azure"]
