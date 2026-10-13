@@ -1,5 +1,4 @@
 ---
-import Base from '../layouts/Base.astro';
 import { allPhotos, countryFilters, srcset, photoUrl, formatDate, cityLabel, slug } from '../lib/photos';
 import { countryNames } from '../lib/content';
 
@@ -22,15 +21,14 @@ const lightboxData = allPhotos.map((p) => ({
   h: p.files.full.h,
 }));
 ---
-<Base
-  title="Photos"
-  description="Photos from the Netherlands, Belgium, Luxembourg, the UK and Ontario, shot on a Fujifilm X-T2."
-  theme="decal"
->
-  <section class="wrap gallery" aria-labelledby="photos-h">
+<section class="photos-sec theme-decal" id="photos" aria-labelledby="photos-h">
+  <div class="wrap gallery">
     <header class="g-head">
-      <h1 id="photos-h" class="page-title">Photos</h1>
-      <p class="spec">Fujifilm X-T2{years.length ? `, ${years.join('–')}` : ''}</p>
+      <div>
+        <h2 id="photos-h" class="g-title" tabindex="-1">Photos</h2>
+        <p class="spec">Fujifilm X-T2{years.length ? `, ${years.join('–')}` : ''}</p>
+      </div>
+      <a class="back" href="#places"><span aria-hidden="true">↑</span> Back to the globe</a>
     </header>
 
     <div class="filters">
@@ -77,8 +75,7 @@ const lightboxData = allPhotos.map((p) => ({
                   alt={p.alt}
                   width={p.files.grid.w}
                   height={p.files.grid.h}
-                  loading={i < 3 ? 'eager' : 'lazy'}
-                  fetchpriority={i === 0 ? 'high' : undefined}
+                  loading="lazy"
                   decoding="async"
                 />
               </picture>
@@ -96,7 +93,7 @@ const lightboxData = allPhotos.map((p) => ({
       <p class="empty-title">No photos from <span data-empty-name></span> yet</p>
       <p>The camera came later. Next trip, maybe.</p>
     </div>
-  </section>
+  </div>
 
   <dialog class="lightbox" aria-label="Photo viewer" data-lightbox>
     <div class="lb-inner">
@@ -121,7 +118,7 @@ const lightboxData = allPhotos.map((p) => ({
   </dialog>
 
   <script type="application/json" id="photo-data" set:html={JSON.stringify({ photos: lightboxData, names: countryNames })} />
-</Base>
+</section>
 
 <script>
   type P = {
@@ -142,7 +139,7 @@ const lightboxData = allPhotos.map((p) => ({
 
   function readUrl() {
     const q = new URLSearchParams(location.search);
-    country = (q.get('country') || location.hash.slice(1) || 'all').toLowerCase();
+    country = (q.get('country') || 'all').toLowerCase();
     city = (q.get('city') || '').toLowerCase();
   }
 
@@ -175,7 +172,7 @@ const lightboxData = allPhotos.map((p) => ({
       const q = new URLSearchParams();
       if (country !== 'all') q.set('country', country);
       if (city) q.set('city', city);
-      history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname);
+      history.replaceState(null, '', `${location.pathname}${q.toString() ? `?${q}` : ''}#photos`);
     }
   }
 
@@ -194,9 +191,16 @@ const lightboxData = allPhotos.map((p) => ({
       apply(true);
     }),
   );
-  window.addEventListener('hashchange', () => {
-    readUrl();
-    apply();
+  // The globe asks for a country/city: filter, then bring the gallery into view.
+  const section = document.getElementById('photos')!;
+  document.addEventListener('gallery:show', (e) => {
+    const d = (e as CustomEvent<{ country: string; city: string }>).detail;
+    country = d.country || 'all';
+    city = d.city || '';
+    apply(true);
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    section.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    document.getElementById('photos-h')!.focus({ preventScroll: true });
   });
   readUrl();
   apply();
@@ -255,8 +259,32 @@ const lightboxData = allPhotos.map((p) => ({
 </script>
 
 <style>
-  .gallery {
-    padding-top: clamp(24px, 5vw, 56px);
+  .photos-sec {
+    background: var(--bg);
+    color: var(--fg);
+    padding-block: clamp(56px, 8vw, 104px);
+  }
+  .g-title {
+    font: 400 clamp(48px, 8vw, 96px) / 0.95 var(--font-display);
+    letter-spacing: -0.01em;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .g-title:focus {
+    outline: none;
+  }
+  .back {
+    font: 600 13.5px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.06em;
+    color: var(--green);
+    text-decoration: none;
+    border: 1px solid var(--decal-line);
+    border-radius: 999px;
+    padding: 10px 14px;
+  }
+  .back:hover {
+    border-color: var(--green);
   }
   .g-head {
     display: flex;

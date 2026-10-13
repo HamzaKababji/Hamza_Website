@@ -1,19 +1,10 @@
 ---
-import { NAV } from '../lib/site';
 const { overlay = false } = Astro.props as { overlay?: boolean };
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <header class:list={['site-header', 'wrap', { overlay }]}>
   <a class="plate" href="/" aria-current={here === '/' ? 'page' : undefined}>HAMZA E<span class="visually-hidden">, Hamza Elkababji, home</span></a>
-  <nav aria-label="Main">
-    <ul>
-      {NAV.map((item) => (
-        <li>
-          <a href={item.href} aria-current={here === item.href ? 'page' : undefined}>{item.label}</a>
-        </li>
-      ))}
-    </ul>
-  </nav>
+  <a class="work" href="/work" aria-current={here === '/work' ? 'page' : undefined}>Work</a>
 </header>
 
 <style>
@@ -21,10 +12,9 @@ const here = Astro.url.pathname.replace(/\/$/, '') || '/';
     position: relative;
     z-index: 10;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 8px 16px;
+    gap: 16px;
     padding-block: 20px;
   }
   .overlay {
@@ -33,37 +23,24 @@ const here = Astro.url.pathname.replace(/\/$/, '') || '/';
     left: 0;
     right: 0;
   }
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px clamp(4px, 2vw, 22px);
-    list-style: none;
-    margin: 0 -8px 0 0;
-    padding: 0;
-  }
-  nav a {
-    display: block;
-    padding: 10px 6px;
-    font: 600 12.5px/1 var(--font-body);
-    font-stretch: 75%;
-    letter-spacing: 0.08em;
+  /* Work sits on its own, as a pill that stays readable over the hero photo. */
+  .work {
+    font: 700 13px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--mist);
+    color: var(--decal);
+    background: rgba(10, 21, 15, 0.78);
+    border: 1px solid var(--moss);
+    border-radius: 999px;
+    padding: 11px 18px;
   }
-  :global(.theme-decal) nav a {
-    color: var(--ink-soft);
+  .work:hover {
+    border-color: var(--yellow);
   }
-  nav a:hover {
-    color: var(--fg);
-  }
-  nav a[aria-current='page'] {
-    color: var(--fg);
-    box-shadow: inset 0 -2px 0 var(--yellow);
-  }
-  @media (min-width: 720px) {
-    nav a {
-      font-size: 13.5px;
-    }
+  .work[aria-current='page'] {
+    border-color: var(--yellow);
+    color: var(--yellow);
   }
 </style>

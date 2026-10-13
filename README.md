@@ -3,6 +3,13 @@
 Static Astro site, deployed to Azure Static Web Apps by the GitHub workflow on every push to `main`
 (the workflow builds with `npm run build` and serves `dist/`).
 
+## Layout
+
+The home page is the whole site in one scroll: hero, the globe (Places), the photos it leads to,
+and the Garage. Click a ringed city on the globe to filter the photos to it. **Now** slides out from
+the left on every page, and **Work** (the résumé) is its own page at /work. The old /photos, /places,
+/garage and /now URLs redirect to the matching part of the home page.
+
 ## Run it
 
 ```sh
@@ -17,11 +24,11 @@ Everything you'd normally change is a file in `src/content/`:
 
 | File | Page |
 | --- | --- |
-| `site.toml` | Home: hero photo, crops, focal points, spec row |
-| `trips.toml` | Places: the route, in driving order, plus gallery-only places |
-| `now.toml` | Now (bump `updated`) |
-| `garage.toml` | Garage. Trailing `# comments` show up on the tags |
-| `work.toml` | Work (the résumé). Never add a phone number or address |
+| `site.toml` | Hero: photo, crops, focal points, spec row |
+| `trips.toml` | The globe: the route in driving order, plus gallery-only places |
+| `now.toml` | The Now panel (bump `updated`) |
+| `garage.toml` | The Garage. Trailing `# comments` show up on the tags |
+| `work.toml` | /work, the résumé. Never add a phone number or address |
 | `photo-notes.toml` | Per-photo alt text, city and `person` flag |
 
 ## Add or remove photos

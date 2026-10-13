@@ -1,0 +1,25 @@
+---
+// Old section URLs (/photos, /places, /garage, /now) now live on the home page.
+// Keeps any ?country=&city= query so /photos?country=nl still lands filtered.
+interface Props {
+  to: string;
+  title: string;
+}
+const { to, title } = Astro.props;
+---
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{title} · Hamza Elkababji</title>
+    <link rel="canonical" href={new URL(`/${to}`, Astro.site)} />
+    <meta http-equiv="refresh" content={`0; url=/${to}`} />
+    <script is:inline define:vars={{ to }}>
+      location.replace('/' + location.search + to);
+    </script>
+  </head>
+  <body>
+    <a href={`/${to}`}>{title} is on the home page now</a>
+  </body>
+</html>

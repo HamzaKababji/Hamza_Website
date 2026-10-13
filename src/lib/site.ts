@@ -5,14 +5,6 @@ export const CONTACT = {
   github: 'https://github.com/HamzaKababji',
 };
 
-export const NAV = [
-  { href: '/photos', label: 'Photos' },
-  { href: '/places', label: 'Places' },
-  { href: '/garage', label: 'Garage' },
-  { href: '/now', label: 'Now' },
-  { href: '/work', label: 'Work' },
-];
-
 export const SITE_NAME = 'Hamza Elkababji';
 export const SITE_DESCRIPTION =
   'Software engineering student at Western, co-founder of WE AutoPilot, and a photographer with a Fujifilm X-T2.';

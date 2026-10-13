@@ -1,5 +1,4 @@
 ---
-import Base from '../layouts/Base.astro';
 import ViewSwitch from '../components/ViewSwitch.astro';
 import { garage, garageRawText, now, tomlComment } from '../lib/content';
 import { highlightToml } from '../lib/toml-highlight';
@@ -59,17 +58,17 @@ const screen = [
 const EMBED =
   'https://sketchfab.com/models/402697365eaa41a68a543b71d0e0bfa8/embed?autostart=1&autospin=0.25&preload=1&transparent=1&ui_theme=dark&ui_hint=0&ui_help=0&ui_settings=0&ui_vr=0&ui_ar=0&ui_inspector=0&ui_annotations=0';
 ---
-<Base title="Garage" description="The camera, the laptop, the first PC I built at 14, and a parking bay saved for an Audi Sport Quattro S1.">
-  <section class="wrap g-page" data-switch-root aria-labelledby="garage-h">
+
+  <section class="wrap g-page" id="garage" data-switch-root aria-labelledby="garage-h">
     <header class="g-head">
       <div>
-        <h1 id="garage-h" class="page-title">The Garage</h1>
+        <h2 id="garage-h" class="sec-title">The Garage</h2>
         <p class="intro">Everything I use, one thing I retired, and a bay I’m keeping free.</p>
       </div>
       <ViewSwitch page="GARAGE" file="GARAGE.TOML" label="View the garage as" />
     </header>
 
-    <div class="garage" id="garage" data-open="false" data-view="page">
+    <div class="garage" id="garageBox" data-open="false" data-view="page">
       <div class="scene">
         <!-- First in tab order once open, so Tab moves from here into the garage. -->
         <button type="button" class="close" id="gxClose" hidden>Close the door</button>
@@ -377,11 +376,11 @@ const EMBED =
       <pre class="toml"><code set:html={highlightToml(garageRawText)} /></pre>
     </div>
   </section>
-</Base>
+
 
 <script define:vars={{ EMBED }}>
   (() => {
-    const g = document.getElementById('garage');
+    const g = document.getElementById("garageBox");
     const door = document.getElementById('gxDoor');
     const close = document.getElementById('gxClose');
     const inside = document.getElementById('gxInside');
@@ -432,7 +431,7 @@ const EMBED =
 
 <style>
   .g-page {
-    padding-top: clamp(24px, 5vw, 56px);
+    padding-top: clamp(56px, 9vw, 112px);
   }
   .g-head {
     display: flex;

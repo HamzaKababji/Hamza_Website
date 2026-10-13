@@ -6,6 +6,7 @@ import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-
 import instrumentLatin from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import NowDrawer from '../components/NowDrawer.astro';
 import { SITE_NAME, SITE_DESCRIPTION } from '../lib/site';
 
 interface Props {
@@ -52,6 +53,7 @@ const ogUrl = new URL(ogImage, Astro.site);
       <slot />
     </main>
     <Footer />
+    <NowDrawer />
   </body>
 </html>
 

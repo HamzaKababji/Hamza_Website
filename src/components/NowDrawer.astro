@@ -1,0 +1,349 @@
+---
+// "Now" as a panel that slides out from the left on every page. Renders from now.toml.
+import ViewSwitch from './ViewSwitch.astro';
+import { now, nowRawText } from '../lib/content';
+import { highlightToml } from '../lib/toml-highlight';
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const [y, m] = String(now.updated).split('-').map(Number);
+const updated = m ? `${MONTHS[m - 1]} ${y}` : String(now.updated);
+
+const finished: string[] = now.reading?.finished ?? [];
+const games: string[] = now.playing?.games ?? [];
+const [firstGame = '', ...otherGames] = games;
+const g = /^(.*?)\s*\((.*)\)$/.exec(firstGame);
+const mainGame = g ? `${/^modded/i.test(g[2]) ? 'Modded ' : ''}${g[1]}` : firstGame;
+const gameDetail = g ? g[2].replace(/^modded:?\s*/i, '') : '';
+const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens ?? ''])[0];
+---
+<button type="button" class="now-tab" id="nowTab" aria-controls="nowDrawer" aria-expanded="false">
+  <span class="pulse" aria-hidden="true"></span>
+  <span class="lbl">Now</span>
+</button>
+
+<dialog class="now-drawer" id="nowDrawer" aria-labelledby="now-h">
+  <div class="nd" data-switch-root>
+    <header class="nd-head">
+      <div>
+        <p class="spec">Updated <time datetime={String(now.updated)}>{updated}</time></p>
+        <h2 id="now-h">Now</h2>
+      </div>
+      <button type="button" class="nd-close" id="nowClose" aria-label="Close">✕</button>
+    </header>
+
+    <ul class="nd-list" data-view="page">
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v15H6.5A2.5 2.5 0 0 0 4 20.5 2.5 2.5 0 0 0 6.5 23H19v-5"></path></svg>
+        <div>
+          <p class="spec">Reading</p>
+          <p class="val">{now.reading?.next}</p>
+          <div class="shelf" aria-hidden="true">
+            {finished.map(() => <i class="read"></i>)}
+            <i class="next"></i>
+          </div>
+          <p class="note">
+            Probably. Book {finished.length + 1}, after {finished.map((t, i) => (
+              <>{i > 0 && (i === finished.length - 1 ? ' and ' : ', ')}<cite>{t}</cite></>
+            ))}.
+          </p>
+        </div>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="11" rx="5.5"></rect><path d="M7 10.5v4M5 12.5h4"></path><circle cx="16" cy="11.5" r=".9"></circle><circle cx="18" cy="13.5" r=".9"></circle></svg>
+        <div>
+          <p class="spec">Playing</p>
+          <p class="val">{mainGame}</p>
+          {gameDetail && <p class="note">{gameDetail[0].toUpperCase() + gameDetail.slice(1)}.</p>}
+          {otherGames.length > 0 && (
+            <ul class="chips">
+              {otherGames.map((x) => <li>{x}</li>)}
+            </ul>
+          )}
+          {now.playing?.with && <p class="note">With {now.playing.with}.</p>}
+        </div>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M3 11.5c3-1 6-1.5 9-1.5s6 .5 9 1.5M12 14.5V21.5"></path></svg>
+        <div>
+          <p class="spec">Building</p>
+          <p class="val">{now.building?.club}</p>
+          {now.building?.team && <p class="note">Leading the {now.building.team.toLowerCase().replace(' / ', ' and ')} team.</p>}
+        </div>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2.5l1.5-2h6l1.5 2H19a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+        <div>
+          <p class="spec">Shooting</p>
+          <p class="val">{now.shooting?.body}</p>
+          <p class="note">The {lensShort}, mostly at f/2.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="nd-file" data-view="file" hidden>
+      <pre class="toml"><code set:html={highlightToml(nowRawText)} /></pre>
+    </div>
+
+    <footer class="nd-foot">
+      <ViewSwitch page="PAGE" file="NOW.TOML" label="View Now as" />
+    </footer>
+  </div>
+</dialog>
+
+<script>
+  const tab = document.getElementById('nowTab') as HTMLButtonElement;
+  const dlg = document.getElementById('nowDrawer') as HTMLDialogElement;
+  const closeBtn = document.getElementById('nowClose') as HTMLButtonElement;
+
+  function open() {
+    if (dlg.open) return;
+    dlg.showModal();
+    tab.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    dlg.close();
+  }
+  tab.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg) close(); // backdrop
+  });
+  dlg.addEventListener('close', () => {
+    tab.setAttribute('aria-expanded', 'false');
+    if (location.hash === '#now') history.replaceState(null, '', location.pathname + location.search);
+    tab.focus();
+  });
+  // On small screens the floating tab would cover the globe's stop strip, so it steps aside there.
+  const tour = document.getElementById('tour');
+  if (tour && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => tab.classList.toggle('aside', e.isIntersecting), { threshold: 0.15 }).observe(tour);
+  }
+
+  // /#now (and the old /now URL) opens it.
+  if (location.hash === '#now') open();
+  addEventListener('hashchange', () => location.hash === '#now' && open());
+</script>
+
+<style>
+  /* ---------- the tab ---------- */
+  .now-tab {
+    position: fixed;
+    z-index: 40;
+    left: 16px;
+    bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 16px 11px 14px;
+    border: 1px solid var(--moss);
+    border-radius: 999px;
+    background: var(--green);
+    color: var(--decal);
+    font: 700 13px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.7);
+  }
+  .now-tab:hover {
+    border-color: var(--yellow);
+  }
+  @media (max-width: 899px) {
+    .now-tab {
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .now-tab.aside {
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+    }
+  }
+  .pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 0 0 0 0 rgba(227, 181, 32, 0.6);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(227, 181, 32, 0.55); }
+    70%, 100% { box-shadow: 0 0 0 8px rgba(227, 181, 32, 0); }
+  }
+  @media (min-width: 900px) {
+    /* A vertical tab on the left edge. */
+    .now-tab {
+      left: 0;
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px 10px 18px;
+      border-left: 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .lbl {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+  }
+
+  /* ---------- the drawer ---------- */
+  .now-drawer {
+    margin: 0;
+    padding: 0;
+    width: min(420px, 92vw);
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border: 0;
+    border-right: 1px solid var(--moss);
+    background: var(--night);
+    color: var(--decal);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1), overlay 0.35s allow-discrete, display 0.35s allow-discrete;
+  }
+  .now-drawer[open] {
+    transform: translateX(0);
+  }
+  @starting-style {
+    .now-drawer[open] {
+      transform: translateX(-100%);
+    }
+  }
+  .now-drawer::backdrop {
+    background: rgba(5, 10, 7, 0.55);
+  }
+  .nd {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 28px 28px 24px;
+  }
+  .nd-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 8px;
+  }
+  .nd-head h2 {
+    font: 400 64px/0.95 var(--font-display);
+    margin-top: 6px;
+  }
+  .nd-close {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--moss);
+    border-radius: 50%;
+    background: none;
+    color: var(--mist);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .nd-close:hover {
+    border-color: var(--yellow);
+    color: var(--decal);
+  }
+  .nd-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nd-list > li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+  }
+  .ico {
+    width: 26px;
+    height: 26px;
+    margin-top: 2px;
+    fill: none;
+    stroke: var(--yellow);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .val {
+    margin-top: 4px;
+    font: 400 30px/1.05 var(--font-display);
+    color: var(--decal);
+  }
+  .note {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--stone);
+  }
+  .note cite {
+    font-style: italic;
+  }
+  .shelf {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 26px;
+    margin-top: 10px;
+  }
+  .shelf i {
+    display: block;
+    width: 9px;
+    border-radius: 1px;
+  }
+  .shelf .read {
+    height: 22px;
+    background: var(--stone);
+  }
+  .shelf .read + .read {
+    height: 25px;
+    background: var(--moss);
+  }
+  .shelf .next {
+    height: 24px;
+    border: 1.5px dashed var(--yellow);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+  }
+  .chips li {
+    font: 600 12.5px/1 var(--font-body);
+    font-stretch: 85%;
+    padding: 7px 10px;
+    border: 1px solid var(--moss);
+    border-radius: 999px;
+    color: var(--mist);
+  }
+  .nd-file {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .nd-file .toml {
+    font-size: 12px;
+  }
+  .nd-foot {
+    margin-top: auto;
+    padding-top: 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse {
+      animation: none;
+    }
+    .now-drawer {
+      transition: none;
+    }
+  }
+</style>

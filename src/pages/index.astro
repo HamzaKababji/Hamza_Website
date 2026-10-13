@@ -1,8 +1,12 @@
 ---
+// Home is the whole site in one scroll: hero, the globe, the photos it leads to, the garage.
+// Work is its own page; Now slides out from the left on every page.
 import Base from '../layouts/Base.astro';
-import { site, stops, routeKm } from '../lib/content';
+import Globe from '../components/Globe.astro';
+import Gallery from '../components/Gallery.astro';
+import Garage from '../components/Garage.astro';
+import { site } from '../lib/content';
 import { hero } from '../lib/hero';
-import { photoStats } from '../lib/photos';
 
 const { specs } = site;
 const specRows = [
@@ -11,50 +15,14 @@ const specRows = [
   ['Building', specs.building],
   ['Shooting', specs.shooting],
 ];
-
-const cities = new Set(stops.map((s) => s.city)).size;
-const km = Math.round(routeKm / 1000) * 1000;
-
-const teasers = [
-  {
-    href: '/photos',
-    title: 'Photos',
-    text: 'Canals in Amsterdam, a yellow Beetle in Luxembourg, Toronto’s harbour at blue hour. A lot of it shot through a window, a mirror or a bike frame.',
-    stat: photoStats.total ? `${photoStats.total} photos · ${photoStats.countries} countries` : 'X-T2 · 23mm f/2',
-  },
-  {
-    href: '/places',
-    title: 'Places',
-    text: 'From Amman to Rattlesnake Point, by way of Dammam, Manama, Istanbul and Amsterdam. Scroll, and a small rally car drives the route.',
-    stat: `${cities} cities · ${km.toLocaleString('en-CA')} km`,
-  },
-  {
-    href: '/garage',
-    title: 'Garage',
-    text: 'The camera, the laptop, the first PC I built at 14, and a parking bay I’m keeping free for an Audi Sport Quattro S1.',
-    stat: 'Open the door',
-  },
-  {
-    href: '/now',
-    title: 'Now',
-    text: 'What I’m reading, playing, building and shooting this month. It’s also a config file, if you’d rather read it that way.',
-    stat: 'now.toml',
-  },
-  {
-    href: '/work',
-    title: 'Work',
-    text: 'My résumé, built into the site. Sixteen months at Husky, WE AutoPilot, and the projects that come with numbers.',
-    stat: 'Résumé',
-  },
-];
 ---
 <Base overlayHeader>
   <section class="hero" aria-labelledby="name">
     <picture class="hero-img">
       <source media="(max-width: 719px)" type="image/avif" srcset={hero.mobile.avif} sizes="100vw" width={hero.mobile.width} height={hero.mobile.height} />
       <source media="(max-width: 719px)" type="image/webp" srcset={hero.mobile.webp} sizes="100vw" width={hero.mobile.width} height={hero.mobile.height} />
-      <source type="image/avif" srcset={hero.desktop.avif} sizes="70vw" />
-      <source type="image/webp" srcset={hero.desktop.webp} sizes="70vw" />
+      <source type="image/avif" srcset={hero.desktop.avif} sizes="60vw" />
+      <source type="image/webp" srcset={hero.desktop.webp} sizes="60vw" />
       <img
         src={hero.desktop.fallback}
         alt={site.hero.alt}
@@ -80,12 +48,17 @@ const teasers = [
           </div>
         ))}
       </dl>
+      <a class="cue" href="#places">Scroll to start the drive <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
-  <section class="intro wrap" aria-labelledby="intro-h">
-    <h2 id="intro-h" class="spec">Hello</h2>
-    <div class="intro-copy">
+  <Globe />
+  <Gallery />
+  <Garage />
+
+  <section class="about wrap" aria-labelledby="about-h">
+    <h2 id="about-h" class="spec">About</h2>
+    <div class="about-copy">
       <p class="lede">
         I’m Hamza. I study Software Engineering at Western University in London, Ontario, and I just finished a sixteen-month
         co-op as a software controls engineer at Husky Technologies in Bolton.
@@ -93,25 +66,11 @@ const teasers = [
       <p>
         I co-founded WE AutoPilot, Western’s self-driving car club, and I lead its mapping and localization team. I was
         born in Amman, I built my first PC at 14, and lately most of my free time goes into a Fujifilm X-T2 with the 23mm
-        lens at f/2. I like water, mountains, and old rally cars in British racing green.
+        lens at f/2. I like water, mountains and cars, especially old ones.
       </p>
+      <p><a class="link" href="/work">My work and résumé →</a></p>
     </div>
   </section>
-
-  <nav class="teasers wrap" aria-label="Sections">
-    <ol>
-      {teasers.map((t, i) => (
-        <li>
-          <a href={t.href}>
-            <span class="no spec">{String(i + 1).padStart(2, '0')}</span>
-            <span class="t-title">{t.title}</span>
-            <span class="t-text">{t.text}</span>
-            <span class="t-stat spec">{t.stat}<span class="arrow" aria-hidden="true">→</span></span>
-          </a>
-        </li>
-      ))}
-    </ol>
-  </nav>
 </Base>
 
 <style>
@@ -131,11 +90,8 @@ const teasers = [
     height: 100%;
     object-fit: cover;
     object-position: var(--mfocus);
-    --fade-top: linear-gradient(180deg, transparent 0, #000 120px);
-    -webkit-mask-image: var(--fade-top), linear-gradient(0deg, transparent 4%, #000 48%);
-    mask-image: var(--fade-top), linear-gradient(0deg, transparent 4%, #000 48%);
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
+    -webkit-mask-image: linear-gradient(0deg, transparent 4%, #000 48%);
+    mask-image: linear-gradient(0deg, transparent 4%, #000 48%);
   }
   .hero-text {
     position: relative;
@@ -147,14 +103,13 @@ const teasers = [
   .name,
   .reflect {
     font-family: var(--font-display);
-    font-size: clamp(42px, 12.4vw, 150px);
+    font-size: clamp(42px, 12.4vw, 136px);
     line-height: 0.95;
     letter-spacing: -0.01em;
     white-space: nowrap;
   }
   .name {
     color: var(--decal);
-    text-shadow: 0 1px 24px rgba(12, 25, 18, 0.35);
   }
   .reflect {
     transform: scaleY(-1);
@@ -192,21 +147,41 @@ const teasers = [
     font-stretch: 75%;
     color: var(--decal);
   }
+  .cue {
+    justify-self: start;
+    margin-top: 6px;
+    font: 600 13px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--yellow);
+    padding: 10px 0;
+  }
+  .cue span {
+    display: inline-block;
+    margin-left: 6px;
+    animation: nudge 2.2s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    50% { transform: translateY(3px); }
+  }
 
   @media (min-width: 720px) {
     .hero {
       min-height: clamp(580px, 92vh, 900px);
       display: flex;
     }
+    /* The photo stays on the right; the name and specs sit on plain green, never over it. */
     .hero-img {
       inset: 0 0 0 auto;
-      width: 70%;
+      width: 60%;
       height: auto;
     }
     .hero-img img {
       object-position: var(--focus);
-      -webkit-mask-image: var(--fade-top), linear-gradient(90deg, transparent, #000 40%), linear-gradient(0deg, transparent, #000 16%);
-      mask-image: var(--fade-top), linear-gradient(90deg, transparent, #000 40%), linear-gradient(0deg, transparent, #000 16%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 18%, #000 48%), linear-gradient(0deg, transparent, #000 14%);
+      mask-image: linear-gradient(90deg, transparent 18%, #000 48%), linear-gradient(0deg, transparent, #000 14%);
       -webkit-mask-composite: source-in;
       mask-composite: intersect;
     }
@@ -214,37 +189,38 @@ const teasers = [
       align-content: end;
       gap: 26px;
       padding-top: 120px;
-      padding-bottom: clamp(40px, 7vh, 72px);
+      padding-bottom: clamp(32px, 6vh, 64px);
     }
     .title {
-      margin-bottom: clamp(24px, 9vh, 110px);
+      margin-bottom: clamp(24px, 8vh, 96px);
     }
     .name,
     .reflect {
-      font-size: clamp(64px, 8.6vw, 150px);
+      font-size: clamp(60px, 7.4vw, 136px);
     }
     .hero .stripes {
-      width: min(44vw, 620px);
+      width: min(40vw, 580px);
     }
     .hero .stripes :global(i) {
       height: 6px;
     }
     .specs {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      max-width: min(56vw, 760px);
+      grid-template-columns: repeat(4, max-content);
+      gap: 18px clamp(24px, 3vw, 48px);
+      max-width: none;
     }
     .specs dd {
-      font-size: clamp(18px, 1.7vw, 24px);
+      font-size: clamp(18px, 1.6vw, 23px);
     }
   }
 
-  /* ---------- intro ---------- */
-  .intro {
+  /* ---------- about ---------- */
+  .about {
     display: grid;
     gap: 16px;
-    padding-block: clamp(48px, 9vw, 112px) clamp(32px, 5vw, 56px);
+    padding-top: clamp(64px, 10vw, 128px);
   }
-  .intro-copy {
+  .about-copy {
     display: grid;
     gap: 18px;
     max-width: 62ch;
@@ -258,81 +234,17 @@ const teasers = [
     color: var(--decal);
   }
   @media (min-width: 900px) {
-    .intro {
+    .about {
       grid-template-columns: minmax(140px, 1fr) 3fr;
       gap: 40px;
     }
-    .intro h2 {
+    .about h2 {
       padding-top: 12px;
     }
   }
-
-  /* ---------- teasers ---------- */
-  .teasers ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--line);
-  }
-  .teasers a {
-    display: grid;
-    grid-template-columns: 36px 1fr;
-    gap: 6px 12px;
-    padding: 22px 4px;
-    border-bottom: 1px solid var(--line);
-    text-decoration: none;
-    color: var(--mist);
-  }
-  .no {
-    padding-top: 10px;
-    color: var(--muted);
-  }
-  .t-title {
-    font-family: var(--font-display);
-    font-size: clamp(34px, 4.4vw, 54px);
-    line-height: 1;
-    color: var(--decal);
-    transition: color 0.2s;
-  }
-  .t-text {
-    grid-column: 2;
-    max-width: 58ch;
-    font-size: 15.5px;
-  }
-  .t-stat {
-    grid-column: 2;
-    display: inline-flex;
-    gap: 10px;
-    align-items: center;
-    color: var(--stone);
-  }
-  .arrow {
-    color: var(--yellow);
-    font-size: 15px;
-    transition: transform 0.2s;
-  }
-  .teasers a:hover .t-title,
-  .teasers a:focus-visible .t-title {
-    color: var(--yellow);
-  }
-  .teasers a:hover .arrow {
-    transform: translateX(4px);
-  }
-  @media (min-width: 900px) {
-    .teasers a {
-      grid-template-columns: 56px minmax(180px, 1fr) 2fr minmax(180px, auto);
-      align-items: baseline;
-      gap: 24px;
-      padding: 26px 4px;
-    }
-    .no,
-    .t-text,
-    .t-stat {
-      grid-column: auto;
-      padding-top: 0;
-    }
-    .t-stat {
-      justify-self: end;
+  @media (prefers-reduced-motion: reduce) {
+    .cue span {
+      animation: none;
     }
   }
 </style>

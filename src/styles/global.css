@@ -159,6 +159,12 @@ button {
   letter-spacing: -0.01em;
 }
 
+/* Section titles on the home page. */
+.sec-title {
+  font: 400 clamp(44px, 7vw, 84px) / 0.95 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
 /* The yellow licence plate. */
 .plate {
   display: inline-block;
