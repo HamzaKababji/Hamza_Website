@@ -1,0 +1,2399 @@
+{
+  "generated": "npm run photos",
+  "photos": [
+    {
+      "id": "dscf0954",
+      "key": "f79964eacff451b5",
+      "source": "Toronto/_site/DSCF0954.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-23T19:18:51",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Toronto",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "A man in a cap stands at the chain railing of a boardwalk on Toronto's waterfront, a tall ship under sail on the lake behind him",
+      "altDraft": true
+    },
+    {
+      "id": "dscf0961",
+      "key": "234afc958bff4a78",
+      "source": "Toronto/_site/DSCF0961.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-23T19:21:21",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Toronto",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "Two people on a bench watch a small floating convenience store cross the harbour, framed by dark leaves",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1018",
+      "key": "b9acfe36d7f9c47c",
+      "source": "Toronto/_site/DSCF1018.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-08-23T19:45:18",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/16",
+        "shutter": "1/8s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Toronto",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "People blur past along the harbourfront promenade, sailboats moored behind them",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1039",
+      "key": "bb3da2c619810870",
+      "source": "Toronto/_site/DSCF1039.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-23T19:50:52",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/250s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Toronto",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "A small boat leaves a long wake across the harbour toward the islands at dusk",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1191",
+      "key": "73c23f58b7b0cba1",
+      "source": "Toronto/_site/DSCF1191.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-23T20:26:55",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/15s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Toronto",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "Toronto's towers reflected in the windows of a moored boat's empty dining room at blue hour",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1213",
+      "key": "ffaa5e984396c1c1",
+      "source": "Toronto/_site/DSCF1213.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-08-23T20:29:27",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/30s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Toronto",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "Rows of empty seats seen through a scratched boat window at blue hour",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1449",
+      "key": "b9f0bea306c977e3",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF1449.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-31T16:04:56",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/250s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": "Amsterdam",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A yellow bike leans against a sticker-covered wall in a narrow Amsterdam street",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1576",
+      "key": "bf571d61c5e6d86d",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF1576.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-31T18:43:23",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": "Amsterdam",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "An Amsterdam canal and bridge seen through the green frame of a parked bike",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1596",
+      "key": "10e38052a2ca146b",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF1596.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-31T18:54:37",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/2000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": "Amsterdam",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A teddy bear holding a drink carton sits on a ledge in an old doorway",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1654",
+      "key": "bee12af6ae50799e",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF1654.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-31T19:20:31",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/250s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": "Amsterdam",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A black scooter parked under a stone Hollandsche building sign, in black and white",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1672",
+      "key": "2d813662fe310f6d",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF1672.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-08-31T19:41:14",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/250s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": "Amsterdam",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "Red flowers on a bridge in the foreground, a tree-lined Amsterdam canal stretching away behind them",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1715",
+      "key": "3e0c2be1084552a1",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF1715.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-08-31T19:48:56",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/125s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": "Amsterdam",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "Canal houses glowing gold, reflected in the panes of an open window",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1832",
+      "key": "4b6fef10b142aeb6",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF1832.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-01T12:33:21",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "18mm",
+        "aperture": "f/3.5",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "A cyclist rides between stacked green Zaan-style houses under a bright sky",
+      "altDraft": true
+    },
+    {
+      "id": "dscf2215",
+      "key": "4b2f37c3a90d7bad",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF2215.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-01T16:42:43",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/8000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A rosehip and leaves in focus, a windmill's sails a soft silhouette against the sun behind",
+      "altDraft": true
+    },
+    {
+      "id": "dscf2249",
+      "key": "f53a81de51430117",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF2249.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-09-01T16:54:17",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/2000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "Green wooden houses and an arched footbridge reflected in still water",
+      "altDraft": true
+    },
+    {
+      "id": "dscf2311",
+      "key": "06260d83ff6b2388",
+      "source": "BeNeLux_UK/Netherlands/_site/DSCF2311.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-01T17:08:03",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "nl",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A yellow Audi R8 parked on a cobbled street in front of a white townhouse",
+      "altDraft": true
+    },
+    {
+      "id": "dscf3167",
+      "key": "397ce3d7ede819bd",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF3167.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T13:16:19",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/4000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": "Bruges",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "A horse-drawn carriage crosses the market square in Bruges, framed by pink flowers overhead",
+      "altDraft": true
+    },
+    {
+      "id": "dscf3538",
+      "key": "ef86724ab79962bc",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF3538.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-09-03T13:50:55",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": "Bruges",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A weeping willow hangs over a Bruges canal lined with old brick buildings",
+      "altDraft": true
+    },
+    {
+      "id": "dscf3898",
+      "key": "2375d4772fed29aa",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF3898.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T14:18:38",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": "Bruges",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "The red-and-white striped flag of Bruges flies above a canal house as a tour boat passes",
+      "altDraft": true
+    },
+    {
+      "id": "dscf4066",
+      "key": "7cc8e38543c8a6a7",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF4066.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T14:41:03",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A no-entry sign and a Dépôt d'O street sign on an ivy-covered brick corner",
+      "altDraft": true
+    },
+    {
+      "id": "dscf4077",
+      "key": "23614941c9c594cc",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF4077.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T14:43:04",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A dark stone passage opening onto a sunlit courtyard",
+      "altDraft": true
+    },
+    {
+      "id": "dscf4491",
+      "key": "a5274b776c123b87",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF4491.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T19:08:17",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A scooter mirror reflecting an ornate building, beside a red pole",
+      "altDraft": true
+    },
+    {
+      "id": "dscf4593",
+      "key": "a8e815f0d2b3a0ac",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF4593.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-09-03T19:16:37",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "Three tall white-framed windows in a weathered stone wall",
+      "altDraft": true
+    },
+    {
+      "id": "dscf4599",
+      "key": "cd74655dd3c10784",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF4599.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T19:17:11",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "A scooter rider rounds a cobbled corner beside a grand grey townhouse",
+      "altDraft": true
+    },
+    {
+      "id": "dscf4631",
+      "key": "af85f8e1c521c2b6",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF4631.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T19:20:55",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "be",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "Looking past the back of a man's head down a street of brick and white facades",
+      "altDraft": true
+    },
+    {
+      "id": "dscf4909",
+      "key": "5a2928b27b1c5b66",
+      "source": "BeNeLux_UK/Belgium/_site/DSCF4909.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-03T20:39:06",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/30s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "be",
+      "city": null,
+      "placed": "unplaced",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "A Gothic cathedral and a gabled hall lit by evening sun, a cyclist blurring past",
+      "altDraft": true
+    },
+    {
+      "id": "dscf5404",
+      "key": "999f052824251dd4",
+      "source": "BeNeLux_UK/Luxembourg/_site/DSCF5404.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-05T14:18:08",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/250s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "lu",
+      "city": "Luxembourg",
+      "placed": "folder",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "Looking down through a gap at a sunlit park of hexagonal paving",
+      "altDraft": true
+    },
+    {
+      "id": "dscf5455",
+      "key": "3da825900ce8f3ce",
+      "source": "BeNeLux_UK/Luxembourg/_site/DSCF5455.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-05T14:26:15",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "174mm",
+        "aperture": "f/5.6",
+        "shutter": "1/125s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "lu",
+      "city": "Luxembourg",
+      "placed": "folder",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A small church built into a cliff face, a stone stair climbing beside it",
+      "altDraft": true
+    },
+    {
+      "id": "dscf5506",
+      "key": "7cbcf92912825c47",
+      "source": "BeNeLux_UK/Luxembourg/_site/DSCF5506.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-09-05T14:34:05",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "300mm",
+        "aperture": "f/6.3",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "lu",
+      "city": "Luxembourg",
+      "placed": "folder",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A yellow Volkswagen Beetle rounds a curve on a cobbled road, seen from above",
+      "altDraft": true
+    },
+    {
+      "id": "dscf5530",
+      "key": "0f9679b5f19886cd",
+      "source": "BeNeLux_UK/Luxembourg/_site/DSCF5530.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-05T14:39:16",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "300mm",
+        "aperture": "f/6.3",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "lu",
+      "city": "Luxembourg",
+      "placed": "folder",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A turreted stone tower glimpsed through out-of-focus leaves",
+      "altDraft": true
+    },
+    {
+      "id": "dscf5644",
+      "key": "228f9278abb37c7f",
+      "source": "BeNeLux_UK/Luxembourg/_site/DSCF5644.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-05T14:53:30",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "93mm",
+        "aperture": "f/5",
+        "shutter": "1/2000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "lu",
+      "city": "Luxembourg",
+      "placed": "folder",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "The slate roofs of Luxembourg's Grund district stacked below the cliffs",
+      "altDraft": true
+    },
+    {
+      "id": "dscf5790",
+      "key": "543b3368300b871b",
+      "source": "BeNeLux_UK/Luxembourg/_site/DSCF5790.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-05T16:19:17",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "lu",
+      "city": "Luxembourg",
+      "placed": "folder",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "White houses and a bridge reflected in the still river",
+      "altDraft": true
+    },
+    {
+      "id": "dscf6412",
+      "key": "69c7138ef49ccc54",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF6412.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-09T11:04:23",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/16",
+        "shutter": "1/4s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A red phone box and a passing red bus in front of a grand stone building",
+      "altDraft": true
+    },
+    {
+      "id": "dscf6921",
+      "key": "c6c74b32ffc6a46d",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF6921.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-09T12:12:58",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/16",
+        "shutter": "1/4s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "Big Ben and the Houses of Parliament across Westminster Bridge on a bright day",
+      "altDraft": true
+    },
+    {
+      "id": "dscf6984",
+      "key": "f9f6ce1a2aece3fc",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF6984.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-09-09T12:17:54",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/10",
+        "shutter": "1/125s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A red double-decker bus passes in the foreground with Big Ben ahead",
+      "altDraft": true
+    },
+    {
+      "id": "dscf7326",
+      "key": "f390388644b93f64",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF7326.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-09T13:37:53",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/4000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A quiet modern street corner, a yellow bollard on a small traffic island",
+      "altDraft": true
+    },
+    {
+      "id": "dscf7380",
+      "key": "44ddbf1aaa3bb5a2",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF7380.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-09T14:44:25",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/15s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A thin bronze figure with outstretched arms under a single spotlight in a dark gallery",
+      "altDraft": true
+    },
+    {
+      "id": "dscf7664",
+      "key": "3f43810898c45653",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF7664.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-09-09T15:37:52",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A striped fish and chips van parked under trees, in black and white",
+      "altDraft": true
+    },
+    {
+      "id": "dscf7948",
+      "key": "cc6c17b5da4076df",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF7948.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-09T20:17:11",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "The London Eye and the Thames, seen past a souvenir stall's price tags",
+      "altDraft": true
+    },
+    {
+      "id": "dscf7990",
+      "key": "c518813be2526bf9",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF7990.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-09-09T20:24:30",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "Westminster in silhouette against the evening sky, framed by leaves",
+      "altDraft": true
+    },
+    {
+      "id": "dscf8558",
+      "key": "f6635cc04b305384",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF8558.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-10T12:51:29",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/8",
+        "shutter": "1/500s",
+        "iso": "ISO 1250"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "Oxford",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "Punts moored along a narrow river, trees leaning over the water",
+      "altDraft": true
+    },
+    {
+      "id": "dscf9002",
+      "key": "102f383a13d45a09",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF9002.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-10T14:32:44",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "74mm",
+        "aperture": "f/5",
+        "shutter": "1/8000s",
+        "iso": "ISO 3200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "Oxford",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "A man in a dark suit walks past an ornate Gothic doorway in golden stone",
+      "altDraft": true
+    },
+    {
+      "id": "dscf9084",
+      "key": "fe13703714e95f0d",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF9084.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-10T14:36:29",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "249mm",
+        "aperture": "f/8",
+        "shutter": "1/8000s",
+        "iso": "ISO 3200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "Oxford",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A carved baroque gateway in honey-coloured stone behind black iron railings",
+      "altDraft": true
+    },
+    {
+      "id": "dscf0165",
+      "key": "567028c68effa320",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF0165.JPG",
+      "files": {
+        "grid": {
+          "w": 534,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-11T14:25:20",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "117mm",
+        "aperture": "f/5.6",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": true,
+      "alt": "A man sits on a red bench facing Tower Bridge",
+      "altDraft": true
+    },
+    {
+      "id": "dscf0216",
+      "key": "1483ad5f7af6ac1b",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF0216.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-11T14:33:57",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "218mm",
+        "aperture": "f/6.3",
+        "shutter": "1/500s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A tower of Tower Bridge and its blue suspension chains, a red bus crossing below",
+      "altDraft": true
+    },
+    {
+      "id": "dscf0540",
+      "key": "1dcc443ee3e2a6dd",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF0540.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-11T19:53:49",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/250s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A red DLR train crosses a bridge above the still docks at Canary Wharf",
+      "altDraft": true
+    },
+    {
+      "id": "dscf0671",
+      "key": "007d949a522418a4",
+      "source": "BeNeLux_UK/United Kingdom/_site/DSCF0671.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-09-11T20:32:41",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/125s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "uk",
+      "city": "London, UK",
+      "placed": "notes",
+      "trip": "BeNeLux & UK, Sep 2026",
+      "hasPerson": false,
+      "alt": "A large building with a square opening reflected in dark dock water, a floating restaurant beneath it",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1014",
+      "key": "a76b3944d55715e1",
+      "source": "Fanshawe Park/_site/DSCF1014.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-04T19:49:22",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "300mm",
+        "aperture": "f/6.3",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Fanshawe Park",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A white sailboat on the blue reservoir, autumn trees on the far shore",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1023",
+      "key": "e7f7af569cf3ba03",
+      "source": "Fanshawe Park/_site/DSCF1023.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-04T19:51:58",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "233mm",
+        "aperture": "f/6.3",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Fanshawe Park",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A gull floats on choppy blue water",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1130",
+      "key": "e9e71bbc7f41b51c",
+      "source": "Fanshawe Park/_site/DSCF1130.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-04T20:14:26",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "300mm",
+        "aperture": "f/6.3",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Fanshawe Park",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A bird lands on the water with its wings raised in a splash",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1151",
+      "key": "caafbdb0cdd9e38d",
+      "source": "Fanshawe Park/_site/DSCF1151.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-04T20:20:32",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "188mm",
+        "aperture": "f/5.6",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Fanshawe Park",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "Two people sail a small white sailboat on the lake",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1222",
+      "key": "de3ef056f28115d4",
+      "source": "Fanshawe Park/_site/DSCF1222.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-04T20:54:52",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "174mm",
+        "aperture": "f/5.6",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Fanshawe Park",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "Two people fishing from a small aluminium boat below autumn trees",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1226",
+      "key": "c1473822be6a318f",
+      "source": "Fanshawe Park/_site/DSCF1226.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-04T20:59:38",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "300mm",
+        "aperture": "f/6.3",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Fanshawe Park",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A small plane against a clear blue sky",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1260",
+      "key": "208ec62210c41eb2",
+      "source": "Port Stanley/_site/DSCF1260.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-09T01:04:48",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/500s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Port Stanley",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A sailboat passes the pier at dusk, rocks in the foreground",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1282",
+      "key": "0fd7edafcf419c85",
+      "source": "Port Stanley/_site/DSCF1282.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-10-09T01:06:19",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1/1000s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Port Stanley",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A wave breaks against the rocks at sunset on Lake Erie",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1565",
+      "key": "9c81fe3e0e6f57b2",
+      "source": "Port Stanley/_site/DSCF1565.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-10-09T01:42:44",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "XF23mm f/2 R WR",
+        "focal": "23mm",
+        "aperture": "f/2",
+        "shutter": "1s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Port Stanley",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A blurred shoreline under a thin orange band of sunset",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1727",
+      "key": "14fa9265fed87331",
+      "source": "Rattlesnake Point/_site/DSCF1727.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-10T21:33:01",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "277mm",
+        "aperture": "f/6.3",
+        "shutter": "1/250s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Rattlesnake Point",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "A hiker with a yellow backpack stands at the escarpment edge among autumn leaves",
+      "altDraft": true
+    },
+    {
+      "id": "dscf1833",
+      "key": "137249289dbdcd41",
+      "source": "Rattlesnake Point/_site/DSCF1833.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-10T21:38:27",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "203mm",
+        "aperture": "f/6.3",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Rattlesnake Point",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A farm and green fields seen from the escarpment, framed by orange leaves",
+      "altDraft": true
+    },
+    {
+      "id": "dscf2201",
+      "key": "0f25275d3610450c",
+      "source": "Rattlesnake Point/_site/DSCF2201.JPG",
+      "files": {
+        "grid": {
+          "w": 533,
+          "h": 800,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 1333,
+          "h": 2000,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 1333,
+      "height": 2000,
+      "date": "2026-10-10T22:16:36",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "18mm",
+        "aperture": "f/3.5",
+        "shutter": "1/1000s",
+        "iso": "ISO 200"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Rattlesnake Point",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A fallen, bleached tree trunk under a bare canopy, sun behind the branches",
+      "altDraft": true
+    },
+    {
+      "id": "dscf2418",
+      "key": "43cf6af2d7b263b7",
+      "source": "Rattlesnake Point/_site/DSCF2418.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-10-10T22:55:03",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "188mm",
+        "aperture": "f/5.6",
+        "shutter": "1/500s",
+        "iso": "ISO 400"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Rattlesnake Point",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "Autumn trees and the limestone cliff of the escarpment, seen through red leaves",
+      "altDraft": true
+    },
+    {
+      "id": "dscf2474",
+      "key": "70081ec01524f063",
+      "source": "Rattlesnake Point/_site/DSCF2474.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-10-10T23:00:42",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "18mm",
+        "aperture": "f/3.5",
+        "shutter": "1/1000s",
+        "iso": "ISO 400"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Rattlesnake Point",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "The view over autumn forest from under a rock overhang",
+      "altDraft": true
+    },
+    {
+      "id": "dscf2776",
+      "key": "56c35453cd84a2fa",
+      "source": "Rattlesnake Point/_site/DSCF2776.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-10-10T23:58:13",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "18mm",
+        "aperture": "f/4.5",
+        "shutter": "1/1000s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Rattlesnake Point",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": true,
+      "alt": "Hamza standing in tall autumn grass at Rattlesnake Point, a quarry lake and the evening sky behind him",
+      "altDraft": false
+    },
+    {
+      "id": "dscf2803",
+      "key": "e7a3ac0ac1be641c",
+      "source": "Rattlesnake Point/_site/DSCF2803.JPG",
+      "files": {
+        "grid": {
+          "w": 800,
+          "h": 533,
+          "avif": "grid.avif",
+          "webp": "grid.webp"
+        },
+        "full": {
+          "w": 2000,
+          "h": 1333,
+          "avif": "full.avif",
+          "webp": "full.webp"
+        }
+      },
+      "width": 2000,
+      "height": 1333,
+      "date": "2026-10-11T00:05:23",
+      "exif": {
+        "camera": "X-T2",
+        "lens": "Tamron 18–300mm",
+        "focal": "86mm",
+        "aperture": "f/5",
+        "shutter": "1/500s",
+        "iso": "ISO 800"
+      },
+      "gps": false,
+      "country": "ca",
+      "city": "Rattlesnake Point",
+      "placed": "folder",
+      "trip": null,
+      "hasPerson": false,
+      "alt": "A curving railway track runs toward an autumn ridge",
+      "altDraft": true
+    }
+  ]
+}

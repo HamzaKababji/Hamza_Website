@@ -1,0 +1,493 @@
+---
+import Base from '../layouts/Base.astro';
+import { allPhotos, countryFilters, srcset, photoUrl, formatDate, cityLabel, slug } from '../lib/photos';
+import { countryNames } from '../lib/content';
+
+const filters = countryFilters();
+const emptyCountries = Object.keys(countryNames).filter((id) => !filters.some((f) => f.id === id));
+const years = [...new Set(allPhotos.map((p) => p.date?.slice(0, 4)).filter(Boolean))].sort();
+
+// Minimal data the lightbox needs, embedded once.
+const lightboxData = allPhotos.map((p) => ({
+  id: p.id,
+  alt: p.alt,
+  city: cityLabel(p),
+  country: countryNames[p.country!] ?? '',
+  trip: p.trip,
+  date: formatDate(p.date, true),
+  exif: [p.exif.lens, p.exif.focal, p.exif.aperture, p.exif.shutter, p.exif.iso].filter(Boolean),
+  avif: photoUrl(p.id, p.files.full.avif),
+  webp: photoUrl(p.id, p.files.full.webp),
+  w: p.files.full.w,
+  h: p.files.full.h,
+}));
+---
+<Base
+  title="Photos"
+  description="Photos from the Netherlands, Belgium, Luxembourg, the UK and Ontario, shot on a Fujifilm X-T2."
+  theme="decal"
+>
+  <section class="wrap gallery" aria-labelledby="photos-h">
+    <header class="g-head">
+      <h1 id="photos-h" class="page-title">Photos</h1>
+      <p class="spec">Fujifilm X-T2{years.length ? `, ${years.join('–')}` : ''}</p>
+    </header>
+
+    <div class="filters">
+      <div class="chips" role="group" aria-label="Filter by country" data-countries>
+        <button type="button" data-country="all" aria-pressed="true">All<span>{allPhotos.length}</span></button>
+        {filters.map((f) => (
+          <button type="button" data-country={f.id} aria-pressed="false">
+            {f.name}<span>{f.count}</span>
+          </button>
+        ))}
+        {emptyCountries.map((id) => (
+          <button type="button" data-country={id} data-no-photos aria-pressed="false" hidden>
+            {countryNames[id]}<span>0</span>
+          </button>
+        ))}
+      </div>
+      {filters.map((f) =>
+        f.cities.length > 1 ? (
+          <div class="chips cities" role="group" aria-label={`Filter ${f.name} by place`} data-cities-for={f.id} hidden>
+            <button type="button" data-city="" aria-pressed="true">All of {f.name}</button>
+            {f.cities.map((c) => (
+              <button type="button" data-city={slug(c.name)} aria-pressed="false">
+                {c.label}<span>{c.count}</span>
+              </button>
+            ))}
+          </div>
+        ) : null,
+      )}
+    </div>
+
+    <p class="status visually-hidden" role="status" aria-live="polite" data-status></p>
+
+    <div class="grid" data-grid>
+      {allPhotos.map((p, i) => {
+        const r = p.width / p.height;
+        return (
+          <figure style={`--r:${r.toFixed(4)}`} data-country={p.country} data-city={slug(cityLabel(p))} data-index={i}>
+            <button type="button" class="open" data-open={i} aria-label={`Open photo: ${p.alt}`}>
+              <picture>
+                <source type="image/avif" srcset={srcset(p, 'avif')} sizes={`(max-width: 520px) 100vw, ${Math.round(r * 330)}px`} />
+                <source type="image/webp" srcset={srcset(p, 'webp')} sizes={`(max-width: 520px) 100vw, ${Math.round(r * 330)}px`} />
+                <img
+                  src={photoUrl(p.id, p.files.grid.webp)}
+                  alt={p.alt}
+                  width={p.files.grid.w}
+                  height={p.files.grid.h}
+                  loading={i < 6 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </picture>
+            </button>
+            <figcaption>
+              <span>{cityLabel(p)}</span>
+              <span>{formatDate(p.date)}</span>
+            </figcaption>
+          </figure>
+        );
+      })}
+    </div>
+
+    <div class="empty" data-empty hidden>
+      <p class="empty-title">No photos from <span data-empty-name></span> yet</p>
+      <p>The camera came later. Next trip, maybe.</p>
+    </div>
+  </section>
+
+  <dialog class="lightbox" aria-label="Photo viewer" data-lightbox>
+    <div class="lb-inner">
+      <div class="lb-stage">
+        <picture>
+          <source type="image/avif" data-lb-avif />
+          <img alt="" data-lb-img />
+        </picture>
+      </div>
+      <div class="lb-info">
+        <p class="spec" data-lb-count></p>
+        <h2 class="lb-city" data-lb-city></h2>
+        <p class="lb-meta" data-lb-meta></p>
+        <ul class="lb-exif" data-lb-exif></ul>
+        <div class="lb-nav">
+          <button type="button" data-lb-prev aria-label="Previous photo">← Prev</button>
+          <button type="button" data-lb-next aria-label="Next photo">Next →</button>
+          <button type="button" class="lb-close" data-lb-close autofocus>Close <span aria-hidden="true">✕</span></button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="application/json" id="photo-data" set:html={JSON.stringify({ photos: lightboxData, names: countryNames })} />
+</Base>
+
+<script>
+  type P = {
+    id: string; alt: string; city: string; country: string; trip: string | null; date: string;
+    exif: string[]; avif: string; webp: string; w: number; h: number;
+  };
+  const { photos, names } = JSON.parse(document.getElementById('photo-data')!.textContent!) as {
+    photos: P[];
+    names: Record<string, string>;
+  };
+
+  const countryBar = document.querySelector<HTMLElement>('[data-countries]')!;
+  const figures = [...document.querySelectorAll<HTMLElement>('[data-grid] figure')];
+  const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+  const status = document.querySelector<HTMLElement>('[data-status]')!;
+  let country = 'all';
+  let city = '';
+
+  function readUrl() {
+    const q = new URLSearchParams(location.search);
+    country = (q.get('country') || location.hash.slice(1) || 'all').toLowerCase();
+    city = (q.get('city') || '').toLowerCase();
+  }
+
+  // Countries without photos (reached from the globe) get their chip shown only while selected.
+  function ensureChip(id: string) {
+    countryBar.querySelectorAll<HTMLButtonElement>('[data-no-photos]').forEach((b) => (b.hidden = b.dataset.country !== id));
+  }
+
+  function apply(push = false) {
+    if (country !== 'all' && !names[country]) country = 'all';
+    ensureChip(country);
+    countryBar.querySelectorAll<HTMLButtonElement>('button').forEach((b) =>
+      b.setAttribute('aria-pressed', String(b.dataset.country === country)),
+    );
+    document.querySelectorAll<HTMLElement>('[data-cities-for]').forEach((row) => {
+      const on = row.dataset.citiesFor === country;
+      row.hidden = !on;
+      if (on) row.querySelectorAll<HTMLButtonElement>('button').forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.city || '') === city)));
+    });
+    let shown = 0;
+    for (const f of figures) {
+      const ok = (country === 'all' || f.dataset.country === country) && (!city || f.dataset.city === city);
+      f.hidden = !ok;
+      if (ok) shown++;
+    }
+    empty.hidden = shown > 0;
+    if (!shown) empty.querySelector('[data-empty-name]')!.textContent = names[country] ?? country;
+    status.textContent = `${shown} ${shown === 1 ? 'photo' : 'photos'}${country !== 'all' ? ` from ${names[country]}` : ''}`;
+    if (push) {
+      const q = new URLSearchParams();
+      if (country !== 'all') q.set('country', country);
+      if (city) q.set('city', city);
+      history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname);
+    }
+  }
+
+  countryBar.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-country]');
+    if (!b) return;
+    country = b.dataset.country!;
+    city = '';
+    apply(true);
+  });
+  document.querySelectorAll<HTMLElement>('[data-cities-for]').forEach((row) =>
+    row.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-city]');
+      if (!b) return;
+      city = b.dataset.city || '';
+      apply(true);
+    }),
+  );
+  window.addEventListener('hashchange', () => {
+    readUrl();
+    apply();
+  });
+  readUrl();
+  apply();
+
+  /* ---------- lightbox ---------- */
+  const dlg = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+  const img = dlg.querySelector<HTMLImageElement>('[data-lb-img]')!;
+  const avif = dlg.querySelector<HTMLSourceElement>('[data-lb-avif]')!;
+  const q = (s: string) => dlg.querySelector<HTMLElement>(s)!;
+  let list: number[] = [];
+  let pos = 0;
+  let opener: HTMLElement | null = null;
+
+  function show() {
+    const p = photos[list[pos]];
+    avif.srcset = p.avif;
+    img.src = p.webp;
+    img.alt = p.alt;
+    img.width = p.w;
+    img.height = p.h;
+    q('[data-lb-count]').textContent = `${pos + 1} of ${list.length}`;
+    q('[data-lb-city]').textContent = p.city;
+    q('[data-lb-meta]').textContent = [p.city !== p.country ? p.country : '', p.trip, p.date].filter(Boolean).join(' · ');
+    q('[data-lb-exif]').innerHTML = p.exif.map((x) => `<li>${x}</li>`).join('');
+    // Warm the neighbours so arrowing through is instant.
+    for (const d of [-1, 1]) {
+      const n = photos[list[(pos + d + list.length) % list.length]];
+      if (n) new Image().src = n.webp;
+    }
+  }
+  function step(d: number) {
+    pos = (pos + d + list.length) % list.length;
+    show();
+  }
+
+  document.querySelector('[data-grid]')!.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-open]');
+    if (!b) return;
+    list = figures.filter((f) => !f.hidden).map((f) => Number(f.dataset.index));
+    pos = list.indexOf(Number(b.dataset.open));
+    opener = b;
+    show();
+    dlg.showModal();
+  });
+  q('[data-lb-prev]').addEventListener('click', () => step(-1));
+  q('[data-lb-next]').addEventListener('click', () => step(1));
+  q('[data-lb-close]').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg) dlg.close(); // click on the backdrop
+  });
+  dlg.addEventListener('close', () => opener?.focus());
+</script>
+
+<style>
+  .gallery {
+    padding-top: clamp(24px, 5vw, 56px);
+  }
+  .g-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 12px 24px;
+    margin-bottom: 24px;
+  }
+  .g-head h1 {
+    color: var(--green);
+  }
+
+  .filters {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chips[hidden],
+  .chips button[hidden] {
+    display: none;
+  }
+  .chips button {
+    font: 600 13.5px/1 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--decal-line);
+    background: transparent;
+    color: var(--ink);
+    padding: 10px 14px;
+    min-height: 36px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .chips button:hover {
+    border-color: var(--green);
+  }
+  .chips button[aria-pressed='true'] {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--decal);
+  }
+  .chips button span {
+    opacity: 0.65;
+    margin-left: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .cities button {
+    font-size: 12.5px;
+    padding: 8px 12px;
+    min-height: 32px;
+  }
+  .cities button[aria-pressed='true'] {
+    background: transparent;
+    color: var(--green);
+    border-color: var(--green);
+    box-shadow: inset 0 0 0 1px var(--green);
+  }
+
+  /* Justified rows: each figure grows in proportion to its aspect ratio, so a row
+     shares one height and every photo keeps its true shape. */
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .grid::after {
+    content: '';
+    flex: 10 1 0;
+  }
+  .grid figure {
+    margin: 0;
+    flex: var(--r) 1 calc(var(--r) * 200px);
+    min-width: 0;
+  }
+  .grid figure[hidden] {
+    display: none;
+  }
+  .open {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: #d9d8cb;
+    cursor: zoom-in;
+    border-radius: 2px;
+  }
+  .grid img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--r);
+    border-radius: 2px;
+  }
+  .grid figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 6px;
+    font: 500 12.5px/1.3 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 520px) {
+    .grid figure {
+      flex-basis: 100%;
+    }
+  }
+
+  .empty {
+    padding: 40px 0 24px;
+    color: var(--ink-soft);
+  }
+  .empty-title {
+    font: 400 clamp(26px, 4vw, 36px) / 1.2 var(--font-display);
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+
+  /* ---------- lightbox ---------- */
+  .lightbox {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--decal);
+    color: var(--ink);
+  }
+  .lightbox::backdrop {
+    background: rgba(20, 35, 26, 0.6);
+  }
+  .lb-inner {
+    height: 100%;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 12px;
+  }
+  .lb-stage {
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lb-stage picture {
+    display: contents;
+  }
+  .lb-stage img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .lb-info {
+    display: grid;
+    gap: 6px;
+    padding: 4px 4px 8px;
+  }
+  .lb-city {
+    font: 400 clamp(28px, 4vw, 44px) / 1 var(--font-display);
+    color: var(--green);
+  }
+  .lb-meta {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .lb-exif {
+    font: 600 12.5px/1.3 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    color: var(--ink-soft);
+  }
+  .lb-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .lb-nav button {
+    font: 600 13px/1 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--decal-line);
+    background: transparent;
+    color: var(--ink);
+    padding: 10px 14px;
+    min-height: 38px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .lb-nav button:hover {
+    border-color: var(--green);
+  }
+  .lb-close {
+    margin-left: auto;
+    background: var(--green) !important;
+    border-color: var(--green) !important;
+    color: var(--decal) !important;
+  }
+  @media (min-width: 900px) {
+    .lb-inner {
+      grid-template-columns: minmax(0, 1fr) 300px;
+      grid-template-rows: 1fr;
+      gap: 32px;
+      padding: 32px;
+    }
+    .lb-info {
+      align-content: end;
+      padding-bottom: 12px;
+    }
+    .lb-nav {
+      margin-top: 18px;
+    }
+    .lb-close {
+      margin-left: 0;
+    }
+  }
+</style>

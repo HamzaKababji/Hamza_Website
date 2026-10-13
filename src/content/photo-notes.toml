@@ -1,0 +1,310 @@
+# Hand-edited notes per photo, merged in by `npm run photos`. Keyed by photo id (the file name).
+#   alt    = alt text (what the photo shows, for screen readers)
+#   city   = city for photos in a country folder (the camera records no GPS)
+#   person = true if anyone is in it (such photos are never used on the home page)
+#   draft  = true while Hamza hasn't checked it. Delete the line once it's right.
+#
+# Claude drafted all of these by looking at the photos. Cities marked "# guess" are from
+# landmarks in the frame. Photos with no city are captioned with the country name.
+
+# ---------- Toronto, 23 Aug ----------
+[dscf0954]
+alt = "A man in a cap stands at the chain railing of a boardwalk on Toronto's waterfront, a tall ship under sail on the lake behind him"
+person = true
+draft = true
+
+[dscf0961]
+alt = "Two people on a bench watch a small floating convenience store cross the harbour, framed by dark leaves"
+person = true
+draft = true
+
+[dscf1018]
+alt = "People blur past along the harbourfront promenade, sailboats moored behind them"
+person = true
+draft = true
+
+[dscf1039]
+alt = "A small boat leaves a long wake across the harbour toward the islands at dusk"
+person = true
+draft = true
+
+[dscf1191]
+alt = "Toronto's towers reflected in the windows of a moored boat's empty dining room at blue hour"
+draft = true
+
+[dscf1213]
+alt = "Rows of empty seats seen through a scratched boat window at blue hour"
+draft = true
+
+# ---------- Netherlands, 31 Aug ----------
+[dscf1449]
+alt = "A yellow bike leans against a sticker-covered wall in a narrow Amsterdam street"
+city = "Amsterdam"   # guess: same day as the canal photos
+draft = true
+
+[dscf1576]
+alt = "An Amsterdam canal and bridge seen through the green frame of a parked bike"
+city = "Amsterdam"
+draft = true
+
+[dscf1596]
+alt = "A teddy bear holding a drink carton sits on a ledge in an old doorway"
+city = "Amsterdam"
+draft = true
+
+[dscf1654]
+alt = "A black scooter parked under a stone Hollandsche building sign, in black and white"
+city = "Amsterdam"   # guess: same day
+draft = true
+
+[dscf1672]
+alt = "Red flowers on a bridge in the foreground, a tree-lined Amsterdam canal stretching away behind them"
+city = "Amsterdam"
+draft = true
+
+[dscf1715]
+alt = "Canal houses glowing gold, reflected in the panes of an open window"
+city = "Amsterdam"
+draft = true
+
+# ---------- Netherlands, 1 Sep (city unconfirmed: looks like Zaandam / Zaanse Schans) ----------
+[dscf1832]
+alt = "A cyclist rides between stacked green Zaan-style houses under a bright sky"
+person = true
+draft = true
+
+[dscf2215]
+alt = "A rosehip and leaves in focus, a windmill's sails a soft silhouette against the sun behind"
+draft = true
+
+[dscf2249]
+alt = "Green wooden houses and an arched footbridge reflected in still water"
+draft = true
+
+[dscf2311]
+alt = "A yellow Audi R8 parked on a cobbled street in front of a white townhouse"
+draft = true
+
+# ---------- Belgium, 3 Sep ----------
+[dscf3167]
+alt = "A horse-drawn carriage crosses the market square in Bruges, framed by pink flowers overhead"
+city = "Bruges"   # guess: the Markt
+person = true
+draft = true
+
+[dscf3538]
+alt = "A weeping willow hangs over a Bruges canal lined with old brick buildings"
+city = "Bruges"
+draft = true
+
+[dscf3898]
+alt = "The red-and-white striped flag of Bruges flies above a canal house as a tour boat passes"
+city = "Bruges"
+person = true
+draft = true
+
+[dscf4066]
+alt = "A no-entry sign and a Dépôt d'O street sign on an ivy-covered brick corner"
+draft = true
+
+[dscf4077]
+alt = "A dark stone passage opening onto a sunlit courtyard"
+draft = true
+
+[dscf4491]
+alt = "A scooter mirror reflecting an ornate building, beside a red pole"
+draft = true
+
+[dscf4593]
+alt = "Three tall white-framed windows in a weathered stone wall"
+draft = true
+
+[dscf4599]
+alt = "A scooter rider rounds a cobbled corner beside a grand grey townhouse"
+person = true
+draft = true
+
+[dscf4631]
+alt = "Looking past the back of a man's head down a street of brick and white facades"
+person = true
+draft = true
+
+[dscf4909]
+alt = "A Gothic cathedral and a gabled hall lit by evening sun, a cyclist blurring past"
+person = true
+draft = true
+
+# ---------- Luxembourg, 5 Sep ----------
+[dscf5404]
+alt = "Looking down through a gap at a sunlit park of hexagonal paving"
+draft = true
+
+[dscf5455]
+alt = "A small church built into a cliff face, a stone stair climbing beside it"
+draft = true
+
+[dscf5506]
+alt = "A yellow Volkswagen Beetle rounds a curve on a cobbled road, seen from above"
+draft = true
+
+[dscf5530]
+alt = "A turreted stone tower glimpsed through out-of-focus leaves"
+draft = true
+
+[dscf5644]
+alt = "The slate roofs of Luxembourg's Grund district stacked below the cliffs"
+draft = true
+
+[dscf5790]
+alt = "White houses and a bridge reflected in the still river"
+draft = true
+
+# ---------- United Kingdom, 9 to 11 Sep ----------
+[dscf6412]
+alt = "A red phone box and a passing red bus in front of a grand stone building"
+city = "London, UK"
+draft = true
+
+[dscf6921]
+alt = "Big Ben and the Houses of Parliament across Westminster Bridge on a bright day"
+city = "London, UK"
+person = true
+draft = true
+
+[dscf6984]
+alt = "A red double-decker bus passes in the foreground with Big Ben ahead"
+city = "London, UK"
+draft = true
+
+[dscf7326]
+alt = "A quiet modern street corner, a yellow bollard on a small traffic island"
+city = "London, UK"   # guess: same day as Westminster
+draft = true
+
+[dscf7380]
+alt = "A thin bronze figure with outstretched arms under a single spotlight in a dark gallery"
+city = "London, UK"   # guess: same day
+draft = true
+
+[dscf7664]
+alt = "A striped fish and chips van parked under trees, in black and white"
+city = "London, UK"   # guess: same day
+draft = true
+
+[dscf7948]
+alt = "The London Eye and the Thames, seen past a souvenir stall's price tags"
+city = "London, UK"
+draft = true
+
+[dscf7990]
+alt = "Westminster in silhouette against the evening sky, framed by leaves"
+city = "London, UK"
+person = true
+draft = true
+
+[dscf8558]
+alt = "Punts moored along a narrow river, trees leaning over the water"
+city = "Oxford"   # guess: punts and college stone on 10 Sep
+draft = true
+
+[dscf9002]
+alt = "A man in a dark suit walks past an ornate Gothic doorway in golden stone"
+city = "Oxford"   # guess
+person = true
+draft = true
+
+[dscf9084]
+alt = "A carved baroque gateway in honey-coloured stone behind black iron railings"
+city = "Oxford"   # guess
+draft = true
+
+[dscf0165]
+alt = "A man sits on a red bench facing Tower Bridge"
+city = "London, UK"
+person = true
+draft = true
+
+[dscf0216]
+alt = "A tower of Tower Bridge and its blue suspension chains, a red bus crossing below"
+city = "London, UK"
+draft = true
+
+[dscf0540]
+alt = "A red DLR train crosses a bridge above the still docks at Canary Wharf"
+city = "London, UK"
+draft = true
+
+[dscf0671]
+alt = "A large building with a square opening reflected in dark dock water, a floating restaurant beneath it"
+city = "London, UK"   # guess: same day as Canary Wharf
+draft = true
+
+# ---------- Fanshawe Park, 4 Oct ----------
+[dscf1014]
+alt = "A white sailboat on the blue reservoir, autumn trees on the far shore"
+draft = true
+
+[dscf1023]
+alt = "A gull floats on choppy blue water"
+draft = true
+
+[dscf1130]
+alt = "A bird lands on the water with its wings raised in a splash"
+draft = true
+
+[dscf1151]
+alt = "Two people sail a small white sailboat on the lake"
+person = true
+draft = true
+
+[dscf1222]
+alt = "Two people fishing from a small aluminium boat below autumn trees"
+person = true
+draft = true
+
+[dscf1226]
+alt = "A small plane against a clear blue sky"
+draft = true
+
+# ---------- Port Stanley, 9 Oct ----------
+[dscf1260]
+alt = "A sailboat passes the pier at dusk, rocks in the foreground"
+draft = true
+
+[dscf1282]
+alt = "A wave breaks against the rocks at sunset on Lake Erie"
+draft = true
+
+[dscf1565]
+alt = "A blurred shoreline under a thin orange band of sunset"
+draft = true
+
+# ---------- Rattlesnake Point, 10 to 11 Oct ----------
+[dscf1727]
+alt = "A hiker with a yellow backpack stands at the escarpment edge among autumn leaves"
+person = true
+draft = true
+
+[dscf1833]
+alt = "A farm and green fields seen from the escarpment, framed by orange leaves"
+draft = true
+
+[dscf2201]
+alt = "A fallen, bleached tree trunk under a bare canopy, sun behind the branches"
+draft = true
+
+[dscf2418]
+alt = "Autumn trees and the limestone cliff of the escarpment, seen through red leaves"
+draft = true
+
+[dscf2474]
+alt = "The view over autumn forest from under a rock overhang"
+draft = true
+
+[dscf2776]
+alt = "Hamza standing in tall autumn grass at Rattlesnake Point, a quarry lake and the evening sky behind him"
+person = true
+
+[dscf2803]
+alt = "A curving railway track runs toward an autumn ridge"
+draft = true
