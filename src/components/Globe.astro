@@ -61,35 +61,29 @@ const km = Math.round(routeKm);
           <span id="zoomLbl" class="zl" aria-hidden="true"></span>
         </div>
         <a class="skip-in" href="#photos" id="skipTour">Skip the drive</a>
-      </div>
 
-      <div class="side">
-        <!-- Where the car is now, and the way into its photos. -->
-        <div class="arrive" id="arrive" aria-live="polite">
-          <span class="spec" id="arriveNo">Stop 01</span>
-          <b id="arriveCity">{route[0].city}</b>
-          <span class="arrive-note" id="arriveNote">{route[0].country}</span>
-          <a class="see" id="arriveLink" href="#photos" data-photos hidden>See the photos <span aria-hidden="true">→</span></a>
+        <!-- Pops up beside the globe when the car parks at a key place or one with photos,
+             joined to the city by a leader line. -->
+        <svg class="leader" id="leader" aria-hidden="true" data-show="false"><line id="leaderLine"></line><circle id="leaderDot" r="3.5"></circle></svg>
+        <div class="callout" id="callout" aria-live="polite" data-show="false">
+          <span class="spec" id="coLabel"></span>
+          <b id="coCity"></b>
+          <span class="co-text" id="coText"></span>
+          <a class="see" id="coLink" href="#photos" data-photos hidden>See the photos <span aria-hidden="true">→</span></a>
         </div>
-        <ol class="stops" id="stops" aria-label="The route">
-          {route.map((s, i) => (
-            <li>
-              <button type="button" data-stop={i}>
-                <b>{String(i + 1).padStart(2, '0')}</b>
-                <span class="c">{s.city}</span>
-                <small>{s.country}{s.note ? `, ${s.note}` : ''}</small>
-              </button>
-              {s.photos > 0 && (
-                <a class="pl" href={s.href} data-photos data-country={s.id} data-city={slug(s.city)} aria-label={`See ${s.photos} photos from ${s.city}`}>
-                  {s.photos} <span aria-hidden="true">→</span>
-                </a>
-              )}
-            </li>
-          ))}
-        </ol>
       </div>
     </div>
   </div>
+
+  <!-- The route as text: read by screen readers, and shown under the still globe for reduced motion. -->
+  <ol class="route-list wrap" aria-label="The route, in order">
+    {route.map((s, i) => (
+      <li>
+        <b>{String(i + 1).padStart(2, '0')}</b> {s.city}, {s.country}{s.callout_text ? `: ${s.callout_text}` : s.note ? `, ${s.note}` : ''}
+        {s.photos > 0 && <span class="rl-n"> · {s.photos} photos</span>}
+      </li>
+    ))}
+  </ol>
 
   <script type="application/json" id="route-data" set:html={JSON.stringify({ route, extras, worldUrl })} />
 </section>
@@ -100,7 +94,7 @@ const km = Math.round(routeKm);
 
   type S = {
     id: string; city: string; country: string; iso?: string; lon: number; lat: number; note?: string;
-    photos: number; href: string;
+    photos: number; href: string; callout?: string; callout_text?: string;
   };
   const { route, extras, worldUrl } = JSON.parse(document.getElementById('route-data')!.textContent!) as {
     route: S[];
@@ -113,9 +107,11 @@ const km = Math.round(routeKm);
   const C = 300;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const tour = document.getElementById('tour')!;
-  const stopsEl = document.getElementById('stops')!;
-  const stopBtns = [...stopsEl.querySelectorAll<HTMLButtonElement>('button[data-stop]')];
   const $ = (id: string) => document.getElementById(id)!;
+  const globeBox = document.querySelector<HTMLElement>('#places .globe')!;
+  const svg = $('globe');
+  const co = $('callout');
+  const narrow = matchMedia('(max-width: 760px)');
   const slug = (s: string) =>
     s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
@@ -209,7 +205,7 @@ const km = Math.round(routeKm);
     const s = Math.min(N - 1, Math.floor(t));
     const loc = t - s;
     const u = ease(Math.min(1, Math.max(0, (loc - 0.2) / 0.6)));
-    return { s, u, stop: loc < 0.5 ? s : s + 1 };
+    return { s, u, stop: loc < 0.5 ? s : s + 1, parked: loc < 0.2 || loc > 0.8 };
   }
 
   let landSel: SVGPathElement[] = [];
@@ -218,33 +214,87 @@ const km = Math.round(routeKm);
   let staticStop = route.length - 1;
   let shown = -1; // displayed progress; eases toward the scroll position
 
-  function updateArrive(i: number) {
+  /* ---------- callouts: key places, and places with photos ---------- */
+  const hasCallout = (s: S) => Boolean(s.callout || s.photos);
+  function fillCallout(i: number) {
     const s = route[i];
-    $('arriveNo').textContent = `Stop ${String(i + 1).padStart(2, '0')} of ${route.length}`;
-    $('arriveCity').textContent = s.city;
-    $('arriveNote').textContent = s.photos ? `${s.photos} ${s.photos === 1 ? 'photo' : 'photos'} from here` : `${s.country}${s.note ? `, ${s.note}` : ''}`;
-    const link = $('arriveLink') as HTMLAnchorElement;
+    co.classList.toggle('is-key', Boolean(s.callout));
+    $('coLabel').textContent = s.callout ?? `${s.photos} ${s.photos === 1 ? 'photo' : 'photos'}`;
+    $('coCity').textContent = s.city;
+    $('coText').textContent = s.callout_text ?? (s.note || s.country);
+    const link = $('coLink') as HTMLAnchorElement;
     link.hidden = !s.photos;
     link.href = s.href;
     link.dataset.country = s.id;
     link.dataset.city = slug(s.city);
+    link.firstChild!.textContent = s.callout && s.photos ? `See the ${s.photos} photos ` : 'See the photos ';
+  }
+  /** Put the card in the open space beside the globe (city's side first) with a leader line to the city.
+   *  Without room beside the globe, it sits next to the city; on phones CSS docks it underneath. */
+  const leader = $('leader');
+  const leaderLine = $('leaderLine');
+  const leaderDot = $('leaderDot');
+  function placeCallout(xy: [number, number] | null) {
+    if (narrow.matches || !xy) {
+      co.style.transform = '';
+      leader.dataset.show = 'false';
+      return;
+    }
+    const g = globeBox.getBoundingClientRect();
+    const r = svg.getBoundingClientRect();
+    const size = Math.min(r.width, r.height); // the 600x600 viewBox is letterboxed inside the svg
+    const ox = r.left - g.left + (r.width - size) / 2;
+    const oy = r.top - g.top + (r.height - size) / 2;
+    const k = size / 600;
+    const x = ox + xy[0] * k;
+    const y = oy + xy[1] * k;
+    const cx = ox + C * k;
+    const rad = R * k;
+    const w = co.offsetWidth;
+    const h = co.offsetHeight;
+    const gap = 28;
+    const roomRight = g.width - (cx + rad) >= w + gap;
+    const roomLeft = cx - rad >= w + gap;
+    const preferRight = xy[0] >= C;
+    let left: number;
+    let edgeX: number;
+    if ((preferRight && roomRight) || (!roomLeft && roomRight)) {
+      left = cx + rad + gap;
+      edgeX = left;
+    } else if (roomLeft) {
+      left = cx - rad - gap - w;
+      edgeX = left + w;
+    } else {
+      left = Math.max(8, Math.min(g.width - w - 8, xy[0] <= C ? x + 34 : x - 34 - w));
+      edgeX = xy[0] <= C ? left : left + w;
+    }
+    const top = Math.max(56, Math.min(g.height - h - 64, y - h / 2));
+    co.style.transform = `translate(${left.toFixed(0)}px, ${top.toFixed(0)}px)`;
+    const edgeY = Math.max(top + 14, Math.min(top + h - 14, y));
+    leaderLine.setAttribute('x1', x.toFixed(1));
+    leaderLine.setAttribute('y1', y.toFixed(1));
+    leaderLine.setAttribute('x2', edgeX.toFixed(1));
+    leaderLine.setAttribute('y2', edgeY.toFixed(1));
+    leaderDot.setAttribute('cx', edgeX.toFixed(1));
+    leaderDot.setAttribute('cy', edgeY.toFixed(1));
+    leader.dataset.show = 'true';
   }
 
   function draw() {
     raf = 0;
     const isStatic = reduce.matches;
-    let st: { s: number; u: number; stop: number };
+    let st: { s: number; u: number; stop: number; parked: boolean };
     let pos: [number, number];
     let z: number;
     if (isStatic) {
       // Reduced motion: zoomed out, full route, no animation. Selecting a stop jumps to it.
-      st = { s: N - 1, u: 1, stop: staticStop };
+      st = { s: N - 1, u: 1, stop: staticStop, parked: false };
       pos = staticStop === route.length - 1 ? [-36, 38] : ll(route[staticStop]);
       z = 1;
       proj.scale(R).rotate([-pos[0], -pos[1]]);
     } else {
       const target = scrollTarget();
-      shown = shown < 0 ? target : shown + (target - shown) * 0.12;
+      shown = shown < 0 ? target : shown + (target - shown) * 0.16;
       if (Math.abs(target - shown) < 0.00004) shown = target;
       else req(); // keep easing until we catch up
       st = stateAt(shown);
@@ -326,40 +376,21 @@ const km = Math.round(routeKm);
 
     if (st.stop !== lastStop) {
       lastStop = st.stop;
-      updateArrive(st.stop);
-      const li = stopBtns[st.stop]?.parentElement;
-      if (li) {
-        if (stopsEl.scrollWidth > stopsEl.clientWidth + 4) stopsEl.scrollTo({ left: li.offsetLeft - 16 });
-        else stopsEl.scrollTo({ top: li.offsetTop - stopsEl.clientHeight / 2 });
-      }
-      stopBtns.forEach((b, i) => {
-        b.parentElement!.classList.toggle('on', i === st.stop);
-        b.parentElement!.classList.toggle('past', !isStatic && i < st.stop);
-        if (i === st.stop) b.setAttribute('aria-current', 'step');
-        else b.removeAttribute('aria-current');
-      });
+      fillCallout(st.stop);
     }
+    const show = !isStatic && st.parked && hasCallout(route[st.stop]);
+    if (co.dataset.show !== String(show)) {
+      co.dataset.show = String(show);
+      co.inert = !show;
+    }
+    if (show) placeCallout(proj(ll(route[st.stop])));
+    else leader.dataset.show = 'false';
   }
 
   let raf = 0;
   function req() {
     if (!raf) raf = requestAnimationFrame(draw);
   }
-
-  function driveTo(i: number) {
-    if (reduce.matches) {
-      staticStop = i;
-      lastStop = -1;
-      draw();
-      return;
-    }
-    const r = tour.getBoundingClientRect();
-    const span = r.height - innerHeight;
-    // Land just after the car arrives (inside the stop's wait window).
-    const y = scrollY + r.top + span * Math.min(1, (i === 0 ? 0 : i - 1 + 0.85) / N);
-    scrollTo({ top: y, behavior: 'smooth' });
-  }
-  stopBtns.forEach((b, i) => b.addEventListener('click', () => driveTo(i)));
 
   $('skipTour').addEventListener('click', (e) => {
     e.preventDefault();
@@ -440,7 +471,7 @@ const km = Math.round(routeKm);
     max-width: var(--max);
     margin-inline: auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 28px;
     padding: clamp(16px, 3vw, 32px) var(--gutter);
     overflow: hidden;
@@ -590,129 +621,129 @@ const km = Math.round(routeKm);
     display: none;
   }
 
-  /* ---------- side: arrival card + route ---------- */
-  .side {
-    min-width: 0;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  /* ---------- callout ---------- */
+  .globe #globe {
+    max-width: min(100%, calc(100svh - 120px));
   }
-  .arrive {
-    flex: none;
+  .globe .leader {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    z-index: 2;
+    pointer-events: none;
+    overflow: visible;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .globe .leader[data-show='true'] {
+    opacity: 1;
+  }
+  .leader line {
+    stroke: var(--yellow);
+    stroke-width: 1.2;
+    stroke-dasharray: 3 4;
+  }
+  .leader circle {
+    fill: var(--yellow);
+  }
+  .callout {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    width: 232px;
+    max-width: 232px;
     display: grid;
     gap: 4px;
-    padding: 16px 18px;
+    padding: 14px 16px 15px;
     border: 1px solid var(--moss);
     border-left: 3px solid var(--yellow);
     border-radius: 4px;
-    background: var(--night);
+    background: rgba(12, 25, 18, 0.92);
+    box-shadow: 0 16px 40px -18px #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, translate 0.3s ease;
+    translate: 0 6px;
   }
-  .arrive b {
-    font: 400 clamp(30px, 3vw, 40px) / 1 var(--font-display);
+  .callout[data-show='true'] {
+    opacity: 1;
+    pointer-events: auto;
+    translate: 0 0;
+  }
+  .callout b {
+    font: 400 26px/1.05 var(--font-display);
     color: var(--decal);
   }
-  .arrive-note {
+  .callout.is-key b {
+    font-size: 32px;
+  }
+  .callout.is-key > .spec {
+    color: var(--yellow);
+  }
+  .co-text {
     font-size: 14px;
-    color: var(--stone);
+    line-height: 1.4;
+    color: var(--mist);
   }
   .see {
     justify-self: start;
     margin-top: 8px;
-    font: 700 14px/1 var(--font-body);
+    font: 700 13.5px/1 var(--font-body);
     font-stretch: 85%;
     letter-spacing: 0.04em;
     text-decoration: none;
     background: var(--yellow);
     color: var(--deep);
-    padding: 11px 16px;
+    padding: 10px 15px;
     border-radius: 999px;
   }
   .see:hover {
     background: #f0c63a;
   }
-  .stops {
+
+  /* ---------- the route as text ---------- */
+  .route-list {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  :global(.globe-static) .route-list {
+    position: static !important;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
     list-style: none;
-    margin: 0;
-    padding: 0 4px 0 0;
-    min-height: 0;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--moss) transparent;
-  }
-  .stops li {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border-radius: 4px;
-    transition: background 0.25s;
-  }
-  .stops button {
-    flex: 1;
-    min-width: 0;
-    display: grid;
-    grid-template-columns: 30px 1fr;
-    gap: 1px 10px;
-    align-items: baseline;
-    padding: 8px 10px;
-    border: 0;
-    background: none;
-    cursor: pointer;
-    color: var(--stone);
-    font: 500 14.5px/1.3 var(--font-body);
-    text-align: left;
-  }
-  .stops button:hover {
-    color: var(--decal);
-  }
-  .stops b {
-    font: 700 12px/1 var(--font-body);
-    font-stretch: 75%;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-  }
-  .stops small {
-    grid-column: 2;
-    font-size: 12.5px;
-    opacity: 0.85;
-  }
-  .pl {
-    flex: none;
-    margin-right: 8px;
-    font: 700 12.5px/1 var(--font-body);
-    font-stretch: 80%;
-    letter-spacing: 0.04em;
-    color: var(--yellow);
-    text-decoration: none;
-    padding: 7px 10px;
-    border: 1px solid var(--moss);
-    border-radius: 999px;
-  }
-  .pl:hover {
-    border-color: var(--yellow);
-  }
-  .stops li:global(.past) button {
+    margin: 0 auto;
+    padding-block: 24px 8px;
+    columns: 2 280px;
+    column-gap: 40px;
+    font-size: 14.5px;
     color: var(--mist);
   }
-  .stops li:global(.past) b {
-    color: var(--stone);
+  :global(.globe-static) .route-list li {
+    break-inside: avoid;
+    padding: 5px 0;
   }
-  .stops li:global(.on) {
-    background: var(--green);
+  .route-list b {
+    font: 700 12px/1 var(--font-body);
+    font-stretch: 75%;
+    color: var(--muted);
+    margin-right: 6px;
   }
-  .stops li:global(.on) button {
-    color: var(--decal);
-  }
-  .stops li:global(.on) b {
+  .rl-n {
     color: var(--yellow);
   }
 
   @media (max-width: 760px) {
     .pin {
-      grid-template-columns: 1fr;
       grid-template-rows: minmax(0, 1fr) auto;
       gap: 10px;
       padding-top: 56px;
@@ -720,44 +751,43 @@ const km = Math.round(routeKm);
     .skip-in {
       top: -44px;
     }
-    .arrive {
+    .odo b {
+      font-size: 20px;
+    }
+    /* Docked under the globe instead of floating beside the city. */
+    .callout {
+      top: auto;
+      bottom: 0;
+      left: 50%;
+      right: auto;
+      transform: none !important;
+      translate: -50% 6px;
+      max-width: calc(100% - 8px);
+      width: calc(100% - 8px);
       grid-template-columns: 1fr auto;
       align-items: center;
-      padding: 10px 14px;
       gap: 2px 12px;
     }
-    .arrive > .spec,
-    .arrive b,
-    .arrive-note {
+    .callout[data-show='true'] {
+      translate: -50% 0;
+    }
+    .callout > .spec,
+    .callout b,
+    .co-text {
       grid-column: 1;
     }
-    .arrive b {
-      font-size: 26px;
+    .callout b,
+    .callout.is-key b {
+      font-size: 24px;
     }
     .see {
       grid-column: 2;
       grid-row: 1 / span 3;
       margin: 0;
     }
-    .stops {
-      flex-direction: row;
-      overflow-x: auto;
-      padding: 0 0 6px;
-    }
-    .stops li {
-      flex: 0 0 auto;
-    }
-    .stops button {
-      grid-template-columns: auto auto;
-      padding: 9px 10px;
-      white-space: nowrap;
-    }
-    .stops small,
-    .pl {
-      display: none;
-    }
-    .odo b {
-      font-size: 20px;
+    .odo {
+      bottom: auto;
+      top: 0;
     }
     :global(.globe-static) .pin {
       min-height: 0;
@@ -765,19 +795,9 @@ const km = Math.round(routeKm);
     :global(.globe-static) .globe {
       aspect-ratio: 1;
     }
-    :global(.globe-static) .stops {
-      flex-direction: column;
-      overflow: visible;
-    }
-    :global(.globe-static) .stops small {
-      display: block;
-    }
-    :global(.globe-static) .pl {
-      display: inline-block;
-    }
   }
   @media (prefers-reduced-motion: reduce) {
-    .stops li,
+    .callout,
     .globe :global(.city .ring) {
       transition: none;
     }

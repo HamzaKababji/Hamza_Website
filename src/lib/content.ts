@@ -15,6 +15,8 @@ export interface Stop {
   lon: number;
   lat: number;
   note?: string;
+  callout?: string;
+  callout_text?: string;
 }
 
 export interface SiteConfig {
@@ -24,7 +26,7 @@ export interface SiteConfig {
     mobile_focus: string;
     alt: string;
   };
-  specs: Record<'based_in' | 'studying' | 'building' | 'shooting', string>;
+  specs: Record<'based_in' | 'studying' | 'co_founded' | 'shooting', string>;
 }
 
 export const site = parse(siteRaw) as unknown as SiteConfig;

@@ -67,7 +67,10 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
         <div>
           <p class="spec">Building</p>
           <p class="val">{now.building?.club}</p>
-          {now.building?.team && <p class="note">Leading the {now.building.team.toLowerCase().replace(' / ', ' and ')} team.</p>}
+          <p class="note">
+            {now.building?.role && <strong>{now.building.role}. </strong>}
+            {now.building?.team && <>Leading the {now.building.team.toLowerCase().replace(' / ', ' and ')} team.</>}
+          </p>
         </div>
       </li>
       <li>
@@ -91,13 +94,24 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
 </dialog>
 
 <script>
+  import { pauseScroll, resumeScroll } from '../scripts/smooth';
   const tab = document.getElementById('nowTab') as HTMLButtonElement;
   const dlg = document.getElementById('nowDrawer') as HTMLDialogElement;
   const closeBtn = document.getElementById('nowClose') as HTMLButtonElement;
 
+  // The tab bobs to invite a look, until someone opens it once.
+  try {
+    if (sessionStorage.getItem('now-seen')) tab.classList.add('seen');
+  } catch {}
+
   function open() {
     if (dlg.open) return;
+    tab.classList.add('seen');
+    try {
+      sessionStorage.setItem('now-seen', '1');
+    } catch {}
     dlg.showModal();
+    pauseScroll();
     tab.setAttribute('aria-expanded', 'true');
   }
   function close() {
@@ -109,6 +123,7 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
     if (e.target === dlg) close(); // backdrop
   });
   dlg.addEventListener('close', () => {
+    resumeScroll();
     tab.setAttribute('aria-expanded', 'false');
     if (location.hash === '#now') history.replaceState(null, '', location.pathname + location.search);
     tab.focus();
@@ -116,7 +131,7 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
   // On small screens the floating tab would cover the globe's stop strip, so it steps aside there.
   const tour = document.getElementById('tour');
   if (tour && 'IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => tab.classList.toggle('aside', e.isIntersecting), { threshold: 0.15 }).observe(tour);
+    new IntersectionObserver(([e]) => tab.classList.toggle('aside', e.isIntersecting), { rootMargin: '-45% 0px -45% 0px' }).observe(tour);
   }
 
   // /#now (and the old /now URL) opens it.
@@ -148,6 +163,27 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
   }
   .now-tab:hover {
     border-color: var(--yellow);
+  }
+  .now-tab:not(.seen) {
+    animation: bob 3.6s ease-in-out 1.5s infinite;
+  }
+  .now-tab:hover {
+    animation-play-state: paused;
+  }
+  @keyframes bob {
+    0%, 62%, 100% { translate: 0 0; }
+    70% { translate: 0 -7px; }
+    78% { translate: 0 0; }
+    84% { translate: 0 -3px; }
+    90% { translate: 0 0; }
+  }
+  /* On the left edge it peeks out sideways instead. */
+  @keyframes peek {
+    0%, 62%, 100% { translate: 0 0; }
+    70% { translate: 8px 0; }
+    78% { translate: 0 0; }
+    84% { translate: 4px 0; }
+    90% { translate: 0 0; }
   }
   @media (max-width: 899px) {
     .now-tab {
@@ -184,6 +220,9 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
       border-left: 0;
       border-radius: 0 8px 8px 0;
     }
+    .now-tab:not(.seen) {
+      animation-name: peek;
+    }
     .lbl {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
@@ -218,6 +257,7 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
     background: rgba(5, 10, 7, 0.55);
   }
   .nd {
+    height: 100%;
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -282,6 +322,10 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
     line-height: 1.45;
     color: var(--stone);
   }
+  .note strong {
+    color: var(--yellow);
+    font-weight: 600;
+  }
   .note cite {
     font-style: italic;
   }
@@ -326,11 +370,16 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
     color: var(--mist);
   }
   .nd-file {
+    flex: 1;
+    display: flex;
+    min-height: 0;
     border: 1px solid var(--line);
     border-radius: 6px;
     overflow: hidden;
   }
   .nd-file .toml {
+    flex: 1;
+    overflow: auto;
     font-size: 12px;
   }
   .nd-foot {
@@ -339,7 +388,8 @@ const lensShort = (/\d+mm/.exec(now.shooting?.lens ?? '') ?? [now.shooting?.lens
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pulse {
+    .pulse,
+    .now-tab:not(.seen) {
       animation: none;
     }
     .now-drawer {

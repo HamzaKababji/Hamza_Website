@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import Globe from '../components/Globe.astro';
 import Gallery from '../components/Gallery.astro';
 import Garage from '../components/Garage.astro';
+import Toc from '../components/Toc.astro';
 import { site } from '../lib/content';
 import { hero } from '../lib/hero';
 
@@ -12,7 +13,7 @@ const { specs } = site;
 const specRows = [
   ['Based in', specs.based_in],
   ['Studying', specs.studying],
-  ['Building', specs.building],
+  ['Co-founded', specs.co_founded],
   ['Shooting', specs.shooting],
 ];
 ---
@@ -71,6 +72,8 @@ const specRows = [
       <p><a class="link" href="/work">My work and résumé →</a></p>
     </div>
   </section>
+
+  <Toc />
 </Base>
 
 <style>

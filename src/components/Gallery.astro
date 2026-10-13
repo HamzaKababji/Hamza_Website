@@ -121,6 +121,7 @@ const lightboxData = allPhotos.map((p) => ({
 </section>
 
 <script>
+  import { scrollToEl, pauseScroll, resumeScroll } from '../scripts/smooth';
   type P = {
     id: string; alt: string; city: string; country: string; trip: string | null; date: string;
     exif: string[]; avif: string; webp: string; w: number; h: number;
@@ -198,8 +199,7 @@ const lightboxData = allPhotos.map((p) => ({
     country = d.country || 'all';
     city = d.city || '';
     apply(true);
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    section.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    scrollToEl(section);
     document.getElementById('photos-h')!.focus({ preventScroll: true });
   });
   readUrl();
@@ -244,6 +244,7 @@ const lightboxData = allPhotos.map((p) => ({
     opener = b;
     show();
     dlg.showModal();
+    pauseScroll();
   });
   q('[data-lb-prev]').addEventListener('click', () => step(-1));
   q('[data-lb-next]').addEventListener('click', () => step(1));
@@ -255,7 +256,10 @@ const lightboxData = allPhotos.map((p) => ({
   dlg.addEventListener('click', (e) => {
     if (e.target === dlg) dlg.close(); // click on the backdrop
   });
-  dlg.addEventListener('close', () => opener?.focus());
+  dlg.addEventListener('close', () => {
+    resumeScroll();
+    opener?.focus();
+  });
 </script>
 
 <style>

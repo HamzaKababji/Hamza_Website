@@ -1,5 +1,6 @@
 # The route, in the order the car drives it on /places.
 # id is the country id used for /photos?country=<id>; iso is the world-atlas country code
+# callout / callout_text: a pop-up on the globe when the car arrives.
 # (Bahrain is too small for the 110m atlas, so it has no iso: its dots show, the fill is skipped).
 
 [[stop]]
@@ -10,6 +11,8 @@ iso = "400"
 lon = 35.93
 lat = 31.95
 note = "Born here"
+callout = "Born here"
+callout_text = "Where it all started."
 
 [[stop]]
 id = "sa"
@@ -75,6 +78,8 @@ iso = "792"
 lon = 28.98
 lat = 41.01
 note = "Favourite country so far"
+callout = "Favourite"
+callout_text = "Istanbul, and Türkiye: my favourite country so far."
 
 [[stop]]
 id = "ca"
@@ -129,6 +134,8 @@ iso = "124"
 lon = -81.25
 lat = 42.98
 note = "Western"
+callout = "University"
+callout_text = "Studying Software Engineering at Western."
 
 [[stop]]
 id = "ca"
@@ -138,6 +145,8 @@ iso = "124"
 lon = -79.73
 lat = 43.88
 note = "16 months at Husky"
+callout = "Co-op"
+callout_text = "Sixteen months as a software controls engineer at Husky Technologies."
 
 [[stop]]
 id = "ca"

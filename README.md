@@ -6,7 +6,9 @@ Static Astro site, deployed to Azure Static Web Apps by the GitHub workflow on e
 ## Layout
 
 The home page is the whole site in one scroll: hero, the globe (Places), the photos it leads to,
-and the Garage. Click a ringed city on the globe to filter the photos to it. **Now** slides out from
+and the Garage, with a small contents panel in the bottom right. Click a ringed city on the globe
+(or See the photos on its pop-up) to filter the photos to it. Key places get a pop-up from
+`callout` / `callout_text` in trips.toml. **Now** slides out from
 the left on every page, and **Work** (the résumé) is its own page at /work. The old /photos, /places,
 /garage and /now URLs redirect to the matching part of the home page.
 

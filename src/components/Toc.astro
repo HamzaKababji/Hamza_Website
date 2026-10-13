@@ -1,0 +1,145 @@
+---
+// A small floating table of contents for the home page, bottom right.
+const items = [
+  { id: 'places', label: 'Globe' },
+  { id: 'photos', label: 'Photos' },
+  { id: 'garage', label: 'Garage' },
+];
+---
+<nav class="toc" id="toc" aria-label="On this page" data-show="false">
+  <ul>
+    {items.map((it) => (
+      <li>
+        <a href={`#${it.id}`} data-sec={it.id}>
+          <i aria-hidden="true"></i>
+          <span>{it.label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  const toc = document.getElementById('toc')!;
+  const links = [...toc.querySelectorAll<HTMLAnchorElement>('a[data-sec]')];
+  const sections = links.map((a) => document.getElementById(a.dataset.sec!)).filter(Boolean) as HTMLElement[];
+
+  // Fade in once you're past the top of the hero.
+  const onScroll = () => (toc.dataset.show = String(scrollY > innerHeight * 0.35));
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Highlight the section in the middle of the screen.
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        links.forEach((a) => {
+          const on = a.dataset.sec === e.target.id;
+          a.classList.toggle('on', on);
+          if (on) a.setAttribute('aria-current', 'location');
+          else a.removeAttribute('aria-current');
+        });
+      }
+    },
+    { rootMargin: '-45% 0px -45% 0px' },
+  );
+  sections.forEach((s) => io.observe(s));
+
+  // Phones: step aside while the globe fills the screen, like the Now button.
+  const tour = document.getElementById('tour');
+  if (tour) new IntersectionObserver(([e]) => toc.classList.toggle('aside', e.isIntersecting), { rootMargin: '-45% 0px -45% 0px' }).observe(tour);
+</script>
+
+<style>
+  .toc {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 40;
+    padding: 8px;
+    border: 1px solid rgba(165, 169, 155, 0.22);
+    border-radius: 12px;
+    background: rgba(12, 25, 18, 0.55);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    backdrop-filter: blur(10px) saturate(1.2);
+    box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    translate: 0 8px;
+    pointer-events: none;
+    transition: opacity 0.35s ease, translate 0.35s ease;
+  }
+  .toc[data-show='true'] {
+    opacity: 1;
+    translate: 0 0;
+    pointer-events: auto;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 8px;
+    text-decoration: none;
+    font: 600 12px/1 var(--font-body);
+    font-stretch: 78%;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mist);
+    transition: color 0.2s, background 0.2s;
+  }
+  a:hover {
+    color: var(--decal);
+    background: rgba(236, 235, 224, 0.06);
+  }
+  i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--stone);
+    opacity: 0.6;
+    transition: transform 0.25s, background 0.25s, opacity 0.25s;
+  }
+  a:global(.on) {
+    color: var(--decal);
+  }
+  a:global(.on) i {
+    background: var(--yellow);
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  @media (max-width: 899px) {
+    .toc {
+      right: 16px;
+      bottom: 16px;
+      padding: 4px;
+      border-radius: 999px;
+    }
+    ul {
+      grid-auto-flow: column;
+    }
+    a {
+      padding: 9px 11px;
+      gap: 7px;
+      border-radius: 999px;
+    }
+    .toc:global(.aside) {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toc,
+    a,
+    i {
+      transition: none;
+    }
+  }
+</style>
