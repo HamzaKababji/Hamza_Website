@@ -1,0 +1,696 @@
+---
+import Base from '../layouts/Base.astro';
+import { stops, places, routeKm, countryNames } from '../lib/content';
+import { allPhotos } from '../lib/photos';
+import worldUrl from 'world-atlas/countries-110m.json?url';
+
+const cityCount = (city: string) => allPhotos.filter((p) => p.city === city).length;
+const countryCount = (id: string) => allPhotos.filter((p) => p.country === id).length;
+
+const route = stops.map((s) => ({ ...s, photos: cityCount(s.city) }));
+const extras = places.map((s) => ({ ...s, photos: cityCount(s.city) }));
+const visitedCountries = [...new Set(stops.map((s) => s.id))];
+const km = Math.round(routeKm);
+const segments = stops.length - 1;
+const withPhotos = visitedCountries.filter((id) => countryCount(id) > 0);
+---
+<Base title="Places" description="Every place I've lived or travelled, driven in order on a small globe as you scroll.">
+  <header class="wrap p-head">
+    <h1 class="page-title">Places</h1>
+    <p class="intro">
+      Born in Amman, then Dammam, Bahrain and London, Ontario. Everything after that is trips. Scroll and the car drives
+      them in order.
+    </p>
+  </header>
+
+  <section class="tour" id="tour" style={`--stops:${stops.length}`} aria-label="Travel route">
+    <div class="pin">
+      <div class="globe">
+        <svg id="globe" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="globe-title">
+          <title id="globe-title">Globe showing my route between {stops.length} stops, {km.toLocaleString('en-CA')} km in total</title>
+          <defs><clipPath id="lens"><circle cx="300" cy="300" r="286"></circle></clipPath></defs>
+          <circle class="ocean" cx="300" cy="300" r="286"></circle>
+          <g clip-path="url(#lens)">
+            <circle class="ocean2" id="gOcean" cx="300" cy="300" r="286"></circle>
+            <path class="grat" id="gGrat"></path>
+            <g id="gLand"></g>
+            <path class="todo" id="gTodo"></path>
+            <path class="done" id="gDone"></path>
+            <g id="gCities"></g>
+          </g>
+          <circle class="rim" cx="300" cy="300" r="286"></circle>
+          <g id="car" transform="translate(300 300)" aria-hidden="true">
+            <ellipse cx="0" cy="3" rx="22" ry="11" fill="#000" opacity=".35"></ellipse>
+            <g id="carBody">
+              <!-- tyres -->
+              <rect x="-15" y="-12" width="8" height="4" rx="1.2" fill="#0a150f"></rect>
+              <rect x="8" y="-12" width="8" height="4" rx="1.2" fill="#0a150f"></rect>
+              <rect x="-15" y="8" width="8" height="4" rx="1.2" fill="#0a150f"></rect>
+              <rect x="8" y="8" width="8" height="4" rx="1.2" fill="#0a150f"></rect>
+              <!-- body: boxy rally shape, wider arches -->
+              <path d="M-19 -6 Q-19 -9.5 -15 -9.5 L13 -9.5 Q19 -9 19.5 -4 L19.5 4 Q19 9 13 9.5 L-15 9.5 Q-19 9.5 -19 6 Z" fill="#1d3a29" stroke="#ecebe0" stroke-width="1.3"></path>
+              <!-- livery stripe -->
+              <rect x="-19" y="-1.6" width="38.5" height="3.2" fill="#e3b520"></rect>
+              <!-- windscreen and rear window -->
+              <path d="M3.5 -7 L9 -6 Q10.5 0 9 6 L3.5 7 Z" fill="#a5a99b" opacity=".9"></path>
+              <rect x="-13" y="-6.5" width="4.5" height="13" rx="1.5" fill="#a5a99b" opacity=".6"></rect>
+              <!-- rear wing -->
+              <rect x="-21" y="-8" width="2.6" height="16" rx="1" fill="#0a150f" stroke="#ecebe0" stroke-width=".8"></rect>
+              <!-- headlights -->
+              <rect x="16.6" y="-7" width="2.2" height="3.4" rx="1" fill="#ecebe0"></rect>
+              <rect x="16.6" y="3.6" width="2.2" height="3.4" rx="1" fill="#ecebe0"></rect>
+            </g>
+          </g>
+        </svg>
+        <div class="odo">
+          <span class="spec">Odometer</span>
+          <b id="odo">0 km</b>
+          <span id="zoomLbl" class="zl" aria-hidden="true"></span>
+        </div>
+        <p class="hint">Scroll to drive. Select a city to see its photos.</p>
+        <a class="skip-in" href="#summary" id="skipTour">Skip the drive</a>
+      </div>
+      <div class="stops-wrap">
+        <h2 class="display">The route</h2>
+        <ol class="stops" id="stops">
+          {route.map((s, i) => (
+            <li>
+              <button type="button" data-stop={i}>
+                <b>{String(i + 1).padStart(2, '0')}</b>
+                <span class="c">{s.city}</span>
+                <em>{s.photos ? `${s.photos} ${s.photos === 1 ? 'photo' : 'photos'}` : ''}</em>
+                <small>{s.country}{s.note ? `, ${s.note}` : ''}</small>
+              </button>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap summary" id="summary" aria-labelledby="summary-h">
+    <h2 id="summary-h" class="display" tabindex="-1">{stops.length} stops, {km.toLocaleString('en-CA')} km</h2>
+    <p>
+      {visitedCountries.length} countries so far: {visitedCountries.map((id) => countryNames[id]).join(', ')}. Türkiye is my
+      favourite, and Amsterdam was the best recent trip. The camera only came along for the last few, so photos start in 2026.
+    </p>
+    <ul class="country-links">
+      {withPhotos.map((id) => (
+        <li><a class="link" href={`/photos?country=${id}`}>{countryNames[id]} <span class="spec">{countryCount(id)} photos</span></a></li>
+      ))}
+    </ul>
+    <p><a class="link" href="/photos">All photos →</a></p>
+  </section>
+
+  <script type="application/json" id="route-data" set:html={JSON.stringify({ route, extras, worldUrl })} />
+</Base>
+
+<script>
+  import { geoOrthographic, geoPath, geoInterpolate, geoDistance, geoGraticule10 } from 'd3-geo';
+  import { feature } from 'topojson-client';
+
+  type S = { id: string; city: string; country: string; iso?: string; lon: number; lat: number; note?: string; photos: number };
+  const { route, extras, worldUrl } = JSON.parse(document.getElementById('route-data')!.textContent!) as {
+    route: S[];
+    extras: S[];
+    worldUrl: string;
+  };
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const R = 286;
+  const C = 300;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const tour = document.getElementById('tour')!;
+  const stopsEl = document.getElementById('stops')!;
+  const stopBtns = [...stopsEl.querySelectorAll<HTMLButtonElement>('button[data-stop]')];
+  const $ = (id: string) => document.getElementById(id)!;
+
+  const ll = (s: S): [number, number] => [s.lon, s.lat];
+  const proj = geoOrthographic().scale(R).translate([C, C]).clipAngle(90).precision(0.6);
+  const path = geoPath(proj);
+  const N = route.length - 1;
+  const segs = [];
+  const cum = [0];
+  for (let i = 0; i < N; i++) {
+    segs.push(geoInterpolate(ll(route[i]), ll(route[i + 1])));
+    cum.push(cum[i] + geoDistance(ll(route[i]), ll(route[i + 1])) * 6371);
+  }
+  // Zoom per stop: clamp(2600 / km to the nearest other stop, 1, 4.2)
+  const ZS = route.map((st, i) => {
+    let d = 1e9;
+    route.forEach((o, j) => {
+      if (j === i) return;
+      const k = geoDistance(ll(st), ll(o)) * 6371;
+      if (k > 5) d = Math.min(d, k);
+    });
+    return Math.max(1, Math.min(4.2, 2600 / d));
+  });
+
+  const grat = geoGraticule10();
+
+  // City dots: real links into the gallery, so Enter and click work natively.
+  const ALL = [...route, ...extras];
+  const cityG = $('gCities');
+  const cities = ALL.map((d, i) => {
+    const a = document.createElementNS(NS, 'a');
+    a.setAttribute('href', `/photos?country=${d.id}`);
+    a.setAttribute('class', 'city' + (i >= route.length ? ' extra' : ''));
+    a.setAttribute('aria-label', `${d.city}, ${d.country}: open photos from ${d.country}`);
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('r', i >= route.length ? '3.5' : '5.5');
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', '9');
+    t.setAttribute('y', '4');
+    t.textContent = d.city;
+    a.append(c, t);
+    cityG.appendChild(a);
+    return { el: a, text: t, d, i };
+  });
+
+  function line(fn: (u: number) => [number, number], u0: number, u1: number) {
+    const pts = [];
+    const k = 24;
+    for (let j = 0; j <= k; j++) pts.push(fn(u0 + ((u1 - u0) * j) / k));
+    return pts;
+  }
+  const ease = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+
+  /** Scroll -> segment s, eased progress u (car waits for the first and last 20%), current stop. */
+  function scrollState() {
+    const r = tour.getBoundingClientRect();
+    const span = Math.max(1, r.height - innerHeight);
+    const p = Math.min(1, Math.max(0, -r.top / span));
+    const t = p * N;
+    const s = Math.min(N - 1, Math.floor(t));
+    const loc = t - s;
+    const u = ease(Math.min(1, Math.max(0, (loc - 0.2) / 0.6)));
+    return { s, u, stop: loc < 0.5 ? s : s + 1 };
+  }
+
+  let landSel: SVGPathElement[] = [];
+  let heading = 0;
+  let lastStop = -1;
+  let staticStop = route.length - 1;
+
+  function draw() {
+    raf = 0;
+    const isStatic = reduce.matches;
+    let st, pos: [number, number], z: number;
+    if (isStatic) {
+      // Reduced motion: zoomed out, full route, no animation. Selecting a stop jumps to it.
+      st = { s: N - 1, u: 1, stop: staticStop };
+      pos = staticStop === route.length - 1 ? [-36, 38] : ll(route[staticStop]);
+      z = 1;
+      proj.scale(R).rotate([-pos[0], -pos[1]]);
+    } else {
+      st = scrollState();
+      pos = segs[st.s](st.u);
+      const L = cum[st.s + 1] - cum[st.s];
+      z = ZS[st.s] + (ZS[st.s + 1] - ZS[st.s]) * st.u;
+      if (L > 2500) z = z + (1 - z) * Math.sin(Math.PI * st.u); // zoom out mid-flight on long legs
+      // Tilt the latitude more as we zoom, so Europe sits in the middle of the lens.
+      proj.scale(R * z).rotate([-pos[0], -pos[1] * (0.75 + 0.25 * Math.min(1, (z - 1) / 1.5))]);
+    }
+    $('gOcean').setAttribute('r', String(R * z));
+    $('zoomLbl').textContent = z > 1.4 ? `Zoomed in ${z.toFixed(1)}×` : '';
+    $('gGrat').setAttribute('d', path(grat) ?? '');
+    for (const el of landSel) el.setAttribute('d', path((el as any).__d) ?? '');
+
+    const done: [number, number][][] = [];
+    const todo: [number, number][][] = [];
+    if (isStatic) {
+      for (let i = 0; i < N; i++) done.push(line(segs[i], 0, 1));
+    } else {
+      for (let i = 0; i < st.s; i++) done.push(line(segs[i], 0, 1));
+      done.push(line(segs[st.s], 0, Math.max(0.0001, st.u)));
+      todo.push(line(segs[st.s], st.u, 1));
+      for (let j = st.s + 1; j < N; j++) todo.push(line(segs[j], 0, 1));
+    }
+    $('gDone').setAttribute('d', path({ type: 'MultiLineString', coordinates: done } as any) ?? '');
+    $('gTodo').setAttribute('d', path({ type: 'MultiLineString', coordinates: todo } as any) ?? '');
+
+    // Labels: the current stop wins, then the nearest stops; anything outside the lens is hidden.
+    const centre = proj.invert!([C, C])!;
+    const order = ALL.map((_, i) => i).sort((a, b) =>
+      a === st.stop ? -1 : b === st.stop ? 1 : Math.abs(a - st.stop) - Math.abs(b - st.stop),
+    );
+    const placed: number[][] = [];
+    const shown = new Set<number>();
+    const seenLabel = new Set<string>();
+    for (const i of order) {
+      const d = ALL[i];
+      const xy = proj(ll(d))!;
+      if (geoDistance(ll(d), centre) > 1.5 || Math.hypot(xy[0] - C, xy[1] - C) > R - 6) continue;
+      if (seenLabel.has(d.city)) continue; // Amman and London, Ontario appear twice
+      const w = d.city.length * 6.4 + 12;
+      // The current stop's label sits above its dot so the car doesn't cover it.
+      const box = i === st.stop && !isStatic ? [xy[0] - w / 2, xy[1] - 34, xy[0] + w / 2, xy[1] - 16] : [xy[0] + 8, xy[1] - 9, xy[0] + 8 + w, xy[1] + 7];
+      const hit = placed.some((b) => !(box[2] < b[0] || box[0] > b[2] || box[3] < b[1] || box[1] > b[3]));
+      if (!hit) {
+        placed.push(box);
+        shown.add(i);
+        seenLabel.add(d.city);
+      }
+    }
+    for (const c of cities) {
+      const xy = proj(ll(c.d))!;
+      const vis = geoDistance(ll(c.d), centre) < 1.5 && Math.hypot(xy[0] - C, xy[1] - C) < R - 2;
+      c.el.style.display = vis ? '' : 'none';
+      c.el.setAttribute('transform', `translate(${xy[0].toFixed(1)},${xy[1].toFixed(1)})`);
+      const seen = c.i < route.length && (isStatic || c.i <= st.stop);
+      c.el.classList.toggle('seen', seen);
+      c.el.classList.toggle('current', c.i === st.stop && !isStatic);
+      c.text.style.display = shown.has(c.i) ? '' : 'none';
+      const above = c.i === st.stop && !isStatic;
+      c.text.setAttribute('x', above ? '0' : '9');
+      c.text.setAttribute('y', above ? '-20' : '4');
+      c.text.setAttribute('text-anchor', above ? 'middle' : 'start');
+    }
+
+    // Car: sits on the route and turns to face its direction of travel.
+    const car = $('car');
+    car.style.display = isStatic ? 'none' : '';
+    if (!isStatic) {
+      const here = proj(pos);
+      const ahead = proj(segs[st.s](Math.min(1, st.u + 0.02)));
+      if (ahead && here && Math.hypot(ahead[0] - here[0], ahead[1] - here[1]) > 0.5)
+        heading = (Math.atan2(ahead[1] - here[1], ahead[0] - here[0]) * 180) / Math.PI;
+      $('carBody').setAttribute('transform', `rotate(${heading.toFixed(1)})`);
+      if (here) car.setAttribute('transform', `translate(${here[0].toFixed(1)} ${here[1].toFixed(1)})`);
+    }
+
+    const km = isStatic ? cum[N] : cum[st.s] + (cum[st.s + 1] - cum[st.s]) * st.u;
+    $('odo').textContent = `${Math.round(km).toLocaleString('en-CA')} km`;
+
+    if (st.stop !== lastStop) {
+      lastStop = st.stop;
+      const b = stopBtns[st.stop];
+      if (b) {
+        const li = b.parentElement!;
+        if (stopsEl.scrollWidth > stopsEl.clientWidth + 4) {
+          stopsEl.scrollTo({ left: li.offsetLeft - 16, behavior: 'auto' });
+        } else {
+          stopsEl.scrollTo({ top: li.offsetTop - stopsEl.clientHeight / 2, behavior: 'auto' });
+        }
+      }
+    }
+    stopBtns.forEach((b, i) => {
+      b.classList.toggle('on', i === st.stop);
+      b.classList.toggle('past', !isStatic && i < st.stop);
+      if (i === st.stop) b.setAttribute('aria-current', 'step');
+      else b.removeAttribute('aria-current');
+    });
+  }
+
+  let raf = 0;
+  const req = () => {
+    if (!raf) raf = requestAnimationFrame(draw);
+  };
+
+  function driveTo(i: number) {
+    if (reduce.matches) {
+      staticStop = i;
+      draw();
+      return;
+    }
+    const r = tour.getBoundingClientRect();
+    const span = r.height - innerHeight;
+    // Land just after the car arrives (inside the stop's wait window).
+    const y = scrollY + r.top + span * Math.min(1, (i === 0 ? 0 : i - 1 + 0.85) / N);
+    scrollTo({ top: y, behavior: 'smooth' });
+  }
+  stopBtns.forEach((b, i) => b.addEventListener('click', () => driveTo(i)));
+
+  $('skipTour').addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.getElementById('summary')!;
+    target.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' });
+    document.getElementById('summary-h')!.focus({ preventScroll: true });
+  });
+
+  function setMode() {
+    document.documentElement.classList.toggle('globe-static', reduce.matches);
+    lastStop = -1;
+    req();
+  }
+  reduce.addEventListener('change', setMode);
+  addEventListener('scroll', req, { passive: true });
+  addEventListener('resize', req);
+  setMode();
+
+  fetch(worldUrl)
+    .then((r) => r.json())
+    .then((world) => {
+      const visited = new Set(route.map((s) => s.iso).filter(Boolean));
+      const feats = (feature(world, world.objects.countries) as any).features;
+      const g = $('gLand');
+      landSel = feats.map((f: any) => {
+        const p = document.createElementNS(NS, 'path');
+        p.setAttribute('class', 'land' + (visited.has(f.id) ? ' v' : ''));
+        (p as any).__d = f;
+        g.appendChild(p);
+        return p;
+      });
+      draw();
+    })
+    .catch(() => {});
+</script>
+
+<style>
+  .p-head {
+    display: grid;
+    gap: 14px;
+    padding-block: clamp(24px, 5vw, 56px) 28px;
+  }
+  .intro {
+    max-width: 56ch;
+    color: var(--mist);
+    font-size: 17px;
+  }
+
+  .tour {
+    position: relative;
+    height: calc(var(--stops) * 55vh);
+    background: var(--deep);
+    border-block: 1px solid var(--line);
+  }
+  :global(.globe-static) .tour {
+    height: auto;
+  }
+  .pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    max-width: var(--max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr);
+    gap: 28px;
+    padding: clamp(16px, 3vw, 32px) var(--gutter);
+    overflow: hidden;
+  }
+  :global(.globe-static) .pin {
+    position: static;
+    height: auto;
+    min-height: 640px;
+  }
+  .globe {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .globe svg {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    touch-action: pan-y;
+  }
+  .globe :global(.ocean),
+  .globe :global(.ocean2) {
+    fill: var(--ocean);
+  }
+  .globe :global(.rim) {
+    fill: none;
+    stroke: var(--moss);
+    stroke-width: 1.5;
+  }
+  .globe :global(.grat) {
+    fill: none;
+    stroke: var(--grat);
+    stroke-width: 0.6;
+  }
+  .globe :global(.land) {
+    fill: var(--green);
+    stroke: var(--deep);
+    stroke-width: 0.5;
+  }
+  .globe :global(.land.v) {
+    fill: var(--moss);
+  }
+  .globe :global(.done) {
+    fill: none;
+    stroke: var(--yellow);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+  }
+  .globe :global(.todo) {
+    fill: none;
+    stroke: var(--stone);
+    stroke-width: 1.4;
+    stroke-dasharray: 2 6;
+    stroke-linecap: round;
+    opacity: 0.75;
+  }
+  .globe :global(.city) {
+    cursor: pointer;
+  }
+  .globe :global(.city circle) {
+    fill: var(--stone);
+    stroke: var(--deep);
+    stroke-width: 1.5;
+  }
+  .globe :global(.city.seen circle) {
+    fill: var(--yellow);
+  }
+  .globe :global(.city.current circle) {
+    stroke: var(--decal);
+  }
+  .globe :global(.city text) {
+    font: 600 12px/1 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.04em;
+    fill: var(--mist);
+    paint-order: stroke;
+    stroke: var(--deep);
+    stroke-width: 3px;
+  }
+  .globe :global(.city:focus-visible) {
+    outline: none;
+  }
+  .globe :global(.city:focus-visible circle) {
+    stroke: var(--dusk);
+    stroke-width: 3;
+  }
+  .globe :global(.city:hover text),
+  .globe :global(.city:focus-visible text) {
+    fill: var(--decal);
+  }
+
+  .odo {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .odo b {
+    font: 800 26px/1 var(--font-body);
+    font-stretch: 110%;
+    color: var(--decal);
+    font-variant-numeric: tabular-nums;
+  }
+  .zl {
+    min-height: 14px;
+    font: 600 12px/1.2 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    color: var(--dusk);
+  }
+  .hint {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 12.5px;
+    color: var(--muted);
+    max-width: 22ch;
+    text-align: right;
+  }
+  .skip-in {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font: 600 13px/1 var(--font-body);
+    font-stretch: 80%;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    background: rgba(10, 21, 15, 0.85);
+    color: var(--yellow);
+    border: 1px solid var(--moss);
+    border-radius: 999px;
+    padding: 10px 14px;
+  }
+  .skip-in:hover {
+    border-color: var(--yellow);
+  }
+  :global(.globe-static) .skip-in,
+  :global(.globe-static) .hint {
+    display: none;
+  }
+
+  .stops-wrap {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .stops-wrap h2 {
+    font-size: 40px;
+  }
+  .stops {
+    list-style: none;
+    margin: 0;
+    padding: 0 4px 0 0;
+    min-height: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--moss) transparent;
+  }
+  .stops button {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: 2px 10px;
+    align-items: baseline;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    color: var(--stone);
+    font: 500 14.5px/1.3 var(--font-body);
+    text-align: left;
+    transition: background 0.25s, color 0.25s;
+  }
+  .stops button:hover {
+    color: var(--decal);
+  }
+  .stops b {
+    font: 700 12px/1 var(--font-body);
+    font-stretch: 75%;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .stops em {
+    font-style: normal;
+    font-size: 12px;
+    font-stretch: 75%;
+    letter-spacing: 0.04em;
+  }
+  .stops small {
+    grid-column: 2 / -1;
+    font-size: 12.5px;
+    opacity: 0.85;
+  }
+  .stops button:global(.past) {
+    color: var(--mist);
+  }
+  .stops button:global(.past) b {
+    color: var(--stone);
+  }
+  .stops button:global(.on) {
+    background: var(--green);
+    color: var(--decal);
+  }
+  .stops button:global(.on) b {
+    color: var(--yellow);
+  }
+
+  @media (max-width: 760px) {
+    .pin {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(0, 1fr) auto;
+      gap: 10px;
+      padding-top: 56px;
+    }
+    .skip-in {
+      top: -44px;
+    }
+    .stops-wrap h2,
+    .hint {
+      display: none;
+    }
+    .stops {
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 0 0 6px;
+      scroll-snap-type: x proximity;
+    }
+    .stops li {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+    }
+    .stops button {
+      grid-template-columns: auto auto;
+      padding: 10px 12px;
+      white-space: nowrap;
+    }
+    .stops small,
+    .stops em {
+      display: none;
+    }
+    .odo b {
+      font-size: 20px;
+    }
+    :global(.globe-static) .pin {
+      min-height: 0;
+    }
+    :global(.globe-static) .globe {
+      aspect-ratio: 1;
+    }
+    :global(.globe-static) .stops {
+      flex-direction: column;
+      overflow: visible;
+    }
+    :global(.globe-static) .stops small {
+      display: block;
+    }
+  }
+
+  .summary {
+    display: grid;
+    gap: 16px;
+    padding-top: clamp(48px, 8vw, 96px);
+    max-width: calc(64ch + 2 * var(--gutter));
+    margin-inline: 0 auto;
+    scroll-margin-top: 16px;
+  }
+  .summary h2 {
+    font-size: clamp(36px, 5vw, 56px);
+  }
+  .summary h2:focus {
+    outline: none;
+  }
+  .summary p {
+    color: var(--mist);
+  }
+  .country-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+  }
+  .country-links .spec {
+    margin-left: 4px;
+    color: var(--stone);
+  }
+  @media (min-width: 900px) {
+    .summary {
+      margin-inline: auto;
+      max-width: var(--max);
+    }
+    .summary p,
+    .summary ul {
+      max-width: 64ch;
+    }
+  }
+</style>
